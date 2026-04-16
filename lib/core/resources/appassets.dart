@@ -51,4 +51,5 @@ class AppAssets {
   static String vector2 ='assets/images/Vector.svg';
   static String vector3 ='assets/images/Vector 2.png';
   static String virtualHelper ='assets/images/Virtual AI Helper, AI Chatbot Assistant, Customer Support Bot.png';
+  static String logoPlus ='assets/images/logoplus.png';
 }
