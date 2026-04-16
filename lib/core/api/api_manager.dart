@@ -1,8 +1,5 @@
-
 import 'package:dio/dio.dart';
-
 import 'api_constant.dart';
-
 class ApiManger {
   Dio dio = Dio();
   Future<Response>getData({required String endPoint,
