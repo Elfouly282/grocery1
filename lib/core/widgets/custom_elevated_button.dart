@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../resources/color_manager.dart';
+import '../resources/font_manager.dart';
 import '../resources/styles_manager.dart';
-
-
 
 class CustomElevatedButton extends StatelessWidget {
   final Widget? prefixIcon;
@@ -32,9 +32,9 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shape: isStadiumBorder
-            ? const StadiumBorder()
-            : RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius?.r ?? 0),
+        ),
         backgroundColor: backgroundColor ?? ColorManager.primary,
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
       ),
