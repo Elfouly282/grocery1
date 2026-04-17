@@ -18,14 +18,14 @@ class OnboardingPageWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          // الصورة
+
          Spacer(),
           Expanded(
             flex: 8,
             child: Image.asset(image,height: 199,),
           ),
 
-          // العنوان
+
 
           Expanded(
             flex: 2,
@@ -40,7 +40,7 @@ class OnboardingPageWidget extends StatelessWidget {
             ),
           ),
 
-          // الوصف
+
           Expanded(
             flex: 2,
             child: Text(

@@ -90,7 +90,7 @@ class _SplashViewState extends State<SplashView>
           alignment: Alignment.center,
           children: [
 
-            // shadow
+
             AnimatedBuilder(
               animation: controller,
               builder: (context, child) {
@@ -110,7 +110,7 @@ class _SplashViewState extends State<SplashView>
               },
             ),
 
-            //apple
+
 
             AnimatedBuilder(
               animation: controller,
@@ -151,7 +151,7 @@ class _SplashViewState extends State<SplashView>
               },
             ),
 
-            // +
+
             FadeTransition(
               opacity: plusOpacity,
               child: Transform.translate(

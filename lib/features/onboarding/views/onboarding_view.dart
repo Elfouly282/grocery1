@@ -9,14 +9,14 @@ class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
 
   @override
-  State<OnboardingView> createState() => _OnboardingViewState();
+  State<OnboardingView> createState() => OnboardingViewState();
 }
 
-class _OnboardingViewState extends State<OnboardingView> {
-  final PageController _pageController = PageController();
-  int _currentIndex = 0;
+class OnboardingViewState extends State<OnboardingView> {
+  final PageController pageController = PageController();
+  int currentIndex = 0;
 
-  final List<OnboardingEntity> _pages = [
+  final List<OnboardingEntity> pages = [
     OnboardingEntity(
       image: AppAssets.undrawEmptyCart,
       title: 'Shop Everything You Need, In One Click',
@@ -29,9 +29,9 @@ class _OnboardingViewState extends State<OnboardingView> {
     ),
   ];
 
-  void _onNextPressed() {
-    if (_currentIndex < _pages.length - 1) {
-      _pageController.nextPage(
+  void onNextPressed() {
+    if (currentIndex < pages.length - 1) {
+      pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
@@ -40,8 +40,8 @@ class _OnboardingViewState extends State<OnboardingView> {
     }
   }
 
-  void _onBackPressed() {
-    _pageController.previousPage(
+  void onBackPressed() {
+    pageController.previousPage(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
@@ -49,7 +49,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -63,7 +63,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           child: Column(
             children: [
               // Skip
-              if (_currentIndex == 0)
+              if (currentIndex == 0)
                 Align(
                   alignment: Alignment.topRight,
                   child: Padding(
@@ -81,42 +81,43 @@ class _OnboardingViewState extends State<OnboardingView> {
                     ),
                   ),
                 ),
-              // الصفحات
+
+
               Expanded(
                 child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: _pages.length,
+                  controller: pageController,
+                  itemCount: pages.length,
                   onPageChanged: (index) {
-                    setState(() => _currentIndex = index);
+                    setState(() => currentIndex = index);
                   },
                   itemBuilder: (context, index) {
                     return OnboardingPageWidget(
-                      image: _pages[index].image,
-                      title: _pages[index].title,
-                      description: _pages[index].description,
+                      image: pages[index].image,
+                      title: pages[index].title,
+                      description: pages[index].description,
                     );
                   },
                 ),
               ),
 
-              // Dots
+
               OnboardingDotsIndicator(
-                currentIndex: _currentIndex,
-                count: _pages.length,
+                currentIndex: currentIndex,
+                count: pages.length,
               ),
 
               const SizedBox(height: 32),
 
-              // Buttons
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Back button
-                    if (_currentIndex > 0)
+
+                    if (currentIndex > 0)
                       GestureDetector(
-                        onTap: _onBackPressed,
+                        onTap: onBackPressed,
                         child: Container(
                           height: 50,
                           width: 50,
@@ -133,9 +134,9 @@ class _OnboardingViewState extends State<OnboardingView> {
                     else
                       const SizedBox(width: 56),
 
-                    // Next button
+
                     GestureDetector(
-                      onTap: _onNextPressed,
+                      onTap: onNextPressed,
                       child: Container(
                         height: 50,
                         width: 50,

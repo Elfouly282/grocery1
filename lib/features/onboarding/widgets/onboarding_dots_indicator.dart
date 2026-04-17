@@ -23,7 +23,8 @@ class OnboardingDotsIndicator extends StatelessWidget {
           height: 10,
           width: 10,
           decoration: BoxDecoration(
-            color: index == currentIndex
+            color:
+            index == currentIndex
                 ? const Color(0xFF1A3C5E)
                 : Colors.grey.shade300,
             shape: BoxShape.circle,
