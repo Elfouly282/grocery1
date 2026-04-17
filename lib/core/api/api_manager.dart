@@ -1,8 +1,9 @@
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import 'api_constant.dart';
-
+@singleton
 class ApiManger {
   Dio dio = Dio();
   Future<Response>getData({required String endPoint,
