@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 abstract class AppToast {
-  static void showToast({
+  static  showToast({
     required BuildContext context,
     required String title,
     required String description,
