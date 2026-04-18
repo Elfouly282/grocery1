@@ -11,7 +11,9 @@ import 'package:grocery1/core/di/servicelocator.dart';
 import 'package:grocery1/core/utils/dialog_utils.dart';
 import 'package:grocery1/core/widgets/custom_elevated_button.dart';
 import 'package:grocery1/core/widgets/custom_text_form_field.dart';
+import 'package:grocery1/presentation/ui/auth/cubit/firebaseAuth_view_model.dart';
 
+import 'cubit/FirebaseAuthState.dart';
 import 'cubit/register_view_model.dart';
 import 'cubit/register_states.dart';
 
@@ -24,41 +26,71 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final RegisterViewModel viewModel = getIt<RegisterViewModel>();
+  final FirebaseauthViewModel fireAuth = getIt<FirebaseauthViewModel>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RegisterViewModel, RegisterStates>(
-      bloc: viewModel,
-      listener: (context, state) {
-        if (state is RegisterLoadingState) {
-          DialogUtils.showLoading(
-            context: context,
-            message: 'Loading ...',
-          );
-        }
+    return MultiBlocListener(
+      listeners: [
 
-        else if (state is RegisterErrorState) {
-          DialogUtils.hideLoading(context);
+        /// REGISTER
+        BlocListener<RegisterViewModel, RegisterStates>(
+          bloc: viewModel,
+          listener: (context, state) {
+            if (state is RegisterLoadingState) {
+              DialogUtils.showLoading(
+                context: context,
+                message: 'Loading ...',
+              );
+            } else if (state is RegisterErrorState) {
+              DialogUtils.hideLoading(context);
 
-          DialogUtils.showMessage(
-            context: context,
-            message: state.errors.values.first.first,
-            title: 'Error',
-            posActionName: "OK",
-          );
-        }
+              DialogUtils.showMessage(
+                context: context,
+                message: state.errors.values.first.first,
+                title: 'Error',
+                posActionName: "OK",
+              );
+            } else if (state is RegisterSuccessState) {
+              DialogUtils.hideLoading(context);
 
-        else if (state is RegisterSuccessState) {
-          DialogUtils.hideLoading(context);
+              DialogUtils.showMessage(
+                context: context,
+                message: 'Register Success',
+                title: 'Success',
+                posActionName: 'OK',
+              );
+            }
+          },
+        ),
 
-          DialogUtils.showMessage(
-            context: context,
-            message: 'Register Success',
-            title: 'Success',
-            posActionName: 'OK',
-          );
-        }
-      },
+        /// 🔥 FIREBASE AUTH
+        BlocListener<FirebaseauthViewModel, Firebaseauthstate>(
+          bloc: fireAuth,
+          listener: (context, state) {
+            if (state is AuthLoading) {
+              DialogUtils.showLoading(
+                context: context,
+                message: "Loading...",
+              );
+            } else if (state is AuthSuccess) {
+              DialogUtils.hideLoading(context);
+
+              DialogUtils.showMessage(
+                context: context,
+                message: "Success Login",
+              );
+            } else if (state is AuthError) {
+              DialogUtils.hideLoading(context);
+
+              DialogUtils.showMessage(
+                context: context,
+                message: state.message,
+              );
+            }
+          },
+        ),
+      ],
 
       child: Scaffold(
         backgroundColor: ColorManager.white,
@@ -112,7 +144,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                           SizedBox(height: 20.h),
 
-                          // EMAIL
                           CustomTextFormField(
                             controller: viewModel.mailController,
                             validator: Validator.validateEmail,
@@ -123,7 +154,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             filledColor: ColorManager.baseWhite,
                           ),
 
-                          //USERNAME
                           CustomTextFormField(
                             controller: viewModel.fullNameController,
                             validator: Validator.validateFullName,
@@ -134,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             filledColor: ColorManager.baseWhite,
                           ),
 
-                          /// PASSWORD
+
                           CustomTextFormField(
                             controller: viewModel.passwordController,
                             validator: Validator.validatePassword,
@@ -145,10 +175,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             filledColor: ColorManager.baseWhite,
                           ),
 
-                          /// CONFIRM PASSWORD (FIXED)
+
                           CustomTextFormField(
                             controller: viewModel.rePasswordController,
-                            validator:Validator.validateConfirmPassword(viewModel.passwordController.text),
+                            validator: Validator.validateConfirmPassword(viewModel.passwordController.text),
                             keyboardType: TextInputType.visiblePassword,
                             isPassword: true,
                             isObscureText: true,
@@ -156,7 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             filledColor: ColorManager.baseWhite,
                           ),
 
-                          /// TERMS CHECKBOX (FIXED)
+                          /// TERMS
                           Row(
                             children: [
                               Checkbox(
@@ -169,7 +199,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const Text("I agree to the policies and terms"),
                             ],
                           ),
-
 
                           CustomElevatedButton(
                             onTap: state is RegisterLoadingState
@@ -195,16 +224,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(AppAssets.logoFacebook,
-                                  width: 38.w, height: 38.h),
+                              InkWell(
+                                onTap: fireAuth.signInWithFacebook,
+                                child: Image.asset(
+                                  AppAssets.logoFacebook,
+                                  width: 38.w,
+                                  height: 38.h,
+                                ),
+                              ),
+
                               SizedBox(width: 15.w),
-                              Image.asset(AppAssets.googleIcon,
-                                  width: 38.w, height: 38.h),
+
+                              InkWell(
+                                onTap: fireAuth.signInWithGoogle,
+                                child: Image.asset(
+                                  AppAssets.googleIcon,
+                                  width: 38.w,
+                                  height: 38.h,
+                                ),
+                              ),
+
                               SizedBox(width: 15.w),
-                              Image.asset(AppAssets.mailLogo,
-                                  width: 38.w, height: 38.h),
+
+
+                              InkWell(
+                                onTap: () {
+                                  if (viewModel.formKey.currentState!
+                                      .validate()) {
+                                    fireAuth.signUp(
+                                      viewModel.mailController.text,
+                                      viewModel.passwordController.text,
+                                    );
+                                  }
+                                },
+                                child: Image.asset(
+                                  AppAssets.mailLogo,
+                                  width: 38.w,
+                                  height: 38.h,
+                                ),
+                              ),
                             ],
-                          ),
+                          )
                         ],
                       ),
                     );

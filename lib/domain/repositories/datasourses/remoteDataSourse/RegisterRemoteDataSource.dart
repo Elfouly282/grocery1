@@ -6,4 +6,5 @@ import '../../../entities/RegisterResponseEntity.dart';
 abstract class Registerremotedatasource {
   Future <Either<Failure,RegisterResponseEntity>> register(String email, String name, String password, String rePassword,
       String phone);
+
 }

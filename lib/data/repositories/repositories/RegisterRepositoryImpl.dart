@@ -12,5 +12,6 @@ class Registerrepositoryimpl implements RegisterRepository{
   Future<Either<Failure, RegisterResponseEntity>> register(String name, String email, String password, String rePassword, String phone)async {
     var either=await registerremotedatasource.register(name, email, password, rePassword, phone);
     return either.fold((error)=>Left(error), (response)=>Right(response));
-  }}
+  }
+ }
 
