@@ -26,14 +26,26 @@ class Validator {
     }
   }
 
-  static String? validateConfirmPassword(String? val, String? password) {
-    if (val == null || val.isEmpty) {
-      return 'this field is required';
-    } else if (val != password) {
-      return 'same password';
-    } else {
+  // static String? validateConfirmPassword(String? val, String? password) {
+  //   if (val == null || val.isEmpty) {
+  //     return 'this field is required';
+  //   } else if (val != password) {
+  //     return 'same password';
+  //   } else {
+  //     return null;
+  //   }
+  // }
+
+
+  static String? Function(String?) validateConfirmPassword(String password) {
+    return (val) {
+      if (val == null || val.isEmpty) {
+        return 'this field is required';
+      } else if (val != password) {
+        return 'Passwords do not match';
+      }
       return null;
-    }
+    };
   }
 
   static String? validateUsername(String? val) {

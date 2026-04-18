@@ -1,30 +1,83 @@
-import '../../domain/entities/RegisterResponseEntity.dart';
 
-class RegisterResponseDm  extends RegisterResponseEntity{
-  RegisterResponseDm({
-    super.message,
-    super.user,
-    super.statusMsg,
-    super.token,});
+import 'package:grocery1/domain/entities/RegisterResponseEntity.dart';
 
-  RegisterResponseDm.fromJson(dynamic json) {
-    message = json['message'];
-    statusMsg=json['statusMsg'];
-    user = json['user'] !=null ? UserDM.fromJson(json['user']) : null;
-    token = json['token'];
+class RegisterResponseModel extends RegisterResponseEntity {
+  RegisterResponseModel({
+    bool? success,
+    String? message,
+    DataModel? data,
+  }) : super(
+    success: success,
+    message: message,
+    data: data,
+  );
+
+  factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
+    return RegisterResponseModel(
+      success: json['success'],
+      message: json['message'],
+      data: json['data'] != null
+          ? DataModel.fromJson(json['data'])
+          : null,
+    );
   }
 }
-class UserDM extends UserEntity{
-  UserDM({
-    super.id,
-    super.name,
-    super.email,
-    super.role,});
+class DataModel extends DataEntity {
+  DataModel({
+    UserModel? user,
+    String? token,
+  }) : super(user: user, token: token);
 
-  UserDM.fromJson(dynamic json) {
-    id= json['id'];
-    name = json['name'];
-    email = json['email'];
-    role = json['role'];
+  factory DataModel.fromJson(Map<String, dynamic> json) {
+    return DataModel(
+      user: json['user'] != null
+          ? UserModel.fromJson(json['user'])
+          : null,
+      token: json['token'],
+    );
+  }
+}
+class UserModel extends UserEntity {
+  UserModel({
+    num? id,
+    String? username,
+    String? email,
+    String? phone,
+    String? createdAt,
+  }) : super(
+    id: id,
+    username: username,
+    email: email,
+    phone: phone,
+    createdAt: createdAt,
+  );
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      username: json['username'],
+      email: json['email'],
+      phone: json['phone'],
+      createdAt: json['created_at'],
+    );
+  }
+}
+class ErrorModel extends ErrorEntity {
+  ErrorModel({
+    required String message,
+    required Map<String, List<String>> errors,
+  }) : super(message: message, errors: errors);
+
+  factory ErrorModel.fromJson(Map<String, dynamic> json) {
+    return ErrorModel(
+      message: json['message'] ?? '',
+      errors: (json['errors'] as Map<String, dynamic>).map(
+            (key, value) =>
+            MapEntry(
+              key,
+              List<String>.from(value),
+            ),
+      ),
+    );
   }
 }

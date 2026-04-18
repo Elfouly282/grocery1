@@ -7,40 +7,53 @@ import 'package:grocery1/domain/repositories/datasourses/remoteDataSourse/Regist
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_endpoints.dart';
-@Injectable(as:Registerremotedatasource)
-class Registerremotedatasourceimpl implements Registerremotedatasource{
-  ApiManger apiManger;
-  Registerremotedatasourceimpl({required this.apiManger});
-  @override
-  Future<Either<Failure, RegisterResponseDm>> register(String name, String email, String password, String rePassword, String phone)async {
-    var response=await  apiManger.postData(endPoint: ApiEndpoints.registerEndpoint,body: {
-      "email":email,
-      "username": name,
-      "phone":phone,
-      "password":password,
-      "rePassword":rePassword,
 
-    });
-    try{
-      final List<ConnectivityResult> connectivityResult=await Connectivity().checkConnectivity();
-      if(connectivityResult.contains(ConnectivityResult.wifi)||connectivityResult.contains(ConnectivityResult.mobile)){
-        var registerResponse=RegisterResponseDm.fromJson(response.data);//convert response to object
-        if(response.statusCode!>=200&&response.statusCode!<300){
-          return Right(registerResponse);
-        }
-        else{
-          return Left(Failure(registerResponse.message!));
-        }
+@Injectable(as: Registerremotedatasource)
+class Registerremotedatasourceimpl implements Registerremotedatasource {
+  final ApiManger apiManger;
+
+  Registerremotedatasourceimpl({required this.apiManger});
+
+  @override
+  Future<Either<Failure, RegisterResponseModel>> register(
+      String name,
+      String email,
+      String password,
+      String rePassword,
+      String phone,
+      ) async {
+    try {
+      final connectivityResult = await Connectivity().checkConnectivity();
+
+      if (!connectivityResult.contains(ConnectivityResult.wifi) &&
+          !connectivityResult.contains(ConnectivityResult.mobile)) {
+        return Left(Failure('No Internet Connection'));
       }
-      else{
-        // todo no internet connection
-        return left(Failure( 'No Internet Connection ,Please Check Internet'));
+      final response = await apiManger.postData(
+        endPoint: ApiEndpoints.registerEndpoint,
+        body: {
+          "email": email,
+          "username": name,
+          "phone": phone,
+          "password": password,
+          "password_confirmation": rePassword,
+          "agree_terms": 1
+        },
+      );
+      final registerResponse =
+      RegisterResponseModel.fromJson(response.data);
+
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
+        return Right(registerResponse);
       }
-    }
-    catch(e){
-      return Left(Failure( e.toString()));
+
+      return Left(
+        Failure(registerResponse.message ?? 'Something went wrong'),
+      );
+    } catch (e) {
+      return Left(Failure(e.toString()));
     }
   }
-
-
 }

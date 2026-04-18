@@ -13,11 +13,13 @@ class  RegisterLoadingState extends RegisterStates
 {
 
 }
-class RegisterErrorState extends RegisterStates{
-Failure errorMessage;
- RegisterErrorState({required this.errorMessage});
+class RegisterErrorState extends RegisterStates {
+ final Map<String, List<String>> errors;
+
+ RegisterErrorState({required this.errors});
 }
 class RegisterSuccessState extends RegisterStates{
 RegisterResponseEntity responseEntity;
 RegisterSuccessState({required this.responseEntity});
 }
+class TermsChanged extends RegisterStates {}

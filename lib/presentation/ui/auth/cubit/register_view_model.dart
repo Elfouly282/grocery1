@@ -6,27 +6,65 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../domain/usecases/register_useCase.dart';
 
+
 @injectable
-class RegisterViewModel extends Cubit<RegisterStates>{
-  RegisterUseCase registerUseCase;
-  RegisterViewModel({required this.registerUseCase}):super(RegisterInitState());
+class RegisterViewModel extends Cubit<RegisterStates> {
+  final RegisterUseCase registerUseCase;
+
+  RegisterViewModel({required this.registerUseCase})
+      : super(RegisterInitState());
+
   TextEditingController fullNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
-  var formKey=GlobalKey<FormState>();
-  void register()async{
-    if(formKey.currentState?.validate()==true){
-      emit(RegisterLoadingState());
-      var either=await registerUseCase.invoke(fullNameController.text, mailController.text,
-          passwordController.text,rePasswordController.text,phoneController.text);
-      either.fold((error){
-        emit(RegisterErrorState(errorMessage: error));
-      }, (response){
-        emit(RegisterSuccessState(responseEntity: response));
-      });
-    }
+
+  final formKey = GlobalKey<FormState>();
+
+  bool isAcceptedTerms = false;
+
+  void toggleTerms(bool value) {
+    isAcceptedTerms = value;
+    emit(TermsChanged());
+  }
+
+  void register() async {
+    if (!(formKey.currentState?.validate() ?? false)) return;
+
+
+    if (!isAcceptedTerms) {
+      emit(RegisterErrorState(
+        errors: {
+          "agree_terms": ["You must accept terms and conditions"]
+        },
+      ));
+      return;
     }
 
+    emit(RegisterLoadingState());
+
+    final result = await registerUseCase.invoke(
+      fullNameController.text,
+      mailController.text,
+      passwordController.text,
+      rePasswordController.text,
+      phoneController.text,
+    );
+
+    result.fold(
+          (failure) {
+            print("RAW ERROR: ${failure.failuremessage}");
+
+            emit(RegisterErrorState(
+          errors: {
+            "general": [failure.failuremessage]
+          },
+        ));
+      },
+          (response) {
+        emit(RegisterSuccessState(responseEntity: response));
+      },
+    );
+  }
 }
