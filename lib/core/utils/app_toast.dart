@@ -13,17 +13,11 @@ abstract class AppToast {
       type: type,
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
       description: Text(
         description,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-        ),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
       ),
       primaryColor: Colors.white,
       autoCloseDuration: const Duration(seconds: 3),
@@ -31,19 +25,19 @@ abstract class AppToast {
         color: type == ToastificationType.success
             ? Colors.green
             : type == ToastificationType.info
-                ? Colors.blue
-                : type == ToastificationType.warning
-                    ? Colors.orange
-                    : Colors.red,
+            ? Colors.blue
+            : type == ToastificationType.warning
+            ? Colors.orange
+            : Colors.red,
       ),
       showProgressBar: true,
       backgroundColor: type == ToastificationType.success
           ? Colors.green
           : type == ToastificationType.info
-              ? Colors.blue
-              : type == ToastificationType.warning
-                  ? Colors.orange
-                  : Colors.red,
+          ? Colors.blue
+          : type == ToastificationType.warning
+          ? Colors.orange
+          : Colors.red,
       foregroundColor: Colors.white,
     );
   }

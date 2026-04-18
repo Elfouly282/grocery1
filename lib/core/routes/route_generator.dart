@@ -6,7 +6,7 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.products:
-        return MaterialPageRoute(builder: (_) => const ProductList());
+        return MaterialPageRoute(builder: (_) =>  ProductList());
       default:
         return _undefinedRoute();
     }

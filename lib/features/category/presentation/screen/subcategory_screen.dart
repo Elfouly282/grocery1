@@ -7,9 +7,14 @@ import 'package:grocery1/core/resources/values_manager.dart';
 import 'package:grocery1/features/category/presentation/widgets/gridview.dart';
 import 'package:grocery1/features/category/presentation/widgets/tabbarview_product.dart';
 
-class ProductList extends StatelessWidget {
-  const ProductList({super.key});
+class ProductList extends StatefulWidget {
+  @override
+  State<ProductList> createState() => _ProductListState();
+}
 
+class _ProductListState extends State<ProductList> {
+  int initindex=0 ;
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,12 +51,22 @@ class ProductList extends StatelessWidget {
               style: getMediumStyle(color: Colors.black, fontSize: 16.sp),
             ),
             SizedBox(height: Sizes.s16.h),
-            TabbarviewProduct(),
+            TabbarviewProduct(
+            //   indexselected: initindex,
+              selectedcategory: getselectedcategory),
             SizedBox(height: Sizes.s20.h),
-            Expanded(flex: 4, child: Gridproduct()),
+            Expanded(flex: 4, child: Gridproduct(categoryid: initindex)),
           ],
         ),
       ),
     );
+  }
+
+  void getselectedcategory(int category) {
+    initindex = category;
+    setState(() {
+      
+    });
+    print(' we are in Home  and index is $initindex');
   }
 }

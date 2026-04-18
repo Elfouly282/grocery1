@@ -1,10 +1,8 @@
-// run    => flutter pub run build_runner build
+import 'package:grocery1/core/di/servicelocator.config.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+//import 'package:injectable/injectable.dart';
 
-
-
-
-// final getit = GetIt.instance;
-
-// void configureDependencies() {
-  
-// }
+final servicelocator = GetIt.instance;
+@InjectableInit()
+void setupLocator() => servicelocator.init();
