@@ -19,7 +19,9 @@ class _ProductListState extends State<ProductList> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios_new),
+        leading: IconButton(onPressed:(){
+          Navigator.of(context).pop();
+        } , icon: Icon(Icons.arrow_back_ios_new)),
         backgroundColor: ColorManager.appbarBackground,
         toolbarHeight: Sizes.s100.h,
         actions: [

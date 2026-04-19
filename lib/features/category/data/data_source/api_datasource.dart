@@ -36,7 +36,6 @@ class ApiDatasource implements SubcategoryDatasource {
       final response = await api.getData(
         endPoint: '${ApiEndpoints.subcategoryEndpoint}/$id',
       );
-      print("✅ RAW RESPONSE: ${response.data}");
       return SubCategoryDetailsResponse.fromJson(response.data);
     } catch (e) {
       if (e is DioException) {
@@ -46,21 +45,5 @@ class ApiDatasource implements SubcategoryDatasource {
     }
   }
 }
-// catch to fetch any error 
-/*
-  catch (e, stack) {
-        print("🔥 DIO ERROR: $e");
-        print("📌 STACK: $stack");
 
-        if (e is DioException) {
-          print("🔥 RESPONSE: ${e.response?.data}");
-        }
-
-        throw RemoteException(
-          e is DioException
-              ? (e.response?.data?["message"]?.toString() ?? "Dio error")
-              : e.toString(),
-        );
-      }
- */
            

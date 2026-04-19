@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class GetsubcategorydetailsUsecase {
   final SubcategoryRepository subcategoryrepository;
-  GetsubcategorydetailsUsecase({required this.subcategoryrepository});
+  const GetsubcategorydetailsUsecase({required this.subcategoryrepository});
 
   Future<Either<Failure, List<MealEntity>>> call(int id) async {
     return await subcategoryrepository.getmeals(id);

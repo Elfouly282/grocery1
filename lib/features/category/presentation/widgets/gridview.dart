@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/styles_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
 import 'package:grocery1/features/category/presentation/cubit/subcategories_cubit.dart';
+import 'package:grocery1/features/category/presentation/widgets/shimmer_gridview.dart';
 
 class Gridproduct extends StatefulWidget {
   @override
@@ -17,9 +20,7 @@ class _GridproductState extends State<Gridproduct> {
     return BlocBuilder<SubcategoriesCubit, Subcategories>(
       builder: (context, state) {
         if (state.productsLoading) {
-          return Center(
-            child: CircularProgressIndicator(color: ColorManager.primary),
-          );
+          return ShimmerGridview();
         } else if (state.products.isNotEmpty) {
           return GridView.builder(
             physics: BouncingScrollPhysics(),
@@ -42,17 +43,31 @@ class _GridproductState extends State<Gridproduct> {
                   Expanded(
                     child: Stack(
                       children: [
-                        Image.network(
-                          //    height: 120.h,
-                          fit: BoxFit.fill,
-                          state.products[index].imageurl!,
-                          width: double.infinity,
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12.r),
+                            topRight: Radius.circular(12.r),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: state.products[index].imageurl ?? "",
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+
+                            // Loading
+                            placeholder: (context, url) =>
+                                Container(color: Colors.grey.shade300),
+                            // error case
+                            errorWidget: (context, url, error) => Container(
+                              color: Colors.grey.shade300,
+                              child: Icon(Icons.error, color: Colors.red),
+                            ),
+                          ),
                         ),
                         Positioned(
                           top: 4.h,
-                          left: 142.w,
+                          right: 8.w,
                           child: ClipRRect(
-                            borderRadius: BorderRadiusGeometry.circular(13.r),
+                            borderRadius: BorderRadius.circular(13.r),
                             child: Container(
                               height: 23.h,
                               width: 23.w,
@@ -70,6 +85,7 @@ class _GridproductState extends State<Gridproduct> {
                       ],
                     ),
                   ),
+                  // Name Product
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -85,26 +101,24 @@ class _GridproductState extends State<Gridproduct> {
                                   state.products[index].title,
                                 ),
                               ),
-                              //    Expanded(child: Text("(8 Kg)")),
                             ],
                           ),
+                          // Rating
                           Row(
                             children: [
-                              Icon(Icons.star, color: Colors.amber, size: 17),
-                              Icon(Icons.star, color: Colors.amber, size: 17),
-                              Icon(Icons.star, color: Colors.amber, size: 17),
-                              Icon(Icons.star, color: Colors.amber, size: 17),
-                              Icon(Icons.star, color: Colors.amber, size: 17),
-                              Text(
-                                '(5)',
-                                style: getRegularStyle(
-                                  color: ColorManager.grey,
-                                ),
+                              RatingBarIndicator(
+                                rating: state.products[index].rating,
+                                itemBuilder: (context, _) =>
+                                    Icon(Icons.star, color: Colors.amber),
+                                itemCount: 5,
+                                itemSize: 14.sp,
                               ),
+                              SizedBox(width: 4.w),
+                              Text("(${state.products[index].rating})"),
                             ],
                           ),
                           SizedBox(height: Sizes.s8.h),
-
+                          // Price & Last price
                           Row(
                             children: [
                               Text(
@@ -130,7 +144,7 @@ class _GridproductState extends State<Gridproduct> {
                           ),
 
                           SizedBox(height: Sizes.s8.h),
-
+                          // Button
                           SizedBox(
                             height: 31.h,
 

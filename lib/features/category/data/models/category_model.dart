@@ -10,12 +10,6 @@ class CategoryModel {
     name: json['name'] as String,
     slug: json['slug'] as String?,
   );
-  //  factory CategoryModel.empty() {
-  //     return CategoryModel(
-  //       id: 0,
-  //       name: '',
-  //       slug: '',
-  //     );
-  //   }
+
   Map<String, dynamic> toJson() => {'id': id, 'name': name, 'slug': slug};
 }

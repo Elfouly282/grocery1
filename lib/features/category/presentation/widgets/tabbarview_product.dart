@@ -4,21 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
 import 'package:grocery1/features/category/presentation/cubit/subcategories_cubit.dart';
+import 'package:grocery1/features/category/presentation/widgets/shimmer_tabbar.dart';
 
 class TabbarviewProduct extends StatefulWidget {
-
-  // const TabbarviewProduct({
-  //   required this.selectedcategory,
-  //   super.key,
-  // });
-  // final void Function(int x) selectedcategory;
-
   @override
   State<TabbarviewProduct> createState() => _TabbarviewProductState();
 }
 
 class _TabbarviewProductState extends State<TabbarviewProduct> {
-  int toggle = 0;
   @override
   void initState() {
     super.initState();
@@ -30,8 +23,8 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
     return BlocBuilder<SubcategoriesCubit, Subcategories>(
       builder: (context, state) {
         if (state.categoriesLoading) {
-          return CircularProgressIndicator(color: Colors.amber);
-        } else if  (state.subcategories.isNotEmpty) {
+          return ShimmerCategories();
+        } else if (state.subcategories.isNotEmpty) {
           return Expanded(
             flex: 1,
             child: ListView.separated(
@@ -42,19 +35,21 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
               scrollDirection: Axis.horizontal,
               itemCount: state.subcategories.length,
               itemBuilder: (context, index) => InkWell(
-              borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(16.r),
                 onTap: () {
-                  context.read<SubcategoriesCubit>().selectCategory(state.subcategories[index].id);
-                print("this is selected_id   ${state.selectedCategoryId}");
-                print( 'index is  $index');
-                }, 
+                  context.read<SubcategoriesCubit>().selectCategory(
+                    state.subcategories[index].id,
+                  );
+
+                },
                 child: Container(
                   decoration: BoxDecoration(
-                  
                     border: Border.all(width: .8.w, color: ColorManager.grey),
-                    color:  state.selectedCategoryId == state.subcategories[index].id
-                        ? Colors.white
-                        : const Color.fromARGB(255, 244, 246, 246),
+                    color:
+                        state.selectedCategoryId ==
+                            state.subcategories[index].id
+                        ? ColorManager.appbarBackground
+                        : const Color.fromARGB(255, 246, 247, 247),
                     borderRadius: BorderRadius.circular(16.r),
                   ),
 
@@ -63,6 +58,7 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // image
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 3.w),
                         child: Image.asset(
@@ -71,6 +67,7 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
                         ),
                       ),
                       SizedBox(height: 6.h),
+                      // Name subcategory
                       Text(
                         textAlign: TextAlign.center,
                         state.subcategories[index].name,
@@ -82,8 +79,7 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
               ),
             ),
           );
-        } 
-        else if (state.error !=null) {
+        } else if (state.error != null) {
           return Text(state.error ?? "Not data founded");
         }
         return Center(child: SizedBox(child: Text("No data founded")));
