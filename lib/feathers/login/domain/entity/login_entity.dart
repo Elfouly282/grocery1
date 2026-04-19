@@ -1,13 +1,23 @@
+class UserEntity {
+  final int id;
+  final String username;
+  final String email;
+  final String phone;
+
+  UserEntity({
+    required this.id,
+    required this.username,
+    required this.email,
+    required this.phone,
+  });
+}
+
 class LoginEntity {
-  final String name;
-  final String message;
-  final String version;
-  final String documentation;
+  final UserEntity user;
+  final String token;
 
   LoginEntity({
-    required this.name,
-    required this.message,
-    required this.version,
-    required this.documentation,
+    required this.user,
+    required this.token,
   });
 }

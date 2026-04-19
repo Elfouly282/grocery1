@@ -1,33 +1,35 @@
-/*import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
+import 'package:dartz/dartz.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/api/api_manager.dart';
-
 import 'package:grocery1/core/failure/failure.dart';
-
-import 'package:grocery1/feathers/login/data/model/login_response_model.dart';
+import 'package:grocery1/feathers/login/data/model/login_model.dart';
 
 import '../model/request_login_model.dart';
 import 'login_remote_data_source.dart';
 
 class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
   @override
-  Future<Either<Failure, LoginResponseModel>> login({
-    required String login,
+  //  Login Model
+  Future<Either<Failure, LoginModel>> login({
+    required String email,
     required String password,
   }) async {
     try {
-      final request = RequestLoginModel(login: login, password: password);
+      final request = RequestLoginModel(email: email, password: password);
       final response = await ApiManager().postData(
         endPoint: ApiEndpoints.loginEndpoint,
         body: request.toJson(),
       );
 
-      if(response.statusCode==200||response.statusCode==201){
-        final responseData=response.data;
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseData = response.data;
+        final model = LoginModel.fromJson(responseData);
+        return Right(model);
+      } else {
+        return Left(Failure(failuremessage: "Error happened"));
       }
-    } catch (e) {}
-
+    } catch (e) {
+      return Left(Failure(failuremessage: e.toString()));
+    }
   }
-
-}*/
+}

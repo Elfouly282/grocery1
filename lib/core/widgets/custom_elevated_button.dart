@@ -17,6 +17,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? child;
 
   const CustomElevatedButton({
+    super.key,
     this.prefixIcon,
     this.textStyle,
     this.isStadiumBorder = true,

@@ -10,9 +10,9 @@ class LoginUseCase {
   LoginUseCase({required this.loginRepo});
 
   Future<Either<Failure, LoginEntity>> call({
-    required String login,
+    required String email,
     required String password,
   }) {
-    return loginRepo.login(login: login, password: password);
+    return loginRepo.login(email: email, password: password);
   }
 }

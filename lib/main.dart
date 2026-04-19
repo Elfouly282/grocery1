@@ -1,11 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery1/feathers/login/presentation/screens/login_screen.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'core/di/servicelocator.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyCyERp8WmKVVMrYNTXVg1zuUMFVfq85-nM",
+      appId: "1:908633982306:android:bfa483aa25957ce35f983b",
+      messagingSenderId: "908633982306",
+      projectId: "grocrey1",
+    ),
+  );
+  await configureDependencies();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

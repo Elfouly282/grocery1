@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery1/core/utils/app_text.dart';
 
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/styles_manager.dart';
 
 class WidgetForgotPassword extends StatelessWidget {
   const WidgetForgotPassword({super.key});
@@ -12,11 +10,10 @@ class WidgetForgotPassword extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () {},
-        child: Text(
-          "Forgot Password?",
-          style: getRegularStyle(color: ColorManager.primary, fontSize: 15.sp),
-        ),
+        onPressed: () {
+          // Navigator.pushNamed(context, Routes.forgotPassword);
+        },
+        child:AppText.forgotPassword(),
       ),
     );
   }
