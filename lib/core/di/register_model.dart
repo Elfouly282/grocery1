@@ -10,7 +10,7 @@ abstract class RegisterModule {
   Dio dio() {
     return Dio(
       BaseOptions(
-      //  baseUrl: ApiConstant.baseUrl,
+        baseUrl: ApiConstant.baseUrl,
         connectTimeout: const Duration(seconds: 5),
         receiveDataWhenStatusError: true,
         sendTimeout: const Duration(seconds: 5),

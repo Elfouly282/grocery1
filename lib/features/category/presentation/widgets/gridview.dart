@@ -7,34 +7,23 @@ import 'package:grocery1/core/resources/values_manager.dart';
 import 'package:grocery1/features/category/presentation/cubit/subcategories_cubit.dart';
 
 class Gridproduct extends StatefulWidget {
-  int categoryid;
-  Gridproduct({required this.categoryid});
-
   @override
   State<Gridproduct> createState() => _GridproductState();
 }
 
 class _GridproductState extends State<Gridproduct> {
   @override
-  void initState() {
-    super.initState();
-    context.read<SubcategoriesCubit>().fetchSubCategoryDetails(
-      5,
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SubcategoriesCubit, SubcategoriesState>(
+    return BlocBuilder<SubcategoriesCubit, Subcategories>(
       builder: (context, state) {
-        if (state is SubcategoriesDetailsLoading) {
+        if (state.productsLoading) {
           return Center(
             child: CircularProgressIndicator(color: ColorManager.primary),
           );
-        } else if (state is SubcategoriesDetailsLoaded) {
+        } else if (state.products.isNotEmpty) {
           return GridView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: state.subcategorydetailslist.length,
+            itemCount: state.products.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 16,
               crossAxisCount: 2,
@@ -53,10 +42,12 @@ class _GridproductState extends State<Gridproduct> {
                   Expanded(
                     child: Stack(
                       children: [
-                        // Image.asset(
-                        //   state.subcategorydetailslist[index].imageurl!,
-                        //   //     width: double.infinity,
-                        // ),
+                        Image.network(
+                          //    height: 120.h,
+                          fit: BoxFit.fill,
+                          state.products[index].imageurl!,
+                          width: double.infinity,
+                        ),
                         Positioned(
                           top: 4.h,
                           left: 142.w,
@@ -69,7 +60,9 @@ class _GridproductState extends State<Gridproduct> {
                               child: Icon(
                                 size: 16.sp,
                                 Icons.favorite_sharp,
-                                color: state.subcategorydetailslist[index].isfeatured ? Colors.red :ColorManager.grey ,
+                                color: state.products[index].isfeatured
+                                    ? Colors.red
+                                    : ColorManager.grey,
                               ),
                             ),
                           ),
@@ -85,7 +78,15 @@ class _GridproductState extends State<Gridproduct> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [Text(state.subcategorydetailslist[index].title), Text("(8 Kg)")],
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  maxLines: 1,
+                                  state.products[index].title,
+                                ),
+                              ),
+                              //    Expanded(child: Text("(8 Kg)")),
+                            ],
                           ),
                           Row(
                             children: [
@@ -104,13 +105,30 @@ class _GridproductState extends State<Gridproduct> {
                           ),
                           SizedBox(height: Sizes.s8.h),
 
-                          Text(
-                            '${state.subcategorydetailslist[index].price}',
-                            style: getMediumStyle(
-                              fontSize: 16,
-                              color: ColorManager.primary,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                '£${state.products[index].finalprice}',
+                                maxLines: 1,
+                                style: getMediumStyle(
+                                  fontSize: 16,
+                                  color: ColorManager.primary,
+                                ),
+                              ),
+                              SizedBox(width: Sizes.s10.w),
+                              Text(
+                                '£${state.products[index].price}',
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: ColorManager.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                  decorationColor: ColorManager.grey,
+                                ),
+                              ),
+                            ],
                           ),
+
                           SizedBox(height: Sizes.s8.h),
 
                           SizedBox(
@@ -142,10 +160,10 @@ class _GridproductState extends State<Gridproduct> {
               ),
             ),
           );
-        } else if (state is SubcategoriesDetailsError) {
-          return Center(child: Text(state.message));
+        } else if (state.error != null) {
+          return Center(child: Text(state.error ?? 'Not founded data'));
         }
-        return SizedBox(child: Text('null'));
+        return Center(child: SizedBox(child: Text('No meals yet')));
       },
     );
   }

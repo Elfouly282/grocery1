@@ -7,11 +7,11 @@ import 'package:grocery1/features/category/presentation/cubit/subcategories_cubi
 
 class TabbarviewProduct extends StatefulWidget {
 
-  TabbarviewProduct({
-    required this.selectedcategory,
-    super.key,
-  });
-  final void Function(int x) selectedcategory;
+  // const TabbarviewProduct({
+  //   required this.selectedcategory,
+  //   super.key,
+  // });
+  // final void Function(int x) selectedcategory;
 
   @override
   State<TabbarviewProduct> createState() => _TabbarviewProductState();
@@ -27,11 +27,11 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SubcategoriesCubit, SubcategoriesState>(
+    return BlocBuilder<SubcategoriesCubit, Subcategories>(
       builder: (context, state) {
-        if (state is SubcategoriesLoading) {
+        if (state.categoriesLoading) {
           return CircularProgressIndicator(color: Colors.amber);
-        } else if (state is SubcategoriesLoaded) {
+        } else if  (state.subcategories.isNotEmpty) {
           return Expanded(
             flex: 1,
             child: ListView.separated(
@@ -44,20 +44,15 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
               itemBuilder: (context, index) => InkWell(
               borderRadius: BorderRadius.circular(16.r),
                 onTap: () {
-                  widget.selectedcategory(index);
-                  context.read<SubcategoriesCubit>().fetchSubCategoryDetails(index+1);
-                 // widget.indexselected = index;
-                  toggle = index;
-                  setState(() {
-                    print('toggle is  $toggle');
-                
-                  });
-                },
+                  context.read<SubcategoriesCubit>().selectCategory(state.subcategories[index].id);
+                print("this is selected_id   ${state.selectedCategoryId}");
+                print( 'index is  $index');
+                }, 
                 child: Container(
                   decoration: BoxDecoration(
                   
                     border: Border.all(width: .8.w, color: ColorManager.grey),
-                    color:  toggle == index
+                    color:  state.selectedCategoryId == state.subcategories[index].id
                         ? Colors.white
                         : const Color.fromARGB(255, 244, 246, 246),
                     borderRadius: BorderRadius.circular(16.r),
@@ -87,10 +82,11 @@ class _TabbarviewProductState extends State<TabbarviewProduct> {
               ),
             ),
           );
-        } else if (state is SubcategoriesError) {
-          return Text(state.message);
+        } 
+        else if (state.error !=null) {
+          return Text(state.error ?? "Not data founded");
         }
-        return SizedBox(child: Text("null"));
+        return Center(child: SizedBox(child: Text("No data founded")));
       },
     );
   }

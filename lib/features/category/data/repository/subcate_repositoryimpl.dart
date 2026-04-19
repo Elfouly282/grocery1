@@ -14,23 +14,17 @@ class SubcateRepositoryimpl implements SubcategoryRepository {
   final SubcategoryDatasource subcategoryDatasource;
 
   @override
- Future<Either<Failure, List<SubcategoriesEntity>>> getSubcategories() async {
-  try {
-    final response = await subcategoryDatasource.getSubcategories();
+  Future<Either<Failure, List<SubcategoriesEntity>>> getSubcategories() async {
+    try {
+      final response = await subcategoryDatasource.getSubcategories();
 
-    final list = response.subcategories
-        .map((e) => e.toEntity())
-        .toList();
+      final list = response.subcategories.map((e) => e.toEntity()).toList();
 
-    return Right(list);
-
-  } catch (e, stack) {
-    print("🔥 FULL ERROR: $e");
-    print("📌 STACK: $stack");
-
-    return Left(Failure(e.toString()));
+      return Right(list);
+    } on Appexception catch (e) {
+      return Left(Failure(e.toString()));
+    }
   }
-}
 
   @override
   Future<Either<Failure, List<MealEntity>>> getmeals(int id) async {

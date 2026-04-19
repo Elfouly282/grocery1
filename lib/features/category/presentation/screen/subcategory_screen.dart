@@ -13,8 +13,7 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
-  int initindex=0 ;
-   
+  int initindex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,22 +50,14 @@ class _ProductListState extends State<ProductList> {
               style: getMediumStyle(color: Colors.black, fontSize: 16.sp),
             ),
             SizedBox(height: Sizes.s16.h),
-            TabbarviewProduct(
-            //   indexselected: initindex,
-              selectedcategory: getselectedcategory),
+
+            TabbarviewProduct(),
+
             SizedBox(height: Sizes.s20.h),
-            Expanded(flex: 4, child: Gridproduct(categoryid: initindex)),
+            Expanded(flex: 4, child: Gridproduct()),
           ],
         ),
       ),
     );
-  }
-
-  void getselectedcategory(int category) {
-    initindex = category;
-    setState(() {
-      
-    });
-    print(' we are in Home  and index is $initindex');
   }
 }

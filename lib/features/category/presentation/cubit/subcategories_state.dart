@@ -1,37 +1,40 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'subcategories_cubit.dart';
 
-abstract class SubcategoriesState {
-  const SubcategoriesState();
-}
-
-final class SubcategoriesInitial extends SubcategoriesState {
-  const SubcategoriesInitial();
-}
-
-final class SubcategoriesLoading extends SubcategoriesState {
-  const SubcategoriesLoading();
-}
-
-final class SubcategoriesError extends SubcategoriesState {
-  final String message;
-  const SubcategoriesError(this.message);
-}
-
-class SubcategoriesLoaded extends SubcategoriesState {
+// -------------------------              Design state contain all information 
+class Subcategories {
   final List<SubcategoriesEntity> subcategories;
-  const SubcategoriesLoaded(this.subcategories);
+  final List<MealEntity> products;
+  final bool categoriesLoading;
+  final bool productsLoading;
+
+  final String? error;
+  final int? selectedCategoryId;
+  Subcategories({
+    this.categoriesLoading=false,
+    this.subcategories = const [],
+    this.products = const [],
+    this.productsLoading = false,
+    this.error,
+    this.selectedCategoryId ,
+  });
+
+  Subcategories copyWith({
+    List<SubcategoriesEntity>? subcategories,
+    List<MealEntity>? products,
+   final bool? categoriesLoading,
+  final bool? productsLoading,
+    String? error,
+    int? selectedCategoryId,
+  }) {
+    return Subcategories(
+      subcategories: subcategories ?? this.subcategories,
+      products: products ?? this.products,
+      productsLoading: productsLoading ?? this.productsLoading,
+      categoriesLoading: categoriesLoading ?? this.categoriesLoading ,
+      error: error ,
+      selectedCategoryId: selectedCategoryId ?? this.selectedCategoryId,
+    );
+  }
 }
 
-final class SubcategoriesDetailsLoading extends SubcategoriesState {
-  const SubcategoriesDetailsLoading();
-}
-
-final class SubcategoriesDetailsError extends SubcategoriesState {
-  final String message;
-  const SubcategoriesDetailsError(this.message);
-}
-
-final class SubcategoriesDetailsLoaded extends SubcategoriesState {
-  final List<MealEntity> subcategorydetailslist;
-  const SubcategoriesDetailsLoaded(this.subcategorydetailslist);
-}

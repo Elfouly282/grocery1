@@ -18,34 +18,15 @@ class ApiDatasource implements SubcategoryDatasource {
       final response = await api.getData(
         endPoint: ApiEndpoints.subcategoryEndpoint,
       );
-    //
+
       return SubcategoryResponse.fromJson(response.data);
-      
-
-
-      } catch (e, stack) {
-  print("🔥 DIO ERROR: $e");
-  print("📌 STACK: $stack");
-
-  if (e is DioException) {
-    print("🔥 RESPONSE: ${e.response?.data}");
-  }
-
-  throw RemoteException(
-    e is DioException
-        ? (e.response?.data?["message"]?.toString() ?? "Dio error")
-        : e.toString(),
-  );
-}
-    // } catch (e) {
-    //   String? message;
-    //   if (e is DioException) {
-         
-    //     message = e.response?.data["message"];
-    //   }
-    //  // print("✅ throw here:");
-    //   throw RemoteException(message ?? 'Failed to get Sub categories');
-    // }
+    } catch (e) {
+      String? message;
+      if (e is DioException) {
+        message = e.response?.data["message"];
+      }
+      throw RemoteException(message ?? 'Failed to get Sub categories');
+    }
   }
 
   @override
@@ -55,27 +36,31 @@ class ApiDatasource implements SubcategoryDatasource {
       final response = await api.getData(
         endPoint: '${ApiEndpoints.subcategoryEndpoint}/$id',
       );
- print("✅ RAW RESPONSE: ${response.data}");
+      print("✅ RAW RESPONSE: ${response.data}");
       return SubCategoryDetailsResponse.fromJson(response.data);
-      } catch (e, stack) {
-  print("🔥 DIO ERROR: $e");
-  print("📌 STACK: $stack");
-
-  if (e is DioException) {
-    print("🔥 RESPONSE: ${e.response?.data}");
-  }
-
-  throw RemoteException(
-    e is DioException
-        ? (e.response?.data?["message"]?.toString() ?? "Dio error")
-        : e.toString(),
-  );
-}
-    // } catch (e) {
-    //   if (e is DioException) {
-    //     message = e.response?.data["message"];
-    //   }
-    //   throw RemoteException(message ?? 'Failed to get Subcategories Detalis');
-    // }
+    } catch (e) {
+      if (e is DioException) {
+        message = e.response?.data["message"];
+      }
+      throw RemoteException(message ?? 'Failed to get Subcategories Detalis');
+    }
   }
 }
+// catch to fetch any error 
+/*
+  catch (e, stack) {
+        print("🔥 DIO ERROR: $e");
+        print("📌 STACK: $stack");
+
+        if (e is DioException) {
+          print("🔥 RESPONSE: ${e.response?.data}");
+        }
+
+        throw RemoteException(
+          e is DioException
+              ? (e.response?.data?["message"]?.toString() ?? "Dio error")
+              : e.toString(),
+        );
+      }
+ */
+           
