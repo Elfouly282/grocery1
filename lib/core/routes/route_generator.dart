@@ -1,13 +1,11 @@
 // import 'package:flutter/material.dart';
-// import 'package:grocery1/core/routes/routes.dart';
-//
-//
+// import 'package:setup/core/routes/routes.dart';
 //
 // class RouteGenerator {
 //   static Route<dynamic> getRoute(RouteSettings settings) {
 //     switch (settings.name) {
 //       case Routes.register:
-//         return MaterialPageRoute(builder: (_) =>  RegisterScreen());
+//         return MaterialPageRoute(builder: (_) => const RegisterScreen());
 //       case Routes.login:
 //         return MaterialPageRoute(builder: (_) => const LoginScreen());
 //       case Routes.home:

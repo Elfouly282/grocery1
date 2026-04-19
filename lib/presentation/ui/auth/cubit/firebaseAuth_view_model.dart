@@ -22,10 +22,12 @@ class FirebaseauthViewModel extends Cubit<Firebaseauthstate>{
     emit(AuthLoading());
 
     final result = await googleUseCase();
-
+    print("{result>>>>>$result}");
     result.fold(
+
           (failure) => emit(AuthError(failure.failuremessage)),
           (user) => emit(AuthSuccess(user)),
+
     );
   }
 

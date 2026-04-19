@@ -245,8 +245,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
 
                               SizedBox(width: 15.w),
-
-
                               InkWell(
                                 onTap: () {
                                   if (viewModel.formKey.currentState!
