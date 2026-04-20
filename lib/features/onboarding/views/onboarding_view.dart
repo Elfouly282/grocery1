@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery1/core/resources/color_manager.dart';
 
 import '../../../core/resources/appassets.dart';
 import '../domain/entities/onboarding_entity.dart';
@@ -33,7 +34,7 @@ class OnboardingViewState extends State<OnboardingView> {
     if (currentIndex < pages.length - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+        curve: Curves.easeInOutCubic,
       );
     } else {
       Navigator.pushReplacementNamed(context, '/login');
@@ -43,7 +44,7 @@ class OnboardingViewState extends State<OnboardingView> {
   void onBackPressed() {
     pageController.previousPage(
       duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
+      curve: Curves.easeInOutCubic,
     );
   }
 
@@ -56,25 +57,28 @@ class OnboardingViewState extends State<OnboardingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: ColorManager.appbarBackground,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+
               // Skip
               if (currentIndex == 0)
                 Align(
                   alignment: Alignment.topRight,
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(12),
                     child: GestureDetector(
                       onTap: () => Navigator.pushReplacementNamed(context, '/login'),
                       child: const Text(
                         'Skip',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color(0xFF1A3C5E),
+                          color: ColorManager.primary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -110,7 +114,7 @@ class OnboardingViewState extends State<OnboardingView> {
 
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal:0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -132,6 +136,7 @@ class OnboardingViewState extends State<OnboardingView> {
                         ),
                       )
                     else
+
                       const SizedBox(width: 56),
 
 

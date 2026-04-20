@@ -31,6 +31,10 @@ class AppAssets {
   static String user ='assets/icons/User.png';
   static String vector ='assets/icons/Vector.png';
   static String voice ='assets/icons/voice.png';
+  static String unSee ='assets/icons/unsee.png';
+  static String resetCheck ='assets/icons/material-symbols_check-rounded.png';
+
+
   
   //images
   static String car ='assets/images/car 1.png';

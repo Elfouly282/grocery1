@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:grocery1/core/resources/color_manager.dart';
 
 class OnboardingDotsIndicator extends StatelessWidget {
   final int currentIndex;
@@ -25,7 +26,7 @@ class OnboardingDotsIndicator extends StatelessWidget {
           decoration: BoxDecoration(
             color:
             index == currentIndex
-                ? const Color(0xFF1A3C5E)
+                ?  ColorManager.primary
                 : Colors.grey.shade300,
             shape: BoxShape.circle,
           ),
