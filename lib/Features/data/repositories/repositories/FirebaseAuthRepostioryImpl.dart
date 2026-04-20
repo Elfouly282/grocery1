@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:grocery1/Features/domain/repositories/repositories/FirebaseAuthRepository.dart';
 import 'package:grocery1/core/failure/failure.dart';
-import 'package:grocery1/domain/repositories/repositories/FirebaseAuthRepository.dart' hide Firebaseauthdatasource;
 import 'package:injectable/injectable.dart';
 import '../../../domain/entities/RegisterResponseEntity.dart';
 import '../../../domain/repositories/datasourses/remoteDataSourse/FirebaseAuthDataSource.dart';

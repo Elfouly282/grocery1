@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:grocery1/domain/repositories/datasourses/remoteDataSourse/FirebaseAuthDataSource.dart';
+import 'package:grocery1/Features/domain/repositories/datasourses/remoteDataSourse/FirebaseAuthDataSource.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../domain/entities/RegisterResponseEntity.dart';
