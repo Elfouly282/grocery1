@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/appassets.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
-
 import 'package:grocery1/presentation/ui/SubCatergories/Cubit/Categories_View_Model.dart';
 import 'package:grocery1/presentation/ui/SubCatergories/Cubit/categories_state.dart';
-
 import 'package:grocery1/presentation/ui/SubCatergories/widgets/CategoriesItem.dart';
 import 'package:grocery1/presentation/ui/SubCatergories/widgets/ProductCard.dart';
 
-class SubCategoriesScreen extends StatefulWidget {
+class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({super.key});
 
-  @override
-  State<SubCategoriesScreen> createState() => _SubCategoriesScreenState();
-}
-
-class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<CategoriesViewModel>()..getCategories(),
       child: Scaffold(
-        backgroundColor: ColorManager.white,
+        backgroundColor: ColorManager.appbarBackground,
         appBar: AppBar(
           backgroundColor: ColorManager.baseWhite,
           elevation: 0,
@@ -33,11 +25,7 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
           actions: [
             InkWell(
               onTap: () {},
-              child: Image.asset(
-                AppAssets.search,
-                width: 22.w,
-                height: 22.h,
-              ),
+              child: Image.asset(AppAssets.search, width: 22.w, height: 22.h),
             ),
             SizedBox(width: 18.w),
             Icon(Icons.shopping_cart_outlined, size: 24.sp),
@@ -55,14 +43,15 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
             }
 
             if (state is CategorySuccess) {
+              final cubit = context.read<CategoriesViewModel>();
               final categories = state.response.data ?? [];
+              final selectedCategory = categories[cubit.selectedIndex];
 
               return Padding(
                 padding: EdgeInsets.all(12.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    /// 🔹 Title
                     Text(
                       "Categories",
                       style: TextStyle(
@@ -73,42 +62,51 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
 
                     SizedBox(height: 10.h),
 
-                    /// 🔹 Horizontal Categories (DYNAMIC)
+                    /// 🔹 Horizontal image card tabs
                     SizedBox(
-                      height: 157.h,
+                      height: 125.h,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: categories.length,
                         itemBuilder: (context, index) {
-                          final category = categories[index];
-
-                          return CategoryItem(
-                            image: category.imageUrl ??'',
-                            title: category.name,
+                          final isSelected = index == cubit.selectedIndex;
+                          return GestureDetector(
+                            onTap: () => cubit.changeIndex(index),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                              ),
+                              child: CategoryItem(
+color:isSelected?ColorManager.primary:ColorManager.black ,
+                                backgroundColor: isSelected?ColorManager.baseWhite:ColorManager.appbarBackground,
+                                image: categories[index].imageUrl ?? "",
+                                title: categories[index].name ?? "",
+                              ),
+                            ),
                           );
                         },
                       ),
                     ),
 
-                    /// 🔹 Products (still static for now)
+                    SizedBox(height: 10.h),
+                    Divider(height: 1, color: Colors.grey.shade200),
+                    SizedBox(height: 10.h),
+
+                    /// 🔹 Products — update when tab changes
                     Expanded(
                       child: ListView(
                         children: [
                           ProductCard(
-                            image: AppAssets.rectangle19,
-                            title: "Beef & Lamb",
-                            description:
-                            "A variety of fresh red meats, including steak, and lamb pieces.",
-                          ),
-                          ProductCard(
-                            image: AppAssets.rectangle19,
-                            title: "Poultry",
-                            description:
-                            "Whole chickens, boneless breasts, wings, and other poultry parts ready for cooking.",
+                            image: selectedCategory.imageUrl ??
+                                AppAssets.rectangle19,
+                            title: selectedCategory.name ?? "",
+                            description: selectedCategory.description ?? "",
                           ),
                         ],
                       ),
                     ),
+
                   ],
                 ),
               );
