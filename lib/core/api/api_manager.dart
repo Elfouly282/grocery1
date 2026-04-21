@@ -1,10 +1,22 @@
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import 'api_constant.dart';
-
+@singleton
 class ApiManger {
-  Dio dio = Dio();
+  final Dio dio = Dio(
+    BaseOptions(
+      baseUrl: ApiConstant.baseUrl,
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      validateStatus: (status) => true,
+    ),
+  );
+
+
   Future<Response>getData({required String endPoint,
     Map<String,dynamic>?qureyParmetes,
     Options?options,
@@ -15,65 +27,62 @@ class ApiManger {
         queryParameters:qureyParmetes,
         options:Options(headers:headers) );
   }
-  
-  Future<Response>postData({required String endPoint,
-    Map<String,dynamic>?qureyParmetes,
-    Object?body,
-    Options?options,
-    Map<String,dynamic>?headers,})
+  Future <Response>postData(
+      {required String endPoint,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        Object? body,
+        Map<String, dynamic>? headers}) {
+    return dio.post(ApiConstant.baseUrl + endPoint,
+      queryParameters: queryParameters,
+      options: Options(headers: headers,validateStatus: (status)=>true),
+      data: body,
 
-  {
-    return dio.post(ApiConstant.baseUrl+endPoint,
-        queryParameters:qureyParmetes,
-        data: body,
-        options:Options(headers:headers) );
+    );
   }
 }
+@singleton
 class ApiManager {
-  static final ApiManager _instance = ApiManager._internal();
-  factory ApiManager() => _instance;
+  late Dio dio;
 
-  late final Dio _dio;
-
-  ApiManager._internal() {
-    _dio = Dio(
+  ApiManager() {
+    dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstant.baseUrl,
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-        headers: {'Content-Type': 'application/json'},
+        baseUrl: ApiConstant.baseUrl, // 🔥 مهم
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        validateStatus: (status) => true, // 🔥 عشان تتعامل مع 422 وغيره
       ),
-    );
-    _dio.interceptors.add(
-      LogInterceptor(requestBody: true, responseBody: true),
     );
   }
 
-  // Future<Response> getData({
-  //   required String endPoint,
-  //   Map<String, dynamic>? queryParameters,
-  //   Map<String, dynamic>? headers,
-  //   Options? options,
-  // }) async {
-  //   return _dio.get(
-  //     endPoint,
-  //     queryParameters: queryParameters,
-  //     options: (options ?? Options()).copyWith(headers: headers),
-  //   );
-  // }
+  /// GET
+  Future<Response> getData({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.get(
+      endPoint,
+      queryParameters: queryParameters,
+      options: Options(headers: headers),
+    );
+  }
 
-  // Future<Response> postData({
-  //   required String endPoint,
-  //   Map<String, dynamic>? queryParameters,
-  //   Object? body,
-  //   Map<String, dynamic>? headers,
-  //   Options? options,
-  // }) async {
-  //   return _dio.post(
-  //     endPoint,
-  //     queryParameters: queryParameters,
-  //     data: body,
-  //     options: (options ?? Options()).copyWith(headers: headers),
-  //   );
-  // }
+  /// POST
+  Future<Response> postData({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    Object? body,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.post(
+      endPoint,
+      queryParameters: queryParameters,
+      data: body,
+      options: Options(headers: headers),
+    );
+  }
 }

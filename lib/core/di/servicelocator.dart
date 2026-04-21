@@ -1,10 +1,14 @@
-// run    => flutter pub run build_runner build
+import 'package:get_it/get_it.dart';
+import 'package:grocery1/core/di/servicelocator.config.dart';
+import 'package:injectable/injectable.dart';
 
 
 
+final getIt = GetIt.instance;
 
-// final getit = GetIt.instance;
-
-// void configureDependencies() {
-  
-// }
+@InjectableInit(
+  initializerName: 'init', // default
+  preferRelativeImports: true, // default
+  asExtension: true, // default
+)
+void configureDependencies() => getIt.init();
