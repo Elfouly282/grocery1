@@ -13,38 +13,52 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final ForgotPasswordRepo repo;
   ForgotPasswordCubit(this.repo) : super(ForgotPasswordInitial());
 
-  bool isEmail=true;
+  bool isEmail = true;
 
-  void toggleMethod(bool email){
-    isEmail =email;
+  void toggleMethod(bool email) {
+    isEmail = email;
     emit(ForgotPasswordInitial());
   }
 
-
-  Future<void>sendCode({String? email,String? phone})async{
+  Future<void> sendCode({String? email, String? phone}) async {
     emit(ForgotPasswordLoading());
-    final result= await repo.sendCode(email: email,phone: phone);
+    final result = await repo.sendCode(email: email, phone: phone);
     result.fold(
-        (failure)=>emit(ForgotPasswordError(failure.failuremessage)),
-        (_)=>emit(ForgotPasswordSuccess()));
+          (failure) {
+        print('❌ Failure: ${failure.failuremessage}');
+        emit(ForgotPasswordError(failure.failuremessage));
+      },
+          (_) {
+        print('✅ Success');
+        emit(ForgotPasswordSuccess());
+      },
+    );
   }
 
-  Future<void>verifyOtp(String otp)async{
+  Future<void> resendCode({String? email, String? phone}) async {
     emit(ForgotPasswordLoading());
-    final result= await repo.verifyOtp(otp);
+    final result = await repo.sendCode(email: email, phone: phone);
     result.fold(
-            (failure)=>emit(ForgotPasswordError(failure.failuremessage)),
-            (_)=>emit(ForgotPasswordSuccess()));
+          (failure) => emit(ForgotPasswordError(failure.failuremessage)),
+          (_) => emit(ForgotPasswordCodeSent()),
+    );
   }
 
-
-  Future<void>resetPassword(String newPassword)async{
+  Future<void> verifyOtp(String otp) async {
     emit(ForgotPasswordLoading());
-    final result= await repo.resetPassword( newPassword);
+    final result = await repo.verifyOtp(otp);
     result.fold(
-            (failure)=>emit(ForgotPasswordError(failure.failuremessage)),
-            (_)=>emit(ForgotPasswordSuccess()));
+          (failure) => emit(ForgotPasswordError(failure.failuremessage)),
+          (_) => emit(ForgotPasswordSuccess()),
+    );
   }
 
-
+  Future<void> resetPassword(String newPassword) async {
+    emit(ForgotPasswordLoading());
+    final result = await repo.resetPassword(newPassword);
+    result.fold(
+          (failure) => emit(ForgotPasswordError(failure.failuremessage)),
+          (_) => emit(ForgotPasswordSuccess()),
+    );
+  }
 }

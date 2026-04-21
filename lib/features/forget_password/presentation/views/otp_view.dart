@@ -46,6 +46,10 @@ class _OtpViewState extends State<OtpView> {
                     ),
                   ),
                 );
+              } else if (state is ForgotPasswordCodeSent) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Code resent successfully')),
+                );
               } else if (state is ForgotPasswordError) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.message)),
@@ -125,7 +129,7 @@ class _OtpViewState extends State<OtpView> {
                         style: TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                       GestureDetector(
-                        onTap: () => cubit.sendCode(
+                        onTap: () => cubit.resendCode(
                           email: cubit.isEmail ? widget.emailOrPhone : null,
                           phone: cubit.isEmail ? null : widget.emailOrPhone,
                         ),
