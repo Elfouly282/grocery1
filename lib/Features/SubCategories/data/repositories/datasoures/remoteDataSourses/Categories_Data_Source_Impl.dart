@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
+import 'package:grocery1/Features/SubCategories/data/models/CategoriesResponseDM.dart';
+import 'package:grocery1/Features/SubCategories/domain/entities/CategoriesResponseEntity.dart';
 import 'package:grocery1/Features/SubCategories/domain/repositories/datasourses/remoteDataSourse/CategoriesDataSource.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/api/api_manager.dart';
 import 'package:grocery1/core/failure/failure.dart';
-import 'package:grocery1/data/models/CategoriesResponseDM.dart';
-import 'package:grocery1/domain/entities/CategoriesResponseEntity.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as:CategoriesDataSource)
 
@@ -34,7 +34,7 @@ class CategoriesDataSourceImpl implements CategoriesDataSource {
       if (response.statusCode != null &&
           response.statusCode! >= 200 &&
           response.statusCode! < 300) {
-        return Right(getAllCategoriesResponse); // ✅ FIXED
+        return Right(getAllCategoriesResponse);
       }
 
       return Left(

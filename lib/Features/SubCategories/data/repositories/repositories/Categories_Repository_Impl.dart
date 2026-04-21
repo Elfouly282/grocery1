@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:grocery1/Features/SubCategories/domain/entities/CategoriesResponseEntity.dart';
 import 'package:grocery1/core/failure/failure.dart';
-import 'package:grocery1/domain/entities/CategoriesResponseEntity.dart';
-import 'package:grocery1/domain/repositories/repositories/CategoriesRepository.dart';
+
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/repositories/datasourses/remoteDataSourse/CategoriesDataSource.dart';
+import '../../../domain/repositories/repositories/CategoriesRepository.dart';
 @Injectable(as: Categoriesrepository)
 class CategoriesRepositoryImpl implements Categoriesrepository{
   CategoriesDataSource dataSource;

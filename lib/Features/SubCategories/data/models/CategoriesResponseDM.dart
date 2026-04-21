@@ -1,4 +1,5 @@
-import 'package:grocery1/domain/entities/CategoriesResponseEntity.dart';
+
+import 'package:grocery1/Features/SubCategories/domain/entities/CategoriesResponseEntity.dart';
 
 /// success : true
 /// message : "Categories retrieved successfully"

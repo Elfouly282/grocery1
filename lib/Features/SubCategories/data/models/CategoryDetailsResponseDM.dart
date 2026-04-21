@@ -1,4 +1,6 @@
-import 'package:grocery1/domain/entities/CategoryDetailsResponseEntity.dart';
+
+
+import 'package:grocery1/Features/SubCategories/domain/entities/CategoryDetailsResponseEntity.dart';
 
 class CategoryDetailsResponseDm extends CategoryDetailsResponseEntity {
   CategoryDetailsResponseDm({
