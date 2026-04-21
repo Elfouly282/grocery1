@@ -1,12 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocery1/core/api/api_manager.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:grocery1/data/models/RegisterResponseDM.dart';
-import 'package:grocery1/domain/entities/RegisterResponseEntity.dart';
 import 'package:grocery1/domain/repositories/datasourses/remoteDataSourse/RegisterRemoteDataSource.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/api/api_endpoints.dart';

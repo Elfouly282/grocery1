@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
+import 'package:grocery1/Features/SubCategories/domain/repositories/datasourses/remoteDataSourse/CategoriesDataSource.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/api/api_manager.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:grocery1/data/models/CategoriesResponseDM.dart';
 import 'package:grocery1/domain/entities/CategoriesResponseEntity.dart';
-import 'package:grocery1/domain/repositories/datasourses/remoteDataSourse/CategoriesDataSource.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as:CategoriesDataSource)
 

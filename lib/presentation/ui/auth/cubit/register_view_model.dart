@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery1/presentation/ui/auth/cubit/register_states.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../domain/usecases/register_useCase.dart';
+import 'package:grocery1/domain/usecases/register_useCase.dart';
 
 
 @injectable
