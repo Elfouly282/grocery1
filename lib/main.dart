@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery1/feathers/login/presentation/screens/login_screen.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/di/servicelocator.dart';
+import 'features/home/presentation/screens/home_screen.dart';
+import 'features/login/presentation/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +33,13 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LoginScreen(),
-        );
+initialRoute: HomeScreen.routeName,
+          routes: {
+            LoginScreen.routeName:(context)=>LoginScreen(),
+            HomeScreen.routeName:(context)=>HomeScreen(),
+
+          },
+                 );
       },
     );
   }

@@ -1,12 +1,12 @@
 // run    => flutter pub run build_runner build
 import 'package:get_it/get_it.dart';
-import 'package:grocery1/feathers/login/domain/useCase/login_use_case.dart';
 
-import '../../feathers/login/data/data_Source/login_remote_data_source.dart';
-import '../../feathers/login/data/data_Source/login_remote_data_source_impl.dart';
-import '../../feathers/login/data/repo/login_repo_impl.dart';
-import '../../feathers/login/domain/repo/login_repo.dart';
-import '../../feathers/login/presentation/cubit/login_cubit.dart';
+import '../../features/login/data/data_Source/login_remote_data_source.dart';
+import '../../features/login/data/data_Source/login_remote_data_source_impl.dart';
+import '../../features/login/data/repo/login_repo_impl.dart';
+import '../../features/login/domain/repo/login_repo.dart';
+import '../../features/login/domain/useCase/login_use_case.dart';
+import '../../features/login/presentation/cubit/login_cubit.dart';
 
 final getit = GetIt.instance;
 

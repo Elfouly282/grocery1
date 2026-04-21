@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api_constant.dart';
-
-
 
 class ApiManager {
   static final ApiManager _instance = ApiManager._internal();
@@ -17,10 +16,21 @@ class ApiManager {
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {'Content-Type': 'application/json'},
+        followRedirects: true,
+        validateStatus: (status) => status! < 400,
       ),
     );
+
     _dio.interceptors.add(
-      LogInterceptor(requestBody: true, responseBody: true),
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: false,
+        responseBody: true,
+        error: true,
+        compact: true,
+        maxWidth: 90,
+      ),
     );
   }
 

@@ -6,6 +6,8 @@ class AppAssets {
   static String favourite = 'assets/icons/favourite.png';
   static String googleIcon = 'assets/icons/google_icon.png';
   static String homeSelected = 'assets/icons/home_selected.png';
+  static String homeUnSelected = 'assets/icons/home_unselected.png';
+
   static String letter = 'assets/icons/Letter.png';
   static String logoFacebook = 'assets/icons/logos_facebook.png';
   static String mailLogo = 'assets/icons/mail_logo.png';
@@ -30,6 +32,7 @@ class AppAssets {
   static String user = 'assets/icons/User.png';
   static String vector = 'assets/icons/Vector.png';
   static String voice = 'assets/icons/voice.png';
+  static const orange ='assets/images/orange.png';
 
   //images
   static String car = 'assets/images/car 1.png';

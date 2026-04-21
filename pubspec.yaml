@@ -46,9 +46,11 @@ dependencies:
   toastification: ^3.0.3
   firebase_core: ^2.30.0
   firebase_auth: ^4.0.0
+  flutter_svg: ^2.0.10
 
 
   bloc: any
+  pretty_dio_logger: ^1.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
