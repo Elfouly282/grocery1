@@ -8,5 +8,4 @@ abstract class FirebaseModule {
   @lazySingleton
   FirebaseAuth firebaseAuth() => FirebaseAuth.instance;
 
-  @lazySingleton
-  GoogleSignIn get googleSignIn => GoogleSignIn.instance;}
+}

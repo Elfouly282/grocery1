@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:grocery1/Features/domain/repositories/repositories/FirebaseAuthRepository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:grocery1/Features/SignUp/domain/repositories/repositories/FirebaseAuthRepository.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:injectable/injectable.dart';
 import '../../../domain/entities/RegisterResponseEntity.dart';
@@ -36,7 +37,7 @@ class Firebaseauthrepostioryimpl implements Firebaseauthrepository {
 
   // ================= GOOGLE =================
   @override
-  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+  Future<Either<Failure, UserCredential>> signInWithGoogle() async {
     try {
       final user = await datasource.signInWithGoogle();
       return Right(user);
@@ -47,7 +48,7 @@ class Firebaseauthrepostioryimpl implements Firebaseauthrepository {
 
   // ================= FACEBOOK =================
   @override
-  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+  Future<Either<Failure, UserCredential>> signInWithFacebook() async {
     try {
       final user = await datasource.signInWithFacebook();
       return Right(user);
@@ -56,14 +57,4 @@ class Firebaseauthrepostioryimpl implements Firebaseauthrepository {
     }
   }
 
-  // ================= SIGN OUT =================
-  @override
-  Future<Either<Failure, void>> signOut() async {
-    try {
-      await datasource.signOut();
-      return const Right(null);
-    } catch (e) {
-      return Left(Failure(e.toString()));
-    }
-  }
 }

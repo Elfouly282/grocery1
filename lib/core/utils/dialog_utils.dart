@@ -13,7 +13,7 @@ class DialogUtils {
           return AlertDialog(
             content: Row(
               children: [
-                const CircularProgressIndicator(),
+                const CircularProgressIndicator(color: ColorManager.primary,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(

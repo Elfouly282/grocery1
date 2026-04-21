@@ -1,5 +1,6 @@
 
-import 'package:grocery1/Features/domain/entities/RegisterResponseEntity.dart' show RegisterResponseEntity, DataEntity, UserEntity, ErrorEntity;
+
+import 'package:grocery1/Features/SignUp/domain/entities/RegisterResponseEntity.dart';
 
 class RegisterResponseModel extends RegisterResponseEntity {
   RegisterResponseModel({
