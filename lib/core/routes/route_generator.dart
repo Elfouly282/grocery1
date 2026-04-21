@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery1/core/routes/routes.dart';
-import 'package:grocery1/features/category/presentation/screen/subcategory_screen.dart';
+import 'package:grocery1/features/productslist/presentation/screen/subcategory_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {

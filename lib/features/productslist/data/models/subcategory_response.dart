@@ -1,4 +1,5 @@
-import 'package:grocery1/features/category/data/models/subcategory_model.dart';
+
+import 'package:grocery1/features/productslist/data/models/subcategory_model.dart';
 
 class SubcategoryResponse {
   bool? success;

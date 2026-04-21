@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/styles_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
-import 'package:grocery1/features/category/presentation/cubit/subcategories_cubit.dart';
-import 'package:grocery1/features/category/presentation/widgets/shimmer_gridview.dart';
+import 'package:grocery1/features/productslist/presentation/cubit/subcategories_cubit.dart';
+import 'package:grocery1/features/productslist/presentation/widgets/shimmer_gridview.dart';
 
 class Gridproduct extends StatefulWidget {
   @override

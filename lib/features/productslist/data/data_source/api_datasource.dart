@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/error/error.dart';
-import 'package:grocery1/features/category/data/models/sub_category_details/subcategorydetails_response.dart';
+import 'package:grocery1/features/productslist/data/models/sub_category_details/subcategorydetails_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:grocery1/core/api/api_manager.dart';
-import 'package:grocery1/features/category/data/data_source/subcategory_datasource.dart';
-import 'package:grocery1/features/category/data/models/subcategory_response.dart';
+import 'package:grocery1/features/productslist/data/data_source/subcategory_datasource.dart';
+import 'package:grocery1/features/productslist/data/models/subcategory_response.dart';
 
 @LazySingleton(as: SubcategoryDatasource)
 class ApiDatasource implements SubcategoryDatasource {

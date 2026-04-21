@@ -5,7 +5,7 @@ import 'package:grocery1/core/bloc_observer.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
 import 'package:grocery1/core/routes/route_generator.dart';
 import 'package:grocery1/core/routes/routes.dart';
-import 'package:grocery1/features/category/presentation/cubit/subcategories_cubit.dart';
+import 'package:grocery1/features/productslist/presentation/cubit/subcategories_cubit.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();

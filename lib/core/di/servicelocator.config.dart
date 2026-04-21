@@ -14,19 +14,19 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:grocery1/core/api/api_manager.dart' as _i820;
 import 'package:grocery1/core/di/register_model.dart' as _i267;
-import 'package:grocery1/features/category/data/data_source/api_datasource.dart'
+import 'package:grocery1/features/productslist/data/data_source/api_datasource.dart'
     as _i642;
-import 'package:grocery1/features/category/data/data_source/subcategory_datasource.dart'
+import 'package:grocery1/features/productslist/data/data_source/subcategory_datasource.dart'
     as _i839;
-import 'package:grocery1/features/category/data/repository/subcate_repositoryimpl.dart'
+import 'package:grocery1/features/productslist/data/repository/subcate_repositoryimpl.dart'
     as _i522;
-import 'package:grocery1/features/category/domain/repo/subcate_repository.dart'
+import 'package:grocery1/features/productslist/domain/repo/subcate_repository.dart'
     as _i1050;
-import 'package:grocery1/features/category/domain/usecase/getsubcate_usecase.dart'
+import 'package:grocery1/features/productslist/domain/usecase/getsubcate_usecase.dart'
     as _i535;
-import 'package:grocery1/features/category/domain/usecase/getsubcategorydetails_usecase.dart'
+import 'package:grocery1/features/productslist/domain/usecase/getsubcategorydetails_usecase.dart'
     as _i486;
-import 'package:grocery1/features/category/presentation/cubit/subcategories_cubit.dart'
+import 'package:grocery1/features/productslist/presentation/cubit/subcategories_cubit.dart'
     as _i536;
 import 'package:injectable/injectable.dart' as _i526;
 

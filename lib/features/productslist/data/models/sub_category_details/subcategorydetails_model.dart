@@ -1,4 +1,4 @@
-import 'package:grocery1/features/category/data/models/category_model.dart';
+import 'package:grocery1/features/productslist/data/models/category_model.dart';
 
 import 'meal_model.dart';
 

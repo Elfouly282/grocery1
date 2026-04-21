@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:grocery1/core/failure/failure.dart';
-import 'package:grocery1/features/category/domain/entities/subcategories_entity.dart';
-import 'package:grocery1/features/category/domain/repo/subcate_repository.dart';
+import 'package:grocery1/features/productslist/domain/entities/subcategories_entity.dart';
+import 'package:grocery1/features/productslist/domain/repo/subcate_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton

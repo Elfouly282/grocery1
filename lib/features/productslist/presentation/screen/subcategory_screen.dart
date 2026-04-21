@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/styles_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
-import 'package:grocery1/features/category/presentation/widgets/gridview.dart';
-import 'package:grocery1/features/category/presentation/widgets/tabbarview_product.dart';
+import 'package:grocery1/features/productslist/presentation/widgets/gridview.dart';
+import 'package:grocery1/features/productslist/presentation/widgets/tabbarview_product.dart';
 
 class ProductList extends StatefulWidget {
   @override
