@@ -15,7 +15,7 @@ class ApiManger {
         queryParameters:qureyParmetes,
         options:Options(headers:headers) );
   }
-  
+
   Future<Response>postData({required String endPoint,
     Map<String,dynamic>?qureyParmetes,
     Object?body,
@@ -27,6 +27,20 @@ class ApiManger {
         queryParameters:qureyParmetes,
         data: body,
         options:Options(headers:headers) );
+  }
+
+  Future<Response> putData({
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    Object? body,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.put(
+      ApiConstant.baseUrl + endPoint,
+      queryParameters: queryParameters,
+      data: body,
+      options: Options(headers: headers),
+    );
   }
 }
 class ApiManager {

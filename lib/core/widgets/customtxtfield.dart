@@ -14,6 +14,8 @@ class CustomTextField extends StatelessWidget {
   final int? maxLines;
   final bool? enabled;
   final Color? backgroundColor;
+  final Color? hintColor;
+  final FontWeight? hintWeight;
 
   const CustomTextField({
     super.key,
@@ -28,6 +30,8 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     this.enabled,
     this.backgroundColor,
+    this.hintColor,
+    this.hintWeight,
   });
 
   @override
@@ -42,18 +46,27 @@ class CustomTextField extends StatelessWidget {
       enabled: enabled ?? true,
       decoration: InputDecoration(
         prefixIcon: icon != null ? Icon(icon) : null,
+        prefixIconColor: Colors.grey,
         suffixIcon: suffixIcon,
+        contentPadding: EdgeInsets.symmetric(vertical: 12),
         hintText: hintText,
+        hintStyle: TextStyle(
+          color: hintColor,
+          fontWeight: hintWeight
+        ),
         filled: true,
         fillColor: backgroundColor ?? const Color(0xFFF2F2F2),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey),
         ),
       ),
     );
