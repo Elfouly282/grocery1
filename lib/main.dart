@@ -1,18 +1,47 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'SplashView.dart';
-import 'features/forget_password/presentation/views/forgot_password_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery1/SplashView.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'core/di/servicelocator.dart';
+import 'features/login/presentation/screens/login_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyCyERp8WmKVVMrYNTXVg1zuUMFVfq85-nM",
+      appId: "1:908633982306:android:bfa483aa25957ce35f983b",
+      messagingSenderId: "908633982306",
+      projectId: "grocrey1",
+    ),
+  );
+  await configureDependencies();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashView());
+    return ScreenUtilInit(
+      designSize: const Size(402, 874),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          // initialRoute: SplashView,
+          home: SplashView(),
+          routes: {
+            LoginScreen.routeName: (context) => LoginScreen(),
+
+            // HomeScreen.routeName:(context)=>HomeScreen(),
+          },
+        );
+      },
+    );
   }
 }

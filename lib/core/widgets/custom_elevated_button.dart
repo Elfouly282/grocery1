@@ -5,8 +5,6 @@ import '../resources/color_manager.dart';
 import '../resources/font_manager.dart';
 import '../resources/styles_manager.dart';
 
-
-
 class CustomElevatedButton extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -19,6 +17,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Widget? child;
 
   const CustomElevatedButton({
+    super.key,
     this.prefixIcon,
     this.textStyle,
     this.isStadiumBorder = true,
@@ -34,9 +33,9 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        shape: isStadiumBorder
-            ? const StadiumBorder()
-            : RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius?.r ?? 0),
+        ),
         backgroundColor: backgroundColor ?? ColorManager.primary,
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
       ),

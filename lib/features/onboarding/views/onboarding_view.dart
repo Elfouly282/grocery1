@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
+import 'package:grocery1/features/login/presentation/screens/login_screen.dart';
 
 import '../../../core/resources/appassets.dart';
 import '../domain/entities/onboarding_entity.dart';
@@ -21,12 +22,14 @@ class OnboardingViewState extends State<OnboardingView> {
     OnboardingEntity(
       image: AppAssets.undrawEmptyCart,
       title: 'Shop Everything You Need, In One Click',
-      description: 'Discover over 1000 fresh and essential grocery products in a single place.',
+      description:
+          'Discover over 1000 fresh and essential grocery products in a single place.',
     ),
     OnboardingEntity(
       image: AppAssets.group,
       title: 'Save Time, Get Groceries Delivered to Your Door',
-      description: 'Ultra-fast delivery with real-time tracking straight to you.',
+      description:
+          'Ultra-fast delivery with real-time tracking straight to you.',
     ),
   ];
 
@@ -37,7 +40,7 @@ class OnboardingViewState extends State<OnboardingView> {
         curve: Curves.easeInOutCubic,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
   }
 
@@ -65,7 +68,6 @@ class OnboardingViewState extends State<OnboardingView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               // Skip
               if (currentIndex == 0)
                 Align(
@@ -73,7 +75,8 @@ class OnboardingViewState extends State<OnboardingView> {
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: GestureDetector(
-                      onTap: () => Navigator.pushReplacementNamed(context, '/login'),
+                      onTap: () =>
+                          Navigator.pushReplacementNamed(context, '/login'),
                       child: const Text(
                         'Skip',
                         style: TextStyle(
@@ -85,7 +88,6 @@ class OnboardingViewState extends State<OnboardingView> {
                     ),
                   ),
                 ),
-
 
               Expanded(
                 child: PageView.builder(
@@ -104,7 +106,6 @@ class OnboardingViewState extends State<OnboardingView> {
                 ),
               ),
 
-
               OnboardingDotsIndicator(
                 currentIndex: currentIndex,
                 count: pages.length,
@@ -112,13 +113,11 @@ class OnboardingViewState extends State<OnboardingView> {
 
               const SizedBox(height: 32),
 
-
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:0),
+                padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     if (currentIndex > 0)
                       GestureDetector(
                         onTap: onBackPressed,
@@ -136,9 +135,7 @@ class OnboardingViewState extends State<OnboardingView> {
                         ),
                       )
                     else
-
                       const SizedBox(width: 56),
-
 
                     GestureDetector(
                       onTap: onNextPressed,

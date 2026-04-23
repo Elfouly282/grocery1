@@ -41,10 +41,16 @@ dependencies:
   flutter_secure_storage: ^10.0.0
   get_it: ^9.2.1
   google_nav_bar: ^5.0.7
-  google_sign_in: ^7.2.0
+  google_sign_in: ^6.2.1
   injectable: ^2.4.2
   toastification: ^3.0.3
+  firebase_core: ^2.30.0
+  firebase_auth: ^4.0.0
+  flutter_svg: ^2.0.10
 
+
+  bloc: any
+  pretty_dio_logger: ^1.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -66,7 +72,6 @@ flutter:
   # the material Icons class.
 
   # To add assets to your application, add an assets section, like this:
-  uses-material-design: true
 
   assets:
     - assets/images/
