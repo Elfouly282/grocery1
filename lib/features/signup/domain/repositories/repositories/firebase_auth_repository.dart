@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grocery1/core/failure/failure.dart';
 
-import '../../entities/register_response_entity.dart';
+import 'package:grocery1/features/signup/domain/entities/register_response_entity.dart';
 
 abstract class Firebaseauthrepository {
   Future<Either<Failure, UserEntity>>signUpWithEmail(String email, String password);

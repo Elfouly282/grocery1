@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:grocery1/Features/SignUp/presentation/ui/auth/cubit/firebase_auth_view_model.dart';
+import 'package:grocery1/features/signup/presentation/ui/auth/cubit/firebase_auth_view_model.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
 
 import 'package:grocery1/core/resources/appassets.dart';
@@ -201,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onTap: state is RegisterLoadingState
                                 ? null
                                 : viewModel.register,
-                            label: "SignUp",
+                            label: "signup",
                             backgroundColor: ColorManager.primary,
                             radius: 8.0.r,
                             isStadiumBorder: false,

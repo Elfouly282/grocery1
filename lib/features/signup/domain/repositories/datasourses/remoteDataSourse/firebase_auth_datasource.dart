@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:grocery1/Features/SignUp/domain/entities/register_response_entity.dart';
+
+import 'package:grocery1/features/signup/domain/entities/register_response_entity.dart';
+
 
 
 abstract class Firebaseauthdatasource {
