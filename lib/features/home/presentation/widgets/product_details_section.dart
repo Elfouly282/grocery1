@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_add_to_cart_button.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_name_row.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_price_row.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_stars_row.dart';
-
 import '../../domain/entity/recommended_meal_entity.dart';
-
+import '../cubit/cart_cubit.dart';
 
 class ProductDetailsSection extends StatelessWidget {
   final RecommendedMealEntity meal;
@@ -18,7 +16,7 @@ class ProductDetailsSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(6),
       decoration: const BoxDecoration(
-        color:ColorManager.white,
+        color: ColorManager.white,
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
       ),
       child: Column(
@@ -30,7 +28,14 @@ class ProductDetailsSection extends StatelessWidget {
           const SizedBox(height: 6),
           ProductPriceRow(meal: meal),
           const SizedBox(height: 8),
-          const ProductAddToCartButton(),
+          ProductAddToCartButton(
+            item: CartItem(
+              id: meal.id.toString(),
+              name: meal.title,
+              price: meal.finalPrice,
+              image: meal.imageUrl,
+            ),
+          ),
         ],
       ),
     );

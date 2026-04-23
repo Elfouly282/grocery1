@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/utils/app_text.dart';
+import '../cubit/cart_cubit.dart';
 
 class ProductAddToCartButton extends StatelessWidget {
-  const ProductAddToCartButton({super.key});
+  final CartItem item; // ← بتمرر المنتج من هنا
+
+  const ProductAddToCartButton({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,16 @@ class ProductAddToCartButton extends StatelessWidget {
       width: 156.w,
       height: 32.h,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<CartCubit>().addToCart(item); // ← هنا بيضيف للسلة
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${item.name} added to cart'),
+              duration: const Duration(seconds: 1),
+              backgroundColor: ColorManager.primary,
+            ),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorManager.primary,
           foregroundColor: ColorManager.white,
@@ -24,7 +36,6 @@ class ProductAddToCartButton extends StatelessWidget {
           padding: EdgeInsets.zero,
         ),
         child: AppText.addToCart(),
-
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:grocery1/features/home/data/repo/recommended_meal_repo_impl.dart
 import 'package:grocery1/features/home/domain/repo/meals_repository.dart';
 import 'package:grocery1/features/home/domain/repo/recommended_meal_repo.dart';
 import 'package:grocery1/features/home/domain/usecase/get_all_deals_use_case.dart';
+import 'package:grocery1/features/home/domain/usecase/get_products_search_use_case.dart';
 import 'package:grocery1/features/home/domain/usecase/recommended_meal_use_case.dart';
 import 'package:grocery1/features/home/presentation/cubit/recommended_cubit.dart';
 
@@ -14,11 +15,17 @@ import '../../features/home/data/data_source/category_section_remote_data_source
 import '../../features/home/data/data_source/category_section_remote_data_source_impl.dart';
 import '../../features/home/data/data_source/meals_remote_data_source.dart';
 import '../../features/home/data/data_source/meals_remote_data_source_impl.dart';
+import '../../features/home/data/data_source/product_search_remote_data_source.dart';
+import '../../features/home/data/data_source/product_search_remote_data_source_impl.dart';
 import '../../features/home/data/repo/category_section_repo_impl.dart';
+import '../../features/home/data/repo/product_search_repository_Impl.dart';
 import '../../features/home/domain/repo/category_section_repo.dart';
+import '../../features/home/domain/repo/product_search_repository.dart';
 import '../../features/home/domain/usecase/category_section_use_case.dart';
+import '../../features/home/presentation/cubit/cart_cubit.dart';
 import '../../features/home/presentation/cubit/category_cubit.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
+import '../../features/home/presentation/cubit/product_search_cubit.dart';
 import '../../features/login/data/data_Source/login_remote_data_source.dart';
 import '../../features/login/data/data_Source/login_remote_data_source_impl.dart';
 import '../../features/login/data/repo/login_repo_impl.dart';
@@ -83,7 +90,6 @@ Future<void> configureDependencies() async {
         () => RecommendedCubit(getIt()),
   );
 
-
   getIt.registerLazySingleton<CategorySectionRemoteDataSource>(
         () => CategorySectionRemoteDataSourceImpl(getIt()),
   );
@@ -98,5 +104,23 @@ Future<void> configureDependencies() async {
 
   getIt.registerFactory<CategoryCubit>(
         () => CategoryCubit(getIt()),
+  );
+
+  getIt.registerFactory<CartCubit>(() => CartCubit());
+
+  getIt.registerLazySingleton<ProductRemoteDataSource>(
+        () => ProductRemoteDataSourceImpl(getIt()),
+  );
+
+  getIt.registerLazySingleton<ProductRepository>(
+        () => ProductRepositoryImpl(getIt()),
+  );
+
+  getIt.registerLazySingleton<GetProductsSearchUseCase>(
+        () => GetProductsSearchUseCase(getIt()),
+  );
+
+  getIt.registerFactory<ProductSearchCubit>(
+        () => ProductSearchCubit(getIt()),
   );
 }

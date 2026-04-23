@@ -4,10 +4,8 @@ import 'package:grocery1/features/home/presentation/widgets/product_details_sect
 import 'package:grocery1/features/home/presentation/widgets/product_favorite_button.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_image_section.dart';
 
-import '../../domain/entity/recommended_meal_entity.dart';
-
 class ProductCard extends StatelessWidget {
-  final RecommendedMealEntity meal;
+  final dynamic  meal;
   const ProductCard({super.key, required this.meal});
 
   @override
