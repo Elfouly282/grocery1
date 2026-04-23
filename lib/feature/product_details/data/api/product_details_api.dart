@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:grocery1/core/api/api_constant.dart';
 import 'package:grocery1/core/api/api_manager.dart';
 import 'package:grocery1/core/error/error.dart';
 import 'package:grocery1/feature/product_details/data/models/product_details_model.dart';
@@ -31,10 +32,7 @@ class ProductDetailsApi {
       final response = await _apiManager.postData(
         endPoint:
             '${ApiEndpoints.favoritesEndpoint}$productId/${ApiEndpoints.toggleFavoriteEndpoint}',
-        headers: {
-          'Authorization':
-              'Bearer 690|QaLdQa2hZhoUTMhijXQVrg9t69E0uImaD0lzkZkc804224bb',
-        },
+        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
         body: {"meal_id": productId},
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {
@@ -52,10 +50,7 @@ class ProductDetailsApi {
     try {
       final response = await _apiManager.postData(
         endPoint: ApiEndpoints.cartItemsEndpoint,
-        headers: {
-          'Authorization':
-              'Bearer 690|QaLdQa2hZhoUTMhijXQVrg9t69E0uImaD0lzkZkc804224bb',
-        },
+        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
         body: FormData.fromMap({"meal_id": mealId, "quantity": quantity}),
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {
