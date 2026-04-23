@@ -44,6 +44,7 @@ dependencies:
   google_sign_in: ^7.2.0
   injectable: ^2.4.2
   toastification: ^3.0.3
+  image_picker: ^1.2.1
 
 dev_dependencies:
   flutter_test:

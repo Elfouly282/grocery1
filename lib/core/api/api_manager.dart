@@ -1,34 +1,45 @@
-
 import 'package:dio/dio.dart';
 
 import 'api_constant.dart';
 
 class ApiManger {
   Dio dio = Dio();
-  Future<Response>getData({required String endPoint,
-    Map<String,dynamic>?qureyParmetes,
-    Options?options,
-    Map<String,dynamic>?headers,})
-
-  {
-    return dio.get(ApiConstant.baseUrl+endPoint,
-        queryParameters:qureyParmetes,
-        options:Options(headers:headers) );
+  Future<Response> getData({
+    required String endPoint,
+    Map<String, dynamic>? qureyParmetes,
+    Options? options,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.get(
+      ApiConstant.baseUrl + endPoint,
+      queryParameters: qureyParmetes,
+      options: Options(headers: headers),
+    );
   }
-  
-  Future<Response>postData({required String endPoint,
-    Map<String,dynamic>?qureyParmetes,
-    Object?body,
-    Options?options,
-    Map<String,dynamic>?headers,})
 
-  {
-    return dio.post(ApiConstant.baseUrl+endPoint,
-        queryParameters:qureyParmetes,
-        data: body,
-        options:Options(headers:headers) );
+  Future<Response> postData({
+    required String endPoint,
+    Map<String, dynamic>? qureyParmetes,
+    Object? body,
+    Options? options,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.post(
+      ApiConstant.baseUrl + endPoint,
+      queryParameters: qureyParmetes,
+      data: body,
+      options: Options(headers: headers),
+    );
   }
+
+  final testdio = Dio(
+    BaseOptions(
+      baseUrl: ApiConstant.baseUrl,
+      headers: {"Accept": "application/json"},
+    ),
+  );
 }
+
 class ApiManager {
   static final ApiManager _instance = ApiManager._internal();
   factory ApiManager() => _instance;
