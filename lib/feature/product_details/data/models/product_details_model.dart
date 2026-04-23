@@ -49,6 +49,7 @@ class ProductModel {
   CategoryModel? subcategory;
   String? createdAt;
   String? updatedAt;
+  bool? isFavorite;
 
   ProductModel({
     this.id,
@@ -82,6 +83,7 @@ class ProductModel {
     this.subcategory,
     this.createdAt,
     this.updatedAt,
+    this.isFavorite,
   });
 
   ProductModel.fromJson(Map<String, dynamic> json) {
@@ -125,6 +127,7 @@ class ProductModel {
 
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    isFavorite = json['is_favorite'] == 1 || json['is_favorite'] == true;
   }
   ProductEntity toEntity() => ProductEntity(
     id: id ?? 0,
@@ -153,6 +156,7 @@ class ProductModel {
     isFeatured: isFeatured ?? false,
     isAvailable: isAvailable ?? false,
     availableDate: availableDate ?? '',
+    isFavorite: isFavorite ?? false,
   );
 }
 

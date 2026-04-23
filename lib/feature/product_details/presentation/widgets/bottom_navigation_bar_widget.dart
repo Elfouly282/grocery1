@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/styles_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
+import 'package:grocery1/feature/product_details/presentation/view_model/product_details_cubit.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
-  BottomNavigationBarWidget({super.key, required this.quantity});
+  BottomNavigationBarWidget({super.key, required this.quantity, this.mealId});
   int quantity;
+  final int? mealId;
   @override
   State<BottomNavigationBarWidget> createState() =>
       _BottomNavigationBarWidgetState();
@@ -68,7 +71,12 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  // أكشن الإضافة للسلة
+                  if (widget.mealId != null) {
+                    context.read<ProductDetailsCubit>().addToCart(
+                          widget.mealId!,
+                          widget.quantity,
+                        );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorManager.primary,

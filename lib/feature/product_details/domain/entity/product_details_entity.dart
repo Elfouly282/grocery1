@@ -40,6 +40,7 @@ class ProductEntity {
   final List<dynamic> reviews;
   final String createdAt;
   final String updatedAt;
+  final bool isFavorite;
 
   const ProductEntity({
     this.id = 0,
@@ -71,6 +72,7 @@ class ProductEntity {
     this.reviews = const [],
     this.createdAt = '',
     this.updatedAt = '',
+    this.isFavorite = false,
   });
 }
 

@@ -27,8 +27,6 @@ class DetailCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(Insets.s12),
       ),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             title,
