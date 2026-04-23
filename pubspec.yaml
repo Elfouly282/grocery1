@@ -47,10 +47,12 @@ dependencies:
   firebase_core: ^2.30.0
   firebase_auth: ^4.0.0
   flutter_svg: ^2.0.10
+  curved_navigation_bar: ^1.0.3
 
 
   bloc: any
   pretty_dio_logger: ^1.4.0
+  carousel_slider: ^5.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

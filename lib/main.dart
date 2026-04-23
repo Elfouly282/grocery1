@@ -9,6 +9,7 @@ import 'features/login/presentation/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: "AIzaSyCyERp8WmKVVMrYNTXVg1zuUMFVfq85-nM",

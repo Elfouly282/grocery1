@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:grocery1/core/resources/color_manager.dart';
-import 'package:grocery1/core/resources/styles_manager.dart';
+
+import 'package:grocery1/core/utils/app_text.dart';
+import '../../domain/entity/recommended_meal_entity.dart';
 import 'product_card.dart';
 
 class RecommendedSection extends StatelessWidget {
-  final List<Map<String, dynamic>> products;
-  const RecommendedSection({super.key, required this.products});
+  final List<RecommendedMealEntity> meals;
+  const RecommendedSection({super.key, required this.meals});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text('Recommended For You',
-            style:getMediumStyle(color: ColorManager.black,fontSize:16.sp )),
-         SizedBox(height: 8.h),
+      AppText.recommendedForYou(),
+        SizedBox(height: 8.h),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 0.65,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            childAspectRatio: 0.75,
           ),
-          itemCount: products.length,
-          itemBuilder: (context, index) => ProductCard(product: products[index]),
+          itemCount: meals.length,
+          itemBuilder: (context, index) => ProductCard(meal: meals[index]),
         ),
       ],
     );

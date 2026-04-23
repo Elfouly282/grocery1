@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:grocery1/features/home/domain/entity/meal_entity.dart';
 
 import '../../../../core/failure/failure.dart';
 import '../entity/deal_entity.dart';
-import '../repo/deals_repository.dart';
+import '../repo/meals_repository.dart';
 
 class GetAllDealsUseCase {
-  final DealsRepository dealsRepository;
+  final MealRepository mealRepository;
 
-  GetAllDealsUseCase(this.dealsRepository);
+  GetAllDealsUseCase(this.mealRepository);
 
-  Future<Either<Failure, List<DealEntity>>> call() {
-    return dealsRepository.getAllDeals();
+  Future<Either<Failure, List<MealEntity>>> call() {
+    return mealRepository.getTodayDeals();
   }
 }

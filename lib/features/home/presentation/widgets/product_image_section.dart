@@ -1,10 +1,11 @@
-// product_image_section.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../domain/entity/recommended_meal_entity.dart';
+
 class ProductImageSection extends StatelessWidget {
-  final Map<String, dynamic> product;
-  const ProductImageSection({super.key, required this.product});
+  final RecommendedMealEntity meal;
+  const ProductImageSection({super.key, required this.meal});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +14,13 @@ class ProductImageSection extends StatelessWidget {
       child: Container(
         height: 225.h,
         width: 168.w,
-        color: product['color'] as Color,
         child: Align(
           alignment: Alignment.topCenter,
-          child: Image.asset(
-            product['image'] as String,
+          child: Image.network(
+            meal.imageUrl,
             width: 168.w,
             height: 116.h,
+            fit: BoxFit.cover,
           ),
         ),
       ),

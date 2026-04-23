@@ -25,22 +25,56 @@ class AppText {
       style: getRegularStyle(color: ColorManager.grey, fontSize: 14.sp),
     );
   }
+
   static Widget login() {
     return Text(
       "Login",
       style: getSemiBoldStyle(color: ColorManager.white, fontSize: 14.sp),
     );
   }
+
   static Widget orLoginWith() {
     return Text(
       "Or Login with",
       style: getRegularStyle(color: ColorManager.black, fontSize: 12.sp),
     );
   }
+
   static Widget signUp() {
     return Text(
       "Sign up",
       style: getSemiBoldStyle(color: ColorManager.primary, fontSize: 12.sp),
+    );
+  }
+
+  static Widget todaysDeals() {
+    return Text(
+      "Today's Deals",
+      style: getMediumStyle(color: ColorManager.black, fontSize: 16.sp),
+    );
+  }
+  static Widget recommendedForYou() {
+    return Text(
+      "Recommended For You",
+      style: getMediumStyle(color: ColorManager.black, fontSize: 16.sp),
+    );
+  }
+  static Widget addToCart() {
+    return Text(
+      "Add to cart",
+      style: getSemiBoldStyle(color: ColorManager.white, fontSize: 18.sp),
+    );
+  }
+  static Widget address() {
+    return Text(
+      "Villa 14, Street 23,",
+      style: getRegularStyle(color: ColorManager.grey, fontSize: 12.sp),
+    );
+  }
+  static Widget categories() {
+    return Text(
+      "Categories",
+      style: getMediumStyle(color: ColorManager.black, fontSize: 16.sp),
     );
   }
 }

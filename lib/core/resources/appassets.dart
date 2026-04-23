@@ -36,6 +36,8 @@ class AppAssets {
 
   //images
   static String car = 'assets/images/car 1.png';
+  static String meat = 'assets/images/meat.png';
+
   static String robotHelper =
       'assets/images/Cute robot helper, AI assistant.png';
   static String ellipse = 'assets/images/Ellipse 12.png';

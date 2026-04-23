@@ -1,5 +1,4 @@
-// product_favorite_button.dart
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,12 +15,12 @@ class ProductFavoriteButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: ColorManager.grey,
+          color: ColorManager.colorBg,
           shape: BoxShape.circle,
         ),
         child: Icon(
-          Icons.favorite_border,
-          size: 16.sp,
+          Icons.favorite,
+          size: 13.sp,
           color: ColorManager.greyBorder,
         ),
       ),
