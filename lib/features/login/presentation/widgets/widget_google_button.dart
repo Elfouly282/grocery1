@@ -6,7 +6,6 @@ import 'package:grocery1/core/utils/app_text.dart';
 
 import '../../../../core/resources/appassets.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../home/presentation/screens/home_screen.dart';
 
 class WidgetGoogleButton extends StatefulWidget {
   const WidgetGoogleButton({super.key});
@@ -32,9 +31,9 @@ class _WidgetGoogleButtonState extends State<WidgetGoogleButton> {
     );
 
     await FirebaseAuth.instance.signInWithCredential(credential);
-    Navigator.of(
-      context,
-    ).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    // Navigator.of(
+    //   context,
+    // ).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
   @override

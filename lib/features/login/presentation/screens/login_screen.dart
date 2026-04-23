@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../home/presentation/screens/home_screen.dart';
 import '../cubit/login_cubit.dart';
 import '../cubit/login_state.dart';
 import '../widgets/widget_form_fields.dart';
@@ -32,7 +31,8 @@ static const String routeName= 'LoginScreen';
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text("Login Success")));
-              Navigator.of(context).pushNamed(HomeScreen.routeName);              final token = state.loginEntity.token;
+              // Navigator.of(context).pushNamed(HomeScreen.routeName);
+              final token = state.loginEntity.token;
 
               final storage = FlutterSecureStorage();
               await storage.write(key: 'token', value: token);

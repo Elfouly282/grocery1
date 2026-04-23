@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/di/servicelocator.dart';
-import 'features/home/presentation/screens/home_screen.dart';
 import 'features/login/presentation/screens/login_screen.dart';
 
 void main() async {
@@ -33,10 +32,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-initialRoute: HomeScreen.routeName,
+initialRoute: LoginScreen.routeName,
           routes: {
             LoginScreen.routeName:(context)=>LoginScreen(),
-            HomeScreen.routeName:(context)=>HomeScreen(),
+            // HomeScreen.routeName:(context)=>HomeScreen(),
 
           },
                  );
