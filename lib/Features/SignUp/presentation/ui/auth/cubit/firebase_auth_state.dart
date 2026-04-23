@@ -1,4 +1,4 @@
-import '../../../../domain/entities/RegisterResponseEntity.dart';
+import '../../../../domain/entities/register_response_entity.dart';
 
 abstract class Firebaseauthstate {}
 

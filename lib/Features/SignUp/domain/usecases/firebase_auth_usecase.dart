@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:injectable/injectable.dart';
-import '../entities/RegisterResponseEntity.dart';
-import '../repositories/repositories/FirebaseAuthRepository.dart';
+import '../entities/register_response_entity.dart';
+import '../repositories/repositories/firebase_auth_repository.dart';
 @injectable
 class AuthUseCases {
   final SignInWithGoogleUseCase google;

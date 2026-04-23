@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../domain/usecases/firebaseAuthUsecase.dart';
-import 'FirebaseAuthState.dart';
+import '../../../../domain/usecases/firebase_auth_usecase.dart';
+import 'firebase_auth_state.dart';
 @injectable
 class FirebaseauthViewModel extends Cubit<Firebaseauthstate>{
   final AuthUseCases authUseCases;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:grocery1/Features/SignUp/presentation/ui/auth/cubit/firebaseAuth_view_model.dart';
+import 'package:grocery1/Features/SignUp/presentation/ui/auth/cubit/firebase_auth_view_model.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
 
 import 'package:grocery1/core/resources/appassets.dart';
@@ -13,7 +13,7 @@ import 'package:grocery1/core/utils/dialog_utils.dart';
 import 'package:grocery1/core/widgets/custom_elevated_button.dart';
 import 'package:grocery1/core/widgets/custom_text_form_field.dart';
 
-import 'cubit/FirebaseAuthState.dart';
+import 'cubit/firebase_auth_state.dart';
 import 'cubit/register_view_model.dart';
 import 'cubit/register_states.dart';
 
@@ -85,7 +85,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Navigator.pushReplacementNamed(context, '/');
             } else if (state is AuthError) {
               DialogUtils.hideLoading(context);
-
               DialogUtils.showMessage(
                 context: context,
                 message: state.message,
@@ -166,8 +165,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hintText: "Username",
                             filledColor: ColorManager.baseWhite,
                           ),
-
-
                           CustomTextFormField(
                             controller: viewModel.passwordController,
                             validator: Validator.validatePassword,
@@ -177,8 +174,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hintText: "Password",
                             filledColor: ColorManager.baseWhite,
                           ),
-
-
                           CustomTextFormField(
                             controller: viewModel.rePasswordController,
                             validator: Validator.validateConfirmPassword(viewModel.passwordController.text),
@@ -189,7 +184,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             filledColor: ColorManager.baseWhite,
                           ),
 
-                          /// TERMS
                           Row(
                             children: [
                               Checkbox(
@@ -248,8 +242,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
 
                               SizedBox(width: 15.w),
-
-
                               InkWell(
                                 onTap: () {
                                   if (viewModel.formKey.currentState!

@@ -4,7 +4,7 @@ import 'dart:isolate';
 
 import 'package:grocery1/core/failure/failure.dart';
 
-import '../../../../domain/entities/RegisterResponseEntity.dart';
+import '../../../../domain/entities/register_response_entity.dart';
 
 abstract class RegisterStates{}
 class RegisterInitState extends RegisterStates

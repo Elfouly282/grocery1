@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'Features/SignUp/presentation/ui/auth/RegisterScreen.dart';
+import 'Features/SignUp/presentation/ui/auth/register_screen.dart';
 import 'core/di/servicelocator.dart';
 import 'core/utils/my_bloc_observer.dart';
 

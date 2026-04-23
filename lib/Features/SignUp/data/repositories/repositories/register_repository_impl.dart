@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:grocery1/Features/SignUp/domain/entities/RegisterResponseEntity.dart';
-import 'package:grocery1/Features/SignUp/domain/repositories/datasourses/remoteDataSourse/RegisterRemoteDataSource.dart';
-import 'package:grocery1/Features/SignUp/domain/repositories/repositories/RegisterRepository.dart';
+import 'package:grocery1/Features/SignUp/domain/entities/register_response_entity.dart';
+import 'package:grocery1/Features/SignUp/domain/repositories/datasourses/remoteDataSourse/register_remote_datasource.dart';
+import 'package:grocery1/Features/SignUp/domain/repositories/repositories/register_repository.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as: RegisterRepository)

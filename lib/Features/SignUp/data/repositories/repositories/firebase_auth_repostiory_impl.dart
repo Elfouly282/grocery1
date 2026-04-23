@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:grocery1/Features/SignUp/domain/repositories/repositories/FirebaseAuthRepository.dart';
+import 'package:grocery1/Features/SignUp/domain/repositories/repositories/firebase_auth_repository.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:injectable/injectable.dart';
-import '../../../domain/entities/RegisterResponseEntity.dart';
-import '../../../domain/repositories/datasourses/remoteDataSourse/FirebaseAuthDataSource.dart';
+import '../../../domain/entities/register_response_entity.dart';
+import '../../../domain/repositories/datasourses/remoteDataSourse/firebase_auth_datasource.dart';
 @Injectable(as:Firebaseauthrepository )
 class Firebaseauthrepostioryimpl implements Firebaseauthrepository {
   final Firebaseauthdatasource datasource;

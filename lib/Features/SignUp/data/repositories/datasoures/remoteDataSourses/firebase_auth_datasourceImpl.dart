@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../domain/entities/RegisterResponseEntity.dart';
-import '../../../../domain/repositories/datasourses/remoteDataSourse/FirebaseAuthDataSource.dart';
+import '../../../../domain/entities/register_response_entity.dart';
+import '../../../../domain/repositories/datasourses/remoteDataSourse/firebase_auth_datasource.dart';
 @Injectable(as:Firebaseauthdatasource)
 class Firebaseauthdatasourceimpl implements Firebaseauthdatasource{
   final FirebaseAuth auth;
