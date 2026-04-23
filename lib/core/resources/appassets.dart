@@ -34,6 +34,9 @@ class AppAssets {
   static String unSee ='assets/icons/unsee.png';
   static String resetCheck ='assets/icons/material-symbols_check-rounded.png';
   static String phoneIcon ='assets/icons/phoneicon.png';
+  static String trashIcon ='assets/icons/trash.png';
+
+
 
 
 

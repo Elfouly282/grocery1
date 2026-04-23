@@ -10,4 +10,6 @@ static const String getProfile = '/profile';
 static const String updateProfile = '/profile/info';
 static const String getAddresses = '/addresses';
 static const String storeAddress = '/addresses';
+static const String deleteAccount = '/auth/delete-account';
+static const String logout = '/auth/logout';
 }

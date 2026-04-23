@@ -42,7 +42,19 @@ class ApiManger {
       options: Options(headers: headers),
     );
   }
+
+  Future<Response> deleteData({
+    required String endPoint,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.delete(
+      ApiConstant.baseUrl + endPoint,
+      options: Options(headers: headers),
+    );
+  }
 }
+
+
 class ApiManager {
   static final ApiManager _instance = ApiManager._internal();
   factory ApiManager() => _instance;

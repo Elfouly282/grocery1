@@ -90,6 +90,12 @@ flutter:
       fonts:
         - asset: fonts/inter/inter_medium.ttf
           weight: 500
+        - asset: fonts/inter/inter_regular.ttf
+          weight: 300
+
+
+
+
 
   #         style: italic
   #   - family: Trajan Pro
