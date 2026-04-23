@@ -60,11 +60,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 title: 'Success',
                 posActionName: 'OK',
               );
+              Navigator.pushReplacementNamed(context, '/');
+
             }
           },
         ),
 
-        /// 🔥 FIREBASE AUTH
+        ///  FIREBASE AUTH
         BlocListener<FirebaseauthViewModel, Firebaseauthstate>(
           bloc: fireAuth,
           listener: (context, state) {
@@ -80,6 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 context: context,
                 message: "Success Login",
               );
+              Navigator.pushReplacementNamed(context, '/');
             } else if (state is AuthError) {
               DialogUtils.hideLoading(context);
 
