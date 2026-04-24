@@ -48,7 +48,6 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
             if (state is CategoryLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-
             if (state is CategoryError) {
               return Center(child: Text(state.message));
             }
@@ -141,10 +140,22 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
                               itemCount: meals.length,
                               itemBuilder: (context, index) {
                                 final meal = meals[index];
-                                return ProductCard(
-                                  image: meal.imageUrl ?? AppAssets.rectangle19,
-                                  title: meal.title ?? "",
-                                  description: meal.description ?? "",
+                                return GestureDetector(
+
+                                  onTap:(){
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (_) => ProductDetailsScreen(meal: meal),
+                                      //   ),
+                                      // );
+
+                                  },
+                                  child: ProductCard(
+                                    image: meal.imageUrl ?? AppAssets.rectangle19,
+                                    title: meal.title ?? "",
+                                    description: meal.description ?? "",
+                                  ),
                                 );
                               },
                             );
