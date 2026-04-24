@@ -141,7 +141,6 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
                               itemBuilder: (context, index) {
                                 final meal = meals[index];
                                 return GestureDetector(
-
                                   onTap:(){
                                       // Navigator.push(
                                       //   context,
