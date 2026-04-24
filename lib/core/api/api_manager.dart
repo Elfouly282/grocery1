@@ -19,7 +19,7 @@ class ApiManager {
           "Content-Type": "application/json",
         },
         followRedirects: true,
-        validateStatus: (status) => true, // عشان تمسك كل الـ responses
+        validateStatus: (status) => true,
       ),
     );
 
@@ -36,7 +36,7 @@ class ApiManager {
     );
   }
 
-  /// GET
+  /// ✅ GET
   Future<Response> getData({
     required String endPoint,
     Map<String, dynamic>? queryParameters,
@@ -50,7 +50,7 @@ class ApiManager {
     );
   }
 
-  /// POST
+  /// ✅ POST
   Future<Response> postData({
     required String endPoint,
     Map<String, dynamic>? queryParameters,
@@ -62,6 +62,22 @@ class ApiManager {
       endPoint,
       queryParameters: queryParameters,
       data: body,
+      options: (options ?? Options()).copyWith(headers: headers),
+    );
+  }
+
+  /// ✅ DELETE
+  Future<Response> deleteData({
+    required String endPoint,
+    Object? body,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    Options? options,
+  }) {
+    return dio.delete(
+      endPoint,
+      data: body,
+      queryParameters: queryParameters,
       options: (options ?? Options()).copyWith(headers: headers),
     );
   }

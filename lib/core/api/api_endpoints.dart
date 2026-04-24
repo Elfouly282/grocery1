@@ -10,9 +10,9 @@ class ApiEndpoints {
   static const String changePasswordEndpoint = '/api/auth/change-password';
 
 static const String cateEndpoint ='';
-static const String forgotPasswordEndPoint ='/auth/forgot-password';
-static const String verifyOtpEndPoint ='/auth/verify-otp';
-static const String resetPasswordEndPoint ='/auth/reset-password';
+static const String forgotPasswordEndPoint ='/api/auth/forgot-password';
+static const String verifyOtpEndPoint ='/api/auth/verify-otp';
+static const String resetPasswordEndPoint ='/api/auth/reset-password';
   // Home
   static const String categoriesEndpoint = '/api/categories';
   static const String subcategoriesEndpoint = '/api/subcategories';
@@ -85,4 +85,8 @@ static const String resetPasswordEndPoint ='/auth/reset-password';
   static const String paymentHistoryEndpoint = '/api/payments/history';
   static const String paymentReceiptEndpoint = '/api/payments/receipt';
   static const String paymentInvoiceEndpoint = '/api/payments/invoice';
+  
+  static const String mealDetailsEndpoint = "/api/meals/";
+  static const String historyEndpoint = "/api/orders/";
+  static const String toggleFavoriteEndpoint = "toggle";
 }

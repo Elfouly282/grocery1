@@ -5,6 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/features/home/presentation/screens/home_screen.dart';
 import 'package:grocery1/features/home/presentation/widgets/home_bottom_nav.dart';
+import 'package:grocery1/features/my_list/presentation/view/my_list_view.dart';
+import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_cubit.dart';
+import 'package:grocery1/features/my_list/presentation/view_model/history/history_cubit.dart';
+import 'package:grocery1/features/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart';
 
 import 'core/di/servicelocator.dart';
 import 'core/utils/my_bloc_observer.dart';
@@ -39,7 +43,7 @@ class _MyAppState extends State<MyApp> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Center(child: Text("My List")),
+    MyListView(),
     Center(child: Text("My Order")),
     Center(child: Text("Profile")),
   ];
@@ -62,12 +66,26 @@ class _MyAppState extends State<MyApp> {
           title: 'Grocery App',
 
           /// أول شاشة
-          home: Scaffold(
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    getIt<SmartListsCubit>()..fetchSmartLists(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<FavoritesCubit>()..fetchFavorites(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<HistoryCubit>()..fetchHistory(),
+              ),
+            ],
+            child: Scaffold(
             body: _widgetOptions.elementAt(_selectedIndex),
             bottomNavigationBar: HomeBottomNav(
               selectedIndex: _selectedIndex,
               onItemTapped: _onItemTapped,
             ),
+          ),
           ),
 
           /// Routes

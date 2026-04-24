@@ -19,4 +19,10 @@ static const Color red=Color(0xffA9090C);
   static const Color darkGrey=Color(0xff888888);
   static const Color baseWhite=Color(0xffFFFFFF);
 
+  
+
+  static const Color darkBlue = Color(0xFF003C5A);
+  static const Color textGrey = Color(0xFF9E9E9E);
+  // static const Color pureWhite = Colors.white;
+  static const Color ratingGold = Color(0xFFFFC107);
 }
