@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
 import '../../domain/entity/login_entity.dart';
 
+@immutable
 sealed class LoginState {}
 
 final class LoginInitial extends LoginState {}

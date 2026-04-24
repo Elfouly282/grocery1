@@ -14,5 +14,7 @@ static const Color red=Color(0xffA9090C);
   static const Color search = Color(0xffEAEEF0);
   static const Color orange = Color(0xffFDC040);
 
+  static const Color darkGrey=Color(0xff888888);
+  static const Color baseWhite=Color(0xffFFFFFF);
 
 }

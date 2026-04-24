@@ -17,12 +17,12 @@ import '../widgets/widget_title.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-static const String routeName= 'LoginScreen';
+  static const String routeName = 'LoginScreen';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getit<LoginCubit>(),
+      create: (context) => getIt<LoginCubit>(),
       child: Scaffold(
         backgroundColor: ColorManager.colorBg,
         body: BlocConsumer<LoginCubit, LoginState>(
@@ -58,7 +58,9 @@ static const String routeName= 'LoginScreen';
                           SizedBox(height: 32.h),
                           WidgetTitle(),
                           SizedBox(height: 16.h),
-                          WidgetFormFields(state: state,),
+                          WidgetFormFields(
+                            state: state,
+                          ),
                           SizedBox(height: 8.h),
                           WidgetForgotPassword(),
                           SizedBox(height: 10.h),

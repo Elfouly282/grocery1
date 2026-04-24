@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:grocery1/core/failure/failure.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/entity/login_entity.dart';
 import '../../domain/repo/login_repo.dart';
 import '../data_Source/login_remote_data_source.dart';
 
+@Injectable(as: LoginRepo)
 class LoginRepoImpl implements LoginRepo {
   final LoginRemoteDataSource loginRemoteDataSource;
 

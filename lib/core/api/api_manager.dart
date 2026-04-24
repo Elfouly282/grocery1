@@ -1,27 +1,29 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:injectable/injectable.dart';
 
 import 'api_constant.dart';
 
+@singleton
 class ApiManager {
-  static final ApiManager _instance = ApiManager._internal();
-  factory ApiManager() => _instance;
+  late Dio dio;
 
-  late final Dio _dio;
-
-  ApiManager._internal() {
-    _dio = Dio(
+  ApiManager() {
+    dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
         followRedirects: true,
-        validateStatus: (status) => status! < 400,
+        validateStatus: (status) => true, // عشان تمسك كل الـ responses
       ),
     );
 
-    _dio.interceptors.add(
+    dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
@@ -34,27 +36,29 @@ class ApiManager {
     );
   }
 
+  /// GET
   Future<Response> getData({
     required String endPoint,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     Options? options,
-  }) async {
-    return _dio.get(
+  }) {
+    return dio.get(
       endPoint,
       queryParameters: queryParameters,
       options: (options ?? Options()).copyWith(headers: headers),
     );
   }
 
+  /// POST
   Future<Response> postData({
     required String endPoint,
     Map<String, dynamic>? queryParameters,
     Object? body,
     Map<String, dynamic>? headers,
     Options? options,
-  }) async {
-    return _dio.post(
+  }) {
+    return dio.post(
       endPoint,
       queryParameters: queryParameters,
       data: body,

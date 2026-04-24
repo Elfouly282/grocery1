@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
-
+import 'package:injectable/injectable.dart';
 
 import '../../domain/useCase/login_use_case.dart';
 import 'login_state.dart';
 
+@injectable
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase loginUseCase;
   LoginCubit(this.loginUseCase) : super(LoginInitial());
@@ -14,7 +15,6 @@ class LoginCubit extends Cubit<LoginState> {
     result.fold(
       (failure) {
         emit(LoginError(failure.failuremessage));
-
       },
       (loginEntity) {
         emit(LoginSuccess(loginEntity));

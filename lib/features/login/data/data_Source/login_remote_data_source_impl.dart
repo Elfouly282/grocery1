@@ -2,11 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/api/api_manager.dart';
 import 'package:grocery1/core/failure/failure.dart';
+import 'package:injectable/injectable.dart';
 
 import '../model/login_model.dart';
 import '../model/request_login_model.dart';
 import 'login_remote_data_source.dart';
 
+@Injectable(as: LoginRemoteDataSource)
 class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
   @override
   //  Login Model
