@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
-import 'package:grocery1/feature/my_list/presentation/view/my_list_view.dart';
-import 'package:grocery1/feature/my_list/presentation/view_model/favorites/favorites_cubit.dart';
-import 'package:grocery1/feature/my_list/presentation/view_model/history/history_cubit.dart';
-import 'package:grocery1/feature/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart';
+import 'package:grocery1/features/my_list/presentation/view/my_list_view.dart';
+import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_cubit.dart';
+import 'package:grocery1/features/my_list/presentation/view_model/history/history_cubit.dart';
+import 'package:grocery1/features/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
