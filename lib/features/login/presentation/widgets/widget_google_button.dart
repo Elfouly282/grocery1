@@ -24,7 +24,6 @@ class _WidgetGoogleButtonState extends State<WidgetGoogleButton> {
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -55,7 +54,7 @@ class _WidgetGoogleButtonState extends State<WidgetGoogleButton> {
           children: [
             Image.asset(AppAssets.googleIcon, width: 24.w, height: 24.h),
             SizedBox(width: 8.w),
-           AppText.loginWithGoogle(),
+            AppText.loginWithGoogle(),
           ],
         ),
       ),
