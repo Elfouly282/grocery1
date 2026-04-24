@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
+import 'package:grocery1/features/login/data/local/local_data_source.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/history/history_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart';
@@ -18,12 +19,14 @@ class MyListView extends StatefulWidget {
 
 class _MyListViewState extends State<MyListView>
     with SingleTickerProviderStateMixin {
+// print('token: $token');
   late TabController _tabController;
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    
   }
 
   @override

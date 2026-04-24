@@ -5,19 +5,24 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'home_state.dart';
+
 @injectable
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.getAllDealsUseCase) : super(HomeInitial());
   final GetAllDealsUseCase getAllDealsUseCase;
 
-  Future<void>getTodayDeals()async{
+  Future<void> getTodayDeals() async {
+    if (isClosed) return;
     emit(HomeLoading());
-    final request=await getAllDealsUseCase.call();
+    final request = await getAllDealsUseCase.call();
+    if (isClosed) return;
     request.fold(
-          (failure) => emit(HomeError(failure.failuremessage)),
-          (meals)   => emit(HomeSuccess(meals)),
+      (failure) {
+        if (!isClosed) emit(HomeError(failure.failuremessage));
+      },
+      (meals) {
+        if (!isClosed) emit(HomeSuccess(meals));
+      },
     );
-
   }
-
 }

@@ -62,7 +62,9 @@ class SmartListsView extends StatelessWidget {
           return Center(
             child: Text(
               state.message,
-              style: TextStyle(fontSize: Sizes.s16.sp),
+              style: TextStyle(
+                fontSize: Sizes.s16.sp,
+              ),
             ),
           );
         }
@@ -93,8 +95,8 @@ class SmartListsView extends StatelessWidget {
             entity: dummyData[index],
             onDelete: () {
               context.read<SmartListsCubit>().deleteSmartList(
-                dummyData[index].id,
-              );
+                    dummyData[index].id,
+                  );
             },
             onAddAllToCart: () {
               context.read<SmartListsCubit>().addAllToCart(dummyData[index]);
@@ -110,12 +112,31 @@ class SmartListsView extends StatelessWidget {
     VoidCallback refresh,
   ) {
     if (smartLists.isEmpty) {
-      return Center(
-        child: Text(
-          'No Smart Lists Found',
-
-          style: TextStyle(fontSize: Sizes.s16.sp),
-        ),
+      return Stack(
+        children: [
+          Center(
+            child: Text(
+              'No Smart Lists Found',
+              style: TextStyle(fontSize: Sizes.s16.sp),
+            ),
+          ),
+          Positioned(
+            bottom: Insets.s16.h,
+            right: Insets.s16.w,
+            child: FloatingActionButton(
+              onPressed: () {
+                //*Here The Add Button */*********************************************** */
+              },
+              backgroundColor: ColorManager.white,
+              elevation: 0,
+              child: Icon(
+                Icons.add,
+                color: ColorManager.darkBlue,
+                size: Sizes.s28.sp,
+              ),
+            ),
+          ),
+        ],
       );
     }
     return Stack(
@@ -128,8 +149,8 @@ class SmartListsView extends StatelessWidget {
               entity: smartLists[index],
               onDelete: () {
                 context.read<SmartListsCubit>().deleteSmartList(
-                  smartLists[index].id,
-                );
+                      smartLists[index].id,
+                    );
               },
               onAddAllToCart: () {
                 context.read<SmartListsCubit>().addAllToCart(smartLists[index]);

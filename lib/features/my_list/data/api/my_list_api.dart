@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:grocery1/core/api/api_constant.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/api/api_manager.dart';
+import 'package:grocery1/core/di/servicelocator.dart';
 import 'package:grocery1/core/error/error.dart';
+import 'package:grocery1/features/login/data/local/local_data_source.dart';
 import 'package:grocery1/features/my_list/data/models/favorite_model.dart';
 import 'package:grocery1/features/my_list/data/models/favorite_toggle_model.dart';
 import 'package:grocery1/features/my_list/data/models/history_model.dart';
@@ -13,12 +14,21 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class MyListApi {
   final ApiManager _apiManager = ApiManager();
+  final LocalauthDatasouce _localAuthDataSource = getIt<LocalauthDatasouce>();
+
+  Future<Map<String, dynamic>> _authHeaders() async {
+    final token = await _localAuthDataSource.getToken();
+    if (token == null || token.isEmpty) {
+      throw RemoteException('Authentication token not found');
+    }
+    return {'Authorization': 'Bearer $token'};
+  }
 
   Future<SmartListResponseModel> fetchSmartLists() async {
     try {
       final response = await _apiManager.getData(
         endPoint: ApiEndpoints.smartListsEndpoint,
-        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
+        headers: await _authHeaders(),
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {
         throw RemoteException(
@@ -35,7 +45,7 @@ class MyListApi {
     try {
       final response = await _apiManager.getData(
         endPoint: ApiEndpoints.favoritesEndpoint,
-        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
+        headers: await _authHeaders(),
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {
         throw RemoteException(
@@ -55,7 +65,7 @@ class MyListApi {
       final response = await _apiManager.getData(
         endPoint: ApiEndpoints.historyEndpoint,
         queryParameters: queryParameters,
-        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
+        headers: await _authHeaders(),
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {
         throw RemoteException(
@@ -72,7 +82,7 @@ class MyListApi {
     try {
       final response = await _apiManager.deleteData(
         endPoint: "${ApiEndpoints.smartListsEndpoint}/$id",
-        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
+        headers: await _authHeaders(),
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {
         throw RemoteException(
@@ -92,7 +102,7 @@ class MyListApi {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer ${ApiConstant.token}',
+          ...await _authHeaders(),
         },
         body: {"meal_id": mealId.toString(), "quantity": quantity.toString()},
       );
@@ -117,7 +127,7 @@ class MyListApi {
       var response = await _apiManager.postData(
         endPoint:
             "${ApiEndpoints.favoritesEndpoint}/$mealId/${ApiEndpoints.toggleFavoriteEndpoint}",
-        headers: {'Authorization': 'Bearer ${ApiConstant.token}'},
+        headers: await _authHeaders(),
         // body: {"meal_id": mealId},
       );
       if (response.statusCode! < 200 || response.statusCode! >= 300) {

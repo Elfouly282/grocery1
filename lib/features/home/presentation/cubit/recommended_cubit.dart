@@ -5,17 +5,24 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'recommended_state.dart';
+
 @injectable
 class RecommendedCubit extends Cubit<RecommendedState> {
   RecommendedCubit(this.recommendedMealUseCase) : super(RecommendedInitial());
   final RecommendedMealUseCase recommendedMealUseCase;
 
   Future<void> getRecommendedForYou() async {
+    if (isClosed) return;
     emit(RecommendedLoading());
     final request = await recommendedMealUseCase.call();
+    if (isClosed) return;
     request.fold(
-          (failure) => emit(RecommendedError(failure.failuremessage)),
-          (meals)   => emit(RecommendedSuccess(meals)),
+      (failure) {
+        if (!isClosed) emit(RecommendedError(failure.failuremessage));
+      },
+      (meals) {
+        if (!isClosed) emit(RecommendedSuccess(meals));
+      },
     );
   }
 }

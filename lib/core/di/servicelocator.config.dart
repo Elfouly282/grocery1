@@ -57,8 +57,11 @@ import '../../features/login/data/data_Source/login_remote_data_source.dart'
     as _i200;
 import '../../features/login/data/data_Source/login_remote_data_source_impl.dart'
     as _i544;
+import '../../features/login/data/local/local_data_source.dart' as _i1102;
+import '../../features/login/data/local/secure_storage.dart' as _i1101;
 import '../../features/login/data/repo/login_repo_impl.dart' as _i176;
 import '../../features/login/domain/repo/login_repo.dart' as _i0;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i1100;
 import '../../features/login/domain/useCase/login_use_case.dart' as _i630;
 import '../../features/login/presentation/cubit/login_cubit.dart' as _i147;
 import '../../features/my_list/data/api/my_list_api.dart' as _i826;
@@ -164,6 +167,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i446.SmartListDataSourceImpl(gh<_i826.MyListApi>()));
     gh.factory<_i200.LoginRemoteDataSource>(
         () => _i544.LoginRemoteDataSourceImpl());
+    gh.singleton<_i1100.FlutterSecureStorage>(
+        () => const _i1100.FlutterSecureStorage());
+    gh.singleton<_i1102.LocalauthDatasouce>(() =>
+        _i1101.SecureStorageDatasource(gh<_i1100.FlutterSecureStorage>()));
     gh.factory<_i445.AddToCartDataSource>(
         () => _i1.AddToCartDataSourceImp(gh<_i826.MyListApi>()));
     gh.factory<_i214.HistoryDataSource>(
@@ -182,8 +189,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i894.DeleteSmartListUseCase(gh<_i375.SmartListRepository>()));
     gh.factory<_i746.GetSmartListsUseCase>(
         () => _i746.GetSmartListsUseCase(gh<_i375.SmartListRepository>()));
-    gh.factory<_i0.LoginRepo>(
-        () => _i176.LoginRepoImpl(gh<_i200.LoginRemoteDataSource>()));
+    gh.factory<_i0.LoginRepo>(() => _i176.LoginRepoImpl(
+          gh<_i200.LoginRemoteDataSource>(),
+          gh<_i1102.LocalauthDatasouce>(),
+        ));
     gh.factory<_i823.ProductRemoteDataSource>(
         () => _i704.ProductRemoteDataSourceImpl(gh<_i1047.ApiManager>()));
     gh.factory<_i836.Firebaseauthdatasource>(

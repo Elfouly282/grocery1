@@ -10,7 +10,7 @@ import 'package:injectable/injectable.dart';
 class SmartListsCubit extends Cubit<SmartListsState> {
   final GetSmartListsUseCase _getSmartListsUseCase;
   final DeleteSmartListUseCase _deleteSmartListUseCase;
-  AddToCartSmartListUseCase _addAllToCartUseCase;
+  final AddToCartSmartListUseCase _addAllToCartUseCase;
 
   SmartListsCubit(
     this._getSmartListsUseCase,
@@ -19,24 +19,33 @@ class SmartListsCubit extends Cubit<SmartListsState> {
   ) : super(SmartListsInitial());
 
   Future<void> fetchSmartLists() async {
+    if (isClosed) return;
     emit(SmartListsLoading());
     final result = await _getSmartListsUseCase.invoke();
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(SmartListsError(failure.failuremessage)),
-      (smartLists) => emit(SmartListsLoaded(smartLists)),
+      (failure) {
+        if (!isClosed) emit(SmartListsError(failure.failuremessage));
+      },
+      (smartLists) {
+        if (!isClosed) emit(SmartListsLoaded(smartLists));
+      },
     );
   }
 
   Future<void> deleteSmartList(int id) async {
+    if (isClosed) return;
     final result = await _deleteSmartListUseCase.invoke(id);
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(DeleteSmartListError(failure.failuremessage)),
+      (failure) {
+        if (!isClosed) emit(DeleteSmartListError(failure.failuremessage));
+      },
       (deleteMessage) {
-        if (state is SmartListsLoaded) {
+        if (!isClosed && state is SmartListsLoaded) {
           final currentList = (state as SmartListsLoaded).smartLists;
-          final updatedList = currentList
-              .where((item) => item.id != id)
-              .toList();
+          final updatedList =
+              currentList.where((item) => item.id != id).toList();
           emit(DeleteSmartListSuccess(deleteMessage));
           emit(SmartListsLoaded(updatedList));
         }
@@ -45,6 +54,7 @@ class SmartListsCubit extends Cubit<SmartListsState> {
   }
 
   Future<void> addAllToCart(SmartListEntity entity) async {
+    if (isClosed) return;
     List<SmartListEntity> currentLists = [];
     if (state is SmartListsLoaded) {
       currentLists = (state as SmartListsLoaded).smartLists;
@@ -52,9 +62,12 @@ class SmartListsCubit extends Cubit<SmartListsState> {
     final mealIds = entity.meals.map((meal) => meal.id).toList();
 
     for (var mealId in mealIds) {
+      if (isClosed) return;
       await _addAllToCartUseCase.invoke(mealId);
     }
-    emit(AddAllToCartSuccess("All items added to cart successfully!"));
-    emit(SmartListsLoaded(currentLists));
+    if (!isClosed) {
+      emit(AddAllToCartSuccess("All items added to cart successfully!"));
+      emit(SmartListsLoaded(currentLists));
+    }
   }
 }

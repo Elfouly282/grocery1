@@ -21,24 +21,33 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   ) : super(FavoritesInitial());
 
   Future<void> fetchFavorites() async {
+    if (isClosed) return;
     emit(FavoritesLoading());
     final result = await _getFavoritesUseCase.invoke();
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(FavoritesError(failure.failuremessage)),
-      (favorites) => emit(FavoritesLoaded(favorites)),
+      (failure) {
+        if (!isClosed) emit(FavoritesError(failure.failuremessage));
+      },
+      (favorites) {
+        if (!isClosed) emit(FavoritesLoaded(favorites));
+      },
     );
   }
 
   Future<void> removeFavorite(int mealId) async {
+    if (isClosed) return;
     final result = await _addAndRemoveFavoriteUseCase.invoke(mealId);
+    if (isClosed) return;
     result.fold(
-      (failure) => emit(RemoveFavoriteError(failure.failuremessage)),
+      (failure) {
+        if (!isClosed) emit(RemoveFavoriteError(failure.failuremessage));
+      },
       (success) {
-        if (state is FavoritesLoaded) {
+        if (!isClosed && state is FavoritesLoaded) {
           final currentFavorites = (state as FavoritesLoaded).favorites;
-          final updatedFavorites = currentFavorites
-              .where((item) => item.id != mealId)
-              .toList();
+          final updatedFavorites =
+              currentFavorites.where((item) => item.id != mealId).toList();
           emit(RemoveFavoriteSuccess(success));
           emit(FavoritesLoaded(updatedFavorites));
         }
@@ -47,30 +56,36 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   }
 
   Future<void> addToCart(int mealId) async {
-  // 1. شيلنا الـ favoriteEntity من بره وجبناها من الـ State الحالية
-  List<FavoriteEntity> currentList = [];
-  if (state is FavoritesLoaded) {
-    currentList = (state as FavoritesLoaded).favorites;
+    if (isClosed) return;
+    // 1. شيلنا الـ favoriteEntity من بره وجبناها من الـ State الحالية
+    List<FavoriteEntity> currentList = [];
+    if (state is FavoritesLoaded) {
+      currentList = (state as FavoritesLoaded).favorites;
+    }
+
+    final result = await _addToCartUseCase.invoke(mealId);
+
+    if (isClosed) return;
+    result.fold(
+      (failure) {
+        if (!isClosed) {
+          emit(AddToCartFavoriteError(failure.failuremessage));
+          // رجع الحالة القديمة عشان الـ UI ميفضلش واقف
+          if (currentList.isNotEmpty) {
+            emit(FavoritesLoaded(currentList));
+          }
+        }
+      },
+      (success) {
+        if (!isClosed) {
+          // 2. ابعت حالة النجاح (عشان الـ Toast)
+          emit(AddToCartDone(success));
+
+          // 3. رجع لستة الـ Favorites زي ما هي
+          // (إلا لو الـ API بتاع الكارت بيأثر على لستة الفيفورت، وقتها ممكن تعمل fetch من جديد)
+          emit(FavoritesLoaded(currentList));
+        }
+      },
+    );
   }
-
-  final result = await _addToCartUseCase.invoke(mealId);
-
-  result.fold(
-    (failure) {
-      emit(AddToCartFavoriteError(failure.failuremessage));
-      // رجع الحالة القديمة عشان الـ UI ميفضلش واقف
-      if (currentList.isNotEmpty) {
-        emit(FavoritesLoaded(currentList));
-      }
-    },
-    (success) {
-      // 2. ابعت حالة النجاح (عشان الـ Toast)
-      emit(AddToCartDone(success));
-      
-      // 3. رجع لستة الـ Favorites زي ما هي 
-      // (إلا لو الـ API بتاع الكارت بيأثر على لستة الفيفورت، وقتها ممكن تعمل fetch من جديد)
-      emit(FavoritesLoaded(currentList));
-    },
-  );
-}
 }

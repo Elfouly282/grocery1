@@ -1,5 +1,6 @@
+import 'package:grocery1/features/login/data/data_Source/login_remote_data_source_impl.dart';
+
 class ApiConstant {
-  static const String baseUrl =
-      "https://grocery.newcinderella.online/public";
-  static String token = "690|QaLdQa2hZhoUTMhijXQVrg9t69E0uImaD0lzkZkc804224bb";
+  static const String baseUrl = "https://grocery.newcinderella.online/public";
+  // static final token = LoginRemoteDataSourceImpl().getToken();
 }

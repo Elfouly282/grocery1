@@ -3,18 +3,15 @@ import 'package:flutter/material.dart';
 import 'core/resources/appassets.dart';
 import 'features/onboarding/views/onboarding_view.dart';
 
-
-
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
+  static String routeName = "SplashView";
 
   @override
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView>
-    with TickerProviderStateMixin {
-
+class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   late AnimationController controller;
 
   late Animation<double> shadowOpacityIn;
@@ -34,7 +31,7 @@ class _SplashViewState extends State<SplashView>
     appleOpacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: controller,
-       curve: const Interval(0.0, 0.6),
+        curve: const Interval(0.0, 0.6),
       ),
     );
 
@@ -59,7 +56,6 @@ class _SplashViewState extends State<SplashView>
       ),
     );
 
-
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Future.delayed(const Duration(seconds: 2), () {
@@ -70,7 +66,6 @@ class _SplashViewState extends State<SplashView>
         });
       }
     });
-
 
     controller.forward();
   }
@@ -89,13 +84,9 @@ class _SplashViewState extends State<SplashView>
         child: Stack(
           alignment: Alignment.center,
           children: [
-
-
             AnimatedBuilder(
               animation: controller,
               builder: (context, child) {
-
-
                 return Opacity(
                   opacity: (1 - controller.value).clamp(0.0, 1.0),
                   child: Transform.translate(
@@ -109,9 +100,6 @@ class _SplashViewState extends State<SplashView>
                 );
               },
             ),
-
-
-
             AnimatedBuilder(
               animation: controller,
               builder: (context, child) {
@@ -150,8 +138,6 @@ class _SplashViewState extends State<SplashView>
                 );
               },
             ),
-
-
             FadeTransition(
               opacity: plusOpacity,
               child: Transform.translate(
@@ -162,7 +148,6 @@ class _SplashViewState extends State<SplashView>
                 ),
               ),
             ),
-
           ],
         ),
       ),

@@ -9,6 +9,7 @@ import 'package:grocery1/features/my_list/presentation/view/my_list_view.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/history/history_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart';
+import 'package:grocery1/features/profile/presentation/views/profile_view.dart';
 
 import 'core/di/servicelocator.dart';
 import 'core/utils/my_bloc_observer.dart';
@@ -39,21 +40,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    MyListView(),
-    Center(child: Text("My Order")),
-    Center(child: Text("Profile")),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -64,34 +50,16 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Grocery App',
+          // initialRoute: SplashView.routeName,
 
           /// أول شاشة
-          home: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) =>
-                    getIt<SmartListsCubit>()..fetchSmartLists(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<FavoritesCubit>()..fetchFavorites(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<HistoryCubit>()..fetchHistory(),
-              ),
-            ],
-            child: Scaffold(
-            body: _widgetOptions.elementAt(_selectedIndex),
-            bottomNavigationBar: HomeBottomNav(
-              selectedIndex: _selectedIndex,
-              onItemTapped: _onItemTapped,
-            ),
-          ),
-          ),
+          home: SplashView(),
 
           /// Routes
           routes: {
             LoginScreen.routeName: (context) => LoginScreen(),
             // RegisterScreen.routeName: (context) => const RegisterScreen(),
+            SplashView.routeName: (context) => SplashView()
           },
         );
       },

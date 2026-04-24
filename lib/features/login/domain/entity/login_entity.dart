@@ -12,7 +12,7 @@ class UserEntity {
   });
 }
 
-class LoginEntity {
+class   LoginEntity {
   final UserEntity user;
   final String token;
 

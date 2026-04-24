@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import '../../domain/entity/products_search_entity.dart';
 
 part 'product_search_state.dart';
+
 @injectable
 class ProductSearchCubit extends Cubit<ProductSearchState> {
   final GetProductsSearchUseCase getProductsSearchUseCase;
@@ -28,6 +29,7 @@ class ProductSearchCubit extends Cubit<ProductSearchState> {
     String? sortBy,
     String? sortOrder,
   }) async {
+    if (isClosed) return;
 
     hasSearch = search != null && search.isNotEmpty;
 
@@ -47,9 +49,14 @@ class ProductSearchCubit extends Cubit<ProductSearchState> {
       sortOrder: sortOrder,
     );
 
+    if (isClosed) return;
     result.fold(
-          (failure) => emit(ProductSearchError(failure.failuremessage)),
-          (data) => emit(ProductSearchSuccess(data)),
+      (failure) {
+        if (!isClosed) emit(ProductSearchError(failure.failuremessage));
+      },
+      (data) {
+        if (!isClosed) emit(ProductSearchSuccess(data));
+      },
     );
   }
 

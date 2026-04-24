@@ -7,8 +7,6 @@ import '../../domain/forgot_password_repo.dart';
 import 'forgot_password_state.dart';
 import 'package:grocery1/core/failure/failure.dart';
 
-
-
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final ForgotPasswordRepo repo;
   ForgotPasswordCubit(this.repo) : super(ForgotPasswordInitial());
@@ -21,44 +19,64 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   }
 
   Future<void> sendCode({String? email, String? phone}) async {
+    if (isClosed) return;
     emit(ForgotPasswordLoading());
     final result = await repo.sendCode(email: email, phone: phone);
+    if (isClosed) return;
     result.fold(
-          (failure) {
+      (failure) {
         print('❌ Failure: ${failure.failuremessage}');
-        emit(ForgotPasswordError(failure.failuremessage));
+        if (!isClosed) emit(ForgotPasswordError(failure.failuremessage));
       },
-          (_) {
+      (_) {
         print('✅ Success');
-        emit(ForgotPasswordSuccess());
+        if (!isClosed) emit(ForgotPasswordSuccess());
       },
     );
   }
 
   Future<void> resendCode({String? email, String? phone}) async {
+    if (isClosed) return;
     emit(ForgotPasswordLoading());
     final result = await repo.sendCode(email: email, phone: phone);
+    if (isClosed) return;
     result.fold(
-          (failure) => emit(ForgotPasswordError(failure.failuremessage)),
-          (_) => emit(ForgotPasswordCodeSent()),
+      (failure) {
+        if (!isClosed) emit(ForgotPasswordError(failure.failuremessage));
+      },
+      (_) {
+        if (!isClosed) emit(ForgotPasswordCodeSent());
+      },
     );
   }
 
   Future<void> verifyOtp(String otp) async {
+    if (isClosed) return;
     emit(ForgotPasswordLoading());
     final result = await repo.verifyOtp(otp);
+    if (isClosed) return;
     result.fold(
-          (failure) => emit(ForgotPasswordError(failure.failuremessage)),
-          (_) => emit(ForgotPasswordSuccess()),
+      (failure) {
+        if (!isClosed) emit(ForgotPasswordError(failure.failuremessage));
+      },
+      (_) {
+        if (!isClosed) emit(ForgotPasswordSuccess());
+      },
     );
   }
 
   Future<void> resetPassword(String newPassword) async {
+    if (isClosed) return;
     emit(ForgotPasswordLoading());
     final result = await repo.resetPassword(newPassword);
+    if (isClosed) return;
     result.fold(
-          (failure) => emit(ForgotPasswordError(failure.failuremessage)),
-          (_) => emit(ForgotPasswordSuccess()),
+      (failure) {
+        if (!isClosed) emit(ForgotPasswordError(failure.failuremessage));
+      },
+      (_) {
+        if (!isClosed) emit(ForgotPasswordSuccess());
+      },
     );
   }
 }
