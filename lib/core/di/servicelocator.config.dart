@@ -14,30 +14,30 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../Features/SubCategories/data/repositories/datasoures/remoteDataSourses/Categories_Data_Source_Impl.dart'
-    as _i50;
-import '../../Features/SubCategories/data/repositories/datasoures/remoteDataSourses/CategoryDetailsDataSourceIpml.dart'
-    as _i188;
-import '../../Features/SubCategories/data/repositories/repositories/Categories_Repository_Impl.dart'
-    as _i948;
-import '../../Features/SubCategories/data/repositories/repositories/CategoryDetailsRepositoryImpl.dart'
-    as _i500;
-import '../../Features/SubCategories/domain/repositories/datasourses/remoteDataSourse/CategoriesDataSource.dart'
-    as _i1000;
-import '../../Features/SubCategories/domain/repositories/datasourses/remoteDataSourse/CategoryDetailsDataSource.dart'
-    as _i24;
-import '../../Features/SubCategories/domain/repositories/repositories/CategoriesRepository.dart'
-    as _i749;
-import '../../Features/SubCategories/domain/repositories/repositories/CategoryDetailsRepository.dart'
-    as _i378;
-import '../../Features/SubCategories/domain/usecases/CategoriesUseCase.dart'
-    as _i941;
-import '../../Features/SubCategories/domain/usecases/CategoryDetailsUseCase.dart'
-    as _i46;
-import '../../Features/SubCategories/presentation/ui/SubCatergories/Cubit/Categories_View_Model.dart'
-    as _i759;
-import '../../Features/SubCategories/presentation/ui/SubCatergories/Cubit/CategoryDetails_View_Model.dart'
-    as _i682;
+import '../../features/subcategories/data/repositories/datasoures/remoteDataSourses/categories_datasource_impl.dart'
+    as _i10;
+import '../../features/subcategories/data/repositories/datasoures/remoteDataSourses/category_details_datasource_Ipml.dart'
+    as _i213;
+import '../../features/subcategories/data/repositories/repositories/categories_repository_Impl.dart'
+    as _i237;
+import '../../features/subcategories/data/repositories/repositories/category_details_repository_Impl.dart'
+    as _i103;
+import '../../features/subcategories/domain/repositories/datasourses/remoteDataSourse/categories_datasource.dart'
+    as _i1062;
+import '../../features/subcategories/domain/repositories/datasourses/remoteDataSourse/category_details_datasource.dart'
+    as _i442;
+import '../../features/subcategories/domain/repositories/repositories/categories_repository.dart'
+    as _i257;
+import '../../features/subcategories/domain/repositories/repositories/category_details_repository.dart'
+    as _i893;
+import '../../features/subcategories/domain/usecases/categories_usecase.dart'
+    as _i245;
+import '../../features/subcategories/domain/usecases/category_details_usecase.dart'
+    as _i587;
+import '../../features/subcategories/presentation/cubit/categories_view_model.dart'
+    as _i616;
+import '../../features/subcategories/presentation/cubit/category_details_view_model.dart'
+    as _i810;
 import '../api/api_manager.dart' as _i1047;
 import '../Firebase/auth_service.dart' as _i140;
 
@@ -53,42 +53,42 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth());
-    gh.factory<_i1000.CategoriesDataSource>(
-      () => _i50.CategoriesDataSourceImpl(apiManger: gh<_i1047.ApiManger>()),
-    );
-    gh.factory<_i24.CategoryDetailsDatasource>(
-      () => _i188.CategoryDetailsDataSourceImpl(
+    gh.factory<_i442.CategoryDetailsDatasource>(
+      () => _i213.CategoryDetailsDataSourceImpl(
         apiManger: gh<_i1047.ApiManger>(),
       ),
     );
-    gh.factory<_i749.Categoriesrepository>(
-      () => _i948.CategoriesRepositoryImpl(
-        dataSource: gh<_i1000.CategoriesDataSource>(),
+    gh.factory<_i1062.CategoriesDataSource>(
+      () => _i10.CategoriesDataSourceImpl(apiManger: gh<_i1047.ApiManger>()),
+    );
+    gh.factory<_i893.CategoryDetailsRepository>(
+      () => _i103.Categorydetailsrepositoryimpl(
+        datasource: gh<_i442.CategoryDetailsDatasource>(),
       ),
     );
-    gh.factory<_i941.CategoriesUseCase>(
-      () => _i941.CategoriesUseCase(
-        categoriesrepository: gh<_i749.Categoriesrepository>(),
+    gh.factory<_i587.CategoryDetailsUseCase>(
+      () => _i587.CategoryDetailsUseCase(
+        categoryDetails: gh<_i893.CategoryDetailsRepository>(),
       ),
     );
-    gh.factory<_i759.CategoriesViewModel>(
-      () => _i759.CategoriesViewModel(
-        categoriesUseCase: gh<_i941.CategoriesUseCase>(),
+    gh.factory<_i257.Categoriesrepository>(
+      () => _i237.CategoriesRepositoryImpl(
+        dataSource: gh<_i1062.CategoriesDataSource>(),
       ),
     );
-    gh.factory<_i378.CategoryDetailsRepository>(
-      () => _i500.Categorydetailsrepositoryimpl(
-        datasource: gh<_i24.CategoryDetailsDatasource>(),
+    gh.factory<_i245.CategoriesUseCase>(
+      () => _i245.CategoriesUseCase(
+        categoriesrepository: gh<_i257.Categoriesrepository>(),
       ),
     );
-    gh.factory<_i46.CategoryDetailsUseCase>(
-      () => _i46.CategoryDetailsUseCase(
-        categoryDetails: gh<_i378.CategoryDetailsRepository>(),
+    gh.factory<_i810.CategoryDetailsViewModel>(
+      () => _i810.CategoryDetailsViewModel(
+        categoryDetailsUseCase: gh<_i587.CategoryDetailsUseCase>(),
       ),
     );
-    gh.factory<_i682.CategoryDetailsViewModel>(
-      () => _i682.CategoryDetailsViewModel(
-        categoryDetailsUseCase: gh<_i46.CategoryDetailsUseCase>(),
+    gh.factory<_i616.CategoriesViewModel>(
+      () => _i616.CategoriesViewModel(
+        categoriesUseCase: gh<_i245.CategoriesUseCase>(),
       ),
     );
     return this;

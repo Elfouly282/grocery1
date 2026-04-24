@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'Features/SubCategories/presentation/ui/SubCatergories/Sub_Categories Screen.dart';
+import 'features/subcategories/presentation/sub_categories_screen.dart';
 import 'core/di/servicelocator.dart';
 import 'core/utils/my_bloc_observer.dart';
 
