@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:grocery1/core/api/api_endpoints.dart';
 import 'package:grocery1/core/api/api_manager.dart';
+import 'package:grocery1/core/error/error.dart';
 import 'package:grocery1/core/failure/failure.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,12 +28,26 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData = response.data as Map<String, dynamic>;
         final model = LoginModel.fromJson(responseData);
+        print(model.data.token);
+        print("***************************************************************");
         return Right(model);
       } else {
         return Left(Failure("Error happened"));
       }
-    } catch (e) {
-      return Left(Failure(e.toString()));
+    } catch (e, stack) {
+      print("🔥 DIO ERROR: $e");
+
+      print("📌 STACK: $stack");
+
+      if (e is DioException) {
+        print("🔥 RESPONSE: ${e.response?.data}");
+      }
+
+      throw RemoteException(
+        e is DioException
+            ? (e.response?.data?["message"]?.toString() ?? "Dio error")
+            : e.toString(),
+      );
     }
   }
 }

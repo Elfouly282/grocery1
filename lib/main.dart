@@ -1,7 +1,10 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery1/features/home/presentation/screens/home_screen.dart';
+import 'package:grocery1/features/home/presentation/widgets/home_bottom_nav.dart';
 
 import 'core/di/servicelocator.dart';
 import 'core/utils/my_bloc_observer.dart';
@@ -13,7 +16,6 @@ import 'SplashView.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// ✅ حماية من التكرار (fix duplicate-app)
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp();
   }
@@ -22,11 +24,31 @@ void main() async {
 
   configureDependencies();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomeScreen(),
+    Center(child: Text("My List")),
+    Center(child: Text("My Order")),
+    Center(child: Text("Profile")),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +62,13 @@ class MyApp extends StatelessWidget {
           title: 'Grocery App',
 
           /// أول شاشة
-          home: SplashView(),
+          home: Scaffold(
+            body: _widgetOptions.elementAt(_selectedIndex),
+            bottomNavigationBar: HomeBottomNav(
+              selectedIndex: _selectedIndex,
+              onItemTapped: _onItemTapped,
+            ),
+          ),
 
           /// Routes
           routes: {

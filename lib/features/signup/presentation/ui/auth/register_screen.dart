@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 title: 'Success',
                 posActionName: 'OK',
               );
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.pushReplacementNamed(context, LoginScreen.routeName);
             }
           },
         ),

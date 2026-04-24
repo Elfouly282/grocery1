@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
+import 'package:grocery1/features/home/presentation/screens/home_screen.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../cubit/login_cubit.dart';
 import '../cubit/login_state.dart';
@@ -31,11 +32,13 @@ class LoginScreen extends StatelessWidget {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text("Login Success")));
-              // Navigator.of(context).pushNamed(HomeScreen.routeName);
               final token = state.loginEntity.token;
-
               final storage = FlutterSecureStorage();
+
               await storage.write(key: 'token', value: token);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ));
             }
 
             if (state is LoginError) {
