@@ -4,11 +4,11 @@ import 'package:grocery1/features/home/presentation/widgets/product_add_to_cart_
 import 'package:grocery1/features/home/presentation/widgets/product_name_row.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_price_row.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_stars_row.dart';
-import '../../domain/entity/recommended_meal_entity.dart';
+import '../../domain/entity/products_search_entity.dart';
 import '../cubit/cart_cubit.dart';
 
 class ProductDetailsSection extends StatelessWidget {
-  final RecommendedMealEntity meal;
+  final Product meal;
   const ProductDetailsSection({super.key, required this.meal});
 
   @override
@@ -24,7 +24,7 @@ class ProductDetailsSection extends StatelessWidget {
         children: [
           ProductNameRow(meal: meal),
           const SizedBox(height: 4),
-          ProductStarsRow(),
+          ProductStarsRow(rating: meal.rating, ratingCount: meal.ratingCount),
           const SizedBox(height: 6),
           ProductPriceRow(meal: meal),
           const SizedBox(height: 8),

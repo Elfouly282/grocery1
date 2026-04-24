@@ -1,45 +1,57 @@
+import 'package:grocery1/features/home/domain/entity/products_search_entity.dart';
 import 'category_entity.dart';
 
-class RecommendedMealEntity {
-  final int id;
-  final String title;
+class RecommendedMealEntity extends Product {
   final String slug;
-  final String description;
-  final String imageUrl;
-  final String? offerTitle;
-  final double price;
-  final double? discountPrice;
-  final double finalPrice;
-  final bool hasOffer;
-  final bool isFeatured;
   final CategoryEntity category;
   final String features;
   final String recommendationReason;
 
-  const RecommendedMealEntity({
-    required this.id,
-    required this.title,
+  RecommendedMealEntity({
+    required int id,
+    required String title,
+    required String description,
+    required String imageUrl,
+    String? offerTitle,
+    required double price,
+    double? discountPrice,
+    required double finalPrice,
+    required bool hasOffer,
+    required double rating,
+    required int ratingCount,
+    required String brand,
+    required String size,
+    required int categoryId,
+    int? subcategoryId,
+    required bool isFeatured,
+    required bool inStock,
+    required bool isFavorited,
+    required String createdAt,
     required this.slug,
-    required this.description,
-    required this.imageUrl,
-    this.offerTitle,
-    required this.price,
-    this.discountPrice,
-    required this.finalPrice,
-    required this.hasOffer,
-    required this.isFeatured,
     required this.category,
     required this.features,
     required this.recommendationReason,
-  });
-
-  bool get hasDiscount =>
-      discountPrice != null && discountPrice! > 0 && discountPrice! < price;
-
-  double get discountPercentage {
-    if (!hasDiscount) return 0;
-    return ((price - discountPrice!) / price) * 100;
-  }
+  }) : super(
+    id: id,
+    title: title,
+    description: description,
+    imageUrl: imageUrl,
+    offerTitle: offerTitle,
+    price: price,
+    discountPrice: discountPrice,
+    finalPrice: finalPrice,
+    hasOffer: hasOffer,
+    rating: rating,
+    ratingCount: ratingCount,
+    brand: brand,
+    size: size,
+    categoryId: categoryId,
+    subcategoryId: subcategoryId,
+    isFeatured: isFeatured,
+    inStock: inStock,
+    isFavorited: isFavorited,
+    createdAt: createdAt,
+  );
 
   List<String> get featureList =>
       features.split(',').map((f) => f.trim()).where((f) => f.isNotEmpty).toList();
@@ -47,7 +59,9 @@ class RecommendedMealEntity {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is RecommendedMealEntity && runtimeType == other.runtimeType && id == other.id;
+          other is RecommendedMealEntity &&
+              runtimeType == other.runtimeType &&
+              id == other.id;
 
   @override
   int get hashCode => id.hashCode;

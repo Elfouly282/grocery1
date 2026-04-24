@@ -6,7 +6,7 @@ import '../../../../core/utils/app_text.dart';
 import '../cubit/cart_cubit.dart';
 
 class ProductAddToCartButton extends StatelessWidget {
-  final CartItem item; // ← بتمرر المنتج من هنا
+  final CartItem item;
 
   const ProductAddToCartButton({super.key, required this.item});
 
@@ -17,7 +17,7 @@ class ProductAddToCartButton extends StatelessWidget {
       height: 32.h,
       child: ElevatedButton(
         onPressed: () {
-          context.read<CartCubit>().addToCart(item); // ← هنا بيضيف للسلة
+          context.read<CartCubit>().addToCart(item);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('${item.name} added to cart'),

@@ -14,28 +14,54 @@ class ProductSearchEntity {
 
 class Product {
   final int id;
-  final String name;
+  final String title;
+  final String description;
+  final String imageUrl;
+  final String? offerTitle;
   final double price;
+  final double? discountPrice;
+  final double finalPrice;
+  final bool hasOffer;
   final double rating;
+  final int ratingCount;
   final String brand;
+  final String size;
   final int categoryId;
-  final int subcategoryId;
+  final int? subcategoryId;
   final bool isFeatured;
   final bool inStock;
+  final bool isFavorited;
   final String createdAt;
 
   Product({
     required this.id,
-    required this.name,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    this.offerTitle,
     required this.price,
+    this.discountPrice,
+    required this.finalPrice,
+    required this.hasOffer,
     required this.rating,
+    required this.ratingCount,
     required this.brand,
+    required this.size,
     required this.categoryId,
-    required this.subcategoryId,
+    this.subcategoryId,
     required this.isFeatured,
     required this.inStock,
+    required this.isFavorited,
     required this.createdAt,
   });
+
+  bool get hasDiscount =>
+      discountPrice != null && discountPrice! > 0 && discountPrice! < price;
+
+  double get discountPercentage {
+    if (!hasDiscount) return 0;
+    return ((price - discountPrice!) / price) * 100;
+  }
 }
 
 class ProductFilters {

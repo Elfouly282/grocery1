@@ -4,21 +4,18 @@ import 'package:grocery1/features/home/data/data_source/recommended_meal_remote_
 import 'package:grocery1/features/home/domain/entity/recommended_meal_entity.dart';
 import 'package:grocery1/features/home/domain/repo/recommended_meal_repo.dart';
 
-class RecommendedMealRepoImpl  implements RecommendedMealRepo{
+class RecommendedMealRepoImpl implements RecommendedMealRepo {
   final RecommendedMealRemoteDataSource recommendedMealRemoteDataSource;
 
   RecommendedMealRepoImpl(this.recommendedMealRemoteDataSource);
 
   @override
-  Future<Either<Failure, List<RecommendedMealEntity>>> getRecommendedForYou()async {
- try{
-   final model=await recommendedMealRemoteDataSource.getRecommendedForYou();
-   final entities = model.map((e) => e.toEntity()).toList();
-         return Right(entities);
- } catch (e) {
-   return Left(Failure(failuremessage: e.toString()));
- }
- }
-
+  Future<Either<Failure, List<RecommendedMealEntity>>> getRecommendedForYou() async {
+    try {
+      final models = await recommendedMealRemoteDataSource.getRecommendedForYou();
+      return Right(models);
+    } catch (e) {
+      return Left(Failure(failuremessage: e.toString()));
+    }
   }
-
+}

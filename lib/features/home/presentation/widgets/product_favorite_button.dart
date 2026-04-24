@@ -5,23 +5,38 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/resources/color_manager.dart';
 
 class ProductFavoriteButton extends StatelessWidget {
-  const ProductFavoriteButton({super.key});
+  final VoidCallback? onPressed;
+  final bool isFavorite;
+
+  const ProductFavoriteButton({
+    super.key,
+    this.onPressed,
+    this.isFavorite = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 8,
-      right: 8,
+      top: 8.h,
+      right: 8.w,
       child: Container(
-        padding: const EdgeInsets.all(5),
+        width: 27.w,
+        height: 22.w,
         decoration: BoxDecoration(
           color: ColorManager.colorBg,
           shape: BoxShape.circle,
         ),
-        child: Icon(
-          Icons.favorite,
-          size: 13.sp,
-          color: ColorManager.greyBorder,
+        child: IconButton(
+          padding: EdgeInsets.all(4.w),
+          constraints: const BoxConstraints(),
+          onPressed: onPressed,
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite,
+            size: 16.sp,
+            color: isFavorite
+                ? ColorManager.red
+                : ColorManager.greyBorder,
+          ),
         ),
       ),
     );

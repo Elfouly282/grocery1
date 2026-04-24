@@ -3,9 +3,10 @@ import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_details_section.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_favorite_button.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_image_section.dart';
+import '../../domain/entity/products_search_entity.dart';
 
 class ProductCard extends StatelessWidget {
-  final dynamic  meal;
+  final Product meal;
   const ProductCard({super.key, required this.meal});
 
   @override

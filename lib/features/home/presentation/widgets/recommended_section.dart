@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:grocery1/core/utils/app_text.dart';
 import '../../domain/entity/recommended_meal_entity.dart';
 import 'product_card.dart';
@@ -14,7 +13,7 @@ class RecommendedSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      AppText.recommendedForYou(),
+        AppText.recommendedForYou(),
         SizedBox(height: 8.h),
         GridView.builder(
           shrinkWrap: true,

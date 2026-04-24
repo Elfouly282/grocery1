@@ -1,95 +1,111 @@
 import '../../domain/entity/recommended_meal_entity.dart';
 import 'category_model.dart';
 
-class RecommendedMealModel {
-  final int id;
-  final String title;
-  final String slug;
-  final String description;
-  final String imageUrl;
-  final String? offerTitle;
-  final double price;
-  final double? discountPrice;
-  final double finalPrice;
-  final bool hasOffer;
-  final bool isFeatured;
-  final CategoryModel category;
-  final String features;
-  final String recommendationReason;
-
-  const RecommendedMealModel({
-    required this.id,
-    required this.title,
-    required this.slug,
-    required this.description,
-    required this.imageUrl,
-    this.offerTitle,
-    required this.price,
-    this.discountPrice,
-    required this.finalPrice,
-    required this.hasOffer,
-    required this.isFeatured,
-    required this.category,
-    required this.features,
-    required this.recommendationReason,
-  });
+class RecommendedMealModel extends RecommendedMealEntity {
+  RecommendedMealModel({
+    required int id,
+    required String title,
+    required String slug,
+    required String description,
+    required String imageUrl,
+    String? offerTitle,
+    required double price,
+    double? discountPrice,
+    required double finalPrice,
+    required bool hasOffer,
+    required double rating,
+    required int ratingCount,
+    required String brand,
+    required String size,
+    required int categoryId,
+    int? subcategoryId,
+    required bool isFeatured,
+    required bool inStock,
+    required bool isFavorited,
+    required String createdAt,
+    required CategoryModel category,
+    required String features,
+    required String recommendationReason,
+  }) : super(
+    id: id,
+    title: title,
+    slug: slug,
+    description: description,
+    imageUrl: imageUrl,
+    offerTitle: offerTitle,
+    price: price,
+    discountPrice: discountPrice,
+    finalPrice: finalPrice,
+    hasOffer: hasOffer,
+    rating: rating,
+    ratingCount: ratingCount,
+    brand: brand,
+    size: size,
+    categoryId: categoryId,
+    subcategoryId: subcategoryId,
+    isFeatured: isFeatured,
+    inStock: inStock,
+    isFavorited: isFavorited,
+    createdAt: createdAt,
+    category: category,
+    features: features,
+    recommendationReason: recommendationReason,
+  );
 
   factory RecommendedMealModel.fromJson(Map<String, dynamic> json) {
     return RecommendedMealModel(
-      id: json['id'],
-      title: json['title'],
-      slug: json['slug'],
-      description: json['description'],
-      imageUrl: json['image_url'],
-      offerTitle: json['offer_title'],
-      price: (json['price'] as num).toDouble(),
-      discountPrice: json['discount_price'] != null
+      id:                   json['id'] ?? 0,
+      title:                json['title'] ?? '',
+      slug:                 json['slug'] ?? '',
+      description:          json['description'] ?? '',
+      imageUrl:             json['image_url'] ?? '',
+      offerTitle:           json['offer_title'],
+      price:                (json['price'] as num).toDouble(),
+      discountPrice:        json['discount_price'] != null
           ? (json['discount_price'] as num).toDouble()
           : null,
-      finalPrice: (json['final_price'] as num).toDouble(),
-      hasOffer: json['has_offer'],
-      isFeatured: json['is_featured'],
-      category: CategoryModel.fromJson(json['category']),
-      features: json['features'],
-      recommendationReason: json['recommendation_reason'],
+      finalPrice:           (json['final_price'] as num).toDouble(),
+      hasOffer:             json['has_offer'] ?? false,
+      rating:               (json['rating'] ?? 0).toDouble(),
+      ratingCount:          json['rating_count'] ?? 0,
+      brand:                json['brand'] ?? '',
+      size:                 json['size'] ?? '',
+      categoryId:           json['category']?['id'] ?? 0,
+      subcategoryId:        json['subcategory']?['id'],
+      isFeatured:           json['is_featured'] ?? false,
+      inStock:              json['in_stock'] ?? false,
+      isFavorited:          json['is_favorited'] ?? false,
+      createdAt:            json['created_at'] ?? '',
+      category:             CategoryModel.fromJson(json['category']),
+      features:             json['features'] ?? '',
+      recommendationReason: json['recommendation_reason'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'title': title,
-      'slug': slug,
-      'description': description,
-      'image_url': imageUrl,
-      'offer_title': offerTitle,
-      'price': price,
-      'discount_price': discountPrice,
-      'final_price': finalPrice,
-      'has_offer': hasOffer,
-      'is_featured': isFeatured,
-      'category': category.toJson(),
-      'features': features,
+      'id':                    id,
+      'title':                 title,
+      'slug':                  slug,
+      'description':           description,
+      'image_url':             imageUrl,
+      'offer_title':           offerTitle,
+      'price':                 price,
+      'discount_price':        discountPrice,
+      'final_price':           finalPrice,
+      'has_offer':             hasOffer,
+      'rating':                rating,
+      'rating_count':          ratingCount,
+      'brand':                 brand,
+      'size':                  size,
+      'category_id':           categoryId,
+      'subcategory_id':        subcategoryId,
+      'is_featured':           isFeatured,
+      'in_stock':              inStock,
+      'is_favorited':          isFavorited,
+      'created_at':            createdAt,
+      'features':              features,
       'recommendation_reason': recommendationReason,
     };
-  }
-
-  RecommendedMealEntity toEntity() {
-    return RecommendedMealEntity(
-      id: id,
-      title: title,
-      slug: slug,
-      description: description,
-      imageUrl: imageUrl,
-      offerTitle: offerTitle,
-      price: price,
-      discountPrice: discountPrice,
-      finalPrice: finalPrice,
-      hasOffer: hasOffer,
-      isFeatured: isFeatured,
-      category: category.toEntity(),
-      features: features,
-      recommendationReason: recommendationReason,
-    );
   }
 }

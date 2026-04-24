@@ -90,7 +90,7 @@ class MealModel {
       discountPrice: discountPrice,
       finalPrice: finalPrice,
       hasOffer: hasOffer,
-      category: category.toEntity(),
+      category: category,
       features: features,
       availableDate: availableDate,
       createdAt: createdAt,
