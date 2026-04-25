@@ -5,8 +5,7 @@ import 'api_constant.dart';
 
 @lazySingleton
 class ApiManger {
-  final Dio dio;
-  ApiManger({required this.dio});
+  late final Dio dio;
   Future<Response> getData({
     required String endPoint,
     Map<String, dynamic>? qureyParmetes,
