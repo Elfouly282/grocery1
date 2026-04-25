@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -57,11 +58,10 @@ import '../../features/login/data/data_Source/login_remote_data_source.dart'
     as _i200;
 import '../../features/login/data/data_Source/login_remote_data_source_impl.dart'
     as _i544;
-import '../../features/login/data/local/local_data_source.dart' as _i1102;
-import '../../features/login/data/local/secure_storage.dart' as _i1101;
+import '../../features/login/data/local/local_data_source.dart' as _i346;
+import '../../features/login/data/local/secure_storage.dart' as _i541;
 import '../../features/login/data/repo/login_repo_impl.dart' as _i176;
 import '../../features/login/domain/repo/login_repo.dart' as _i0;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i1100;
 import '../../features/login/domain/useCase/login_use_case.dart' as _i630;
 import '../../features/login/presentation/cubit/login_cubit.dart' as _i147;
 import '../../features/my_list/data/api/my_list_api.dart' as _i826;
@@ -144,6 +144,30 @@ import '../../features/signup/presentation/ui/auth/cubit/firebase_auth_view_mode
     as _i917;
 import '../../features/signup/presentation/ui/auth/cubit/register_view_model.dart'
     as _i539;
+import '../../features/subcategories/data/repositories/datasoures/remoteDataSourses/categories_datasource_impl.dart'
+    as _i10;
+import '../../features/subcategories/data/repositories/datasoures/remoteDataSourses/category_details_datasource_Ipml.dart'
+    as _i213;
+import '../../features/subcategories/data/repositories/repositories/categories_repository_Impl.dart'
+    as _i237;
+import '../../features/subcategories/data/repositories/repositories/category_details_repository_Impl.dart'
+    as _i103;
+import '../../features/subcategories/domain/repositories/datasourses/remoteDataSourse/categories_datasource.dart'
+    as _i1062;
+import '../../features/subcategories/domain/repositories/datasourses/remoteDataSourse/category_details_datasource.dart'
+    as _i442;
+import '../../features/subcategories/domain/repositories/repositories/categories_repository.dart'
+    as _i257;
+import '../../features/subcategories/domain/repositories/repositories/category_details_repository.dart'
+    as _i893;
+import '../../features/subcategories/domain/usecases/categories_usecase.dart'
+    as _i245;
+import '../../features/subcategories/domain/usecases/category_details_usecase.dart'
+    as _i587;
+import '../../features/subcategories/presentation/cubit/categories_view_model.dart'
+    as _i616;
+import '../../features/subcategories/presentation/cubit/category_details_view_model.dart'
+    as _i810;
 import '../api/api_manager.dart' as _i1047;
 import '../firebase/auth_service.dart' as _i35;
 
@@ -165,12 +189,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth());
     gh.factory<_i1005.SmartListDataSource>(
         () => _i446.SmartListDataSourceImpl(gh<_i826.MyListApi>()));
+    gh.factory<_i442.CategoryDetailsDatasource>(() =>
+        _i213.CategoryDetailsDataSourceImpl(
+            apiManger: gh<_i1047.ApiManager>()));
+    gh.factory<_i1062.CategoriesDataSource>(() =>
+        _i10.CategoriesDataSourceImpl(apiManger: gh<_i1047.ApiManager>()));
+    gh.factory<_i893.CategoryDetailsRepository>(() =>
+        _i103.Categorydetailsrepositoryimpl(
+            datasource: gh<_i442.CategoryDetailsDatasource>()));
     gh.factory<_i200.LoginRemoteDataSource>(
         () => _i544.LoginRemoteDataSourceImpl());
-    gh.singleton<_i1100.FlutterSecureStorage>(
-        () => const _i1100.FlutterSecureStorage());
-    gh.singleton<_i1102.LocalauthDatasouce>(() =>
-        _i1101.SecureStorageDatasource(gh<_i1100.FlutterSecureStorage>()));
+    gh.singleton<_i346.LocalauthDatasouce>(
+        () => _i541.SecureStorageDatasource(gh<_i558.FlutterSecureStorage>()));
     gh.factory<_i445.AddToCartDataSource>(
         () => _i1.AddToCartDataSourceImp(gh<_i826.MyListApi>()));
     gh.factory<_i214.HistoryDataSource>(
@@ -189,14 +219,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i894.DeleteSmartListUseCase(gh<_i375.SmartListRepository>()));
     gh.factory<_i746.GetSmartListsUseCase>(
         () => _i746.GetSmartListsUseCase(gh<_i375.SmartListRepository>()));
-    gh.factory<_i0.LoginRepo>(() => _i176.LoginRepoImpl(
-          gh<_i200.LoginRemoteDataSource>(),
-          gh<_i1102.LocalauthDatasouce>(),
-        ));
     gh.factory<_i823.ProductRemoteDataSource>(
         () => _i704.ProductRemoteDataSourceImpl(gh<_i1047.ApiManager>()));
     gh.factory<_i836.Firebaseauthdatasource>(
         () => _i1020.Firebaseauthdatasourceimpl(auth: gh<_i59.FirebaseAuth>()));
+    gh.factory<_i587.CategoryDetailsUseCase>(() => _i587.CategoryDetailsUseCase(
+        categoryDetails: gh<_i893.CategoryDetailsRepository>()));
     gh.factory<_i5.HistoryRepository>(
         () => _i998.HistoryRepositoryImpl(gh<_i214.HistoryDataSource>()));
     gh.factory<_i801.AddAndRemoveFavoriteUseCase>(() =>
@@ -207,8 +235,14 @@ extension GetItInjectableX on _i174.GetIt {
         _i1008.CategorySectionRemoteDataSourceImpl(gh<_i1047.ApiManager>()));
     gh.factory<_i741.GetFavoritesUseCase>(
         () => _i741.GetFavoritesUseCase(gh<_i701.FavoritesRepository>()));
+    gh.factory<_i257.Categoriesrepository>(() => _i237.CategoriesRepositoryImpl(
+        dataSource: gh<_i1062.CategoriesDataSource>()));
     gh.factory<_i494.RecommendedMealRemoteDataSource>(() =>
         _i71.RecommendedMealRemoteDataSourceImpl(gh<_i1047.ApiManager>()));
+    gh.factory<_i0.LoginRepo>(() => _i176.LoginRepoImpl(
+          gh<_i200.LoginRemoteDataSource>(),
+          gh<_i346.LocalauthDatasouce>(),
+        ));
     gh.factory<_i832.AddToCartRepository>(
         () => _i338.AddToCartRepositoryImp(gh<_i445.AddToCartDataSource>()));
     gh.factory<_i91.MealRepository>(
@@ -231,6 +265,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i159.Firebaseauthrepository>(() =>
         _i867.Firebaseauthrepostioryimpl(
             datasource: gh<_i836.Firebaseauthdatasource>()));
+    gh.factory<_i245.CategoriesUseCase>(() => _i245.CategoriesUseCase(
+        categoriesrepository: gh<_i257.Categoriesrepository>()));
     gh.factory<_i931.RecommendedMealRepo>(() => _i953.RecommendedMealRepoImpl(
         gh<_i494.RecommendedMealRemoteDataSource>()));
     gh.factory<_i600.RegisterUseCase>(() => _i600.RegisterUseCase(
@@ -239,12 +275,17 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i203.AddRemoveFavoritesUseCase(gh<_i5.HistoryRepository>()));
     gh.factory<_i228.GetHistoryUseCase>(
         () => _i228.GetHistoryUseCase(gh<_i5.HistoryRepository>()));
+    gh.factory<_i810.CategoryDetailsViewModel>(() =>
+        _i810.CategoryDetailsViewModel(
+            categoryDetailsUseCase: gh<_i587.CategoryDetailsUseCase>()));
     gh.factory<_i719.ProductRepository>(
         () => _i360.ProductRepositoryImpl(gh<_i823.ProductRemoteDataSource>()));
     gh.factory<_i539.RegisterViewModel>(() =>
         _i539.RegisterViewModel(registerUseCase: gh<_i600.RegisterUseCase>()));
     gh.factory<_i6.CategorySectionRepo>(() => _i894.CategorySectionRepoImpl(
         gh<_i83.CategorySectionRemoteDataSource>()));
+    gh.factory<_i616.CategoriesViewModel>(() => _i616.CategoriesViewModel(
+        categoriesUseCase: gh<_i245.CategoriesUseCase>()));
     gh.factory<_i893.GetAllDealsUseCase>(
         () => _i893.GetAllDealsUseCase(gh<_i91.MealRepository>()));
     gh.factory<_i403.RecommendedMealUseCase>(

@@ -9,7 +9,7 @@ class ApiEndpoints {
   static const String deleteAccountEndpoint = '/api/auth/delete-account';
   static const String changePasswordEndpoint = '/api/auth/change-password';
 
-  static const String cateEndpoint = '';
+  
   static const String forgotPasswordEndPoint = '/api/auth/forgot-password';
   static const String verifyOtpEndPoint = '/api/auth/verify-otp';
   static const String resetPasswordEndPoint = '/api/auth/reset-password';
@@ -26,6 +26,10 @@ class ApiEndpoints {
   static const String brandsEndpoint = '/api/brands';
   static const String moreToExploreEndpoint = '/api/more-to-explore';
   static const String frequencyEndpoint = '/api/frequency';
+  //!! Add more endpoints as needed
+static const String cateEndpoint ='/api/categories';
+static String categoryDetailsEndpoint(int id) => '/api/categories/$id';
+
 
   // Cart
   static const String cartEndpoint = '/api/cart';

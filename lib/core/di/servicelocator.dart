@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'servicelocator.config.dart';
+import 'package:grocery1/core/di/servicelocator.config.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final getIt = GetIt.instance;
 
@@ -12,4 +14,7 @@ final getIt = GetIt.instance;
   preferRelativeImports: true,
   asExtension: true,
 )
-void configureDependencies() => getIt.init();
+void configureDependencies() {
+  getIt.registerLazySingleton(() => FlutterSecureStorage());
+  getIt.init();
+}

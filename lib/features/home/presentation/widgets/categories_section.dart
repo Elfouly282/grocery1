@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:grocery1/core/utils/app_text.dart';
 import 'package:grocery1/features/home/presentation/screens/testscreen.dart';
+import 'package:grocery1/features/subcategories/presentation/sub_categories_screen.dart';
 
 import '../../domain/entity/category_section_entity.dart';
 import 'category_item.dart';
@@ -28,7 +29,7 @@ class CategoriesSection extends StatelessWidget {
             //!! Wrap the CategoryItem with InkWell to make it tappable
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(testscreen.routeName, arguments: categories[index].id);
+                    Navigator.of(context).pushNamed(SubCategoriesScreen.routeName, arguments: categories[index].id);
                   },
                   child: CategoryItem(category: categories[index])),
           ),
