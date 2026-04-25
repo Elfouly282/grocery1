@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/features/home/presentation/screens/home_screen.dart';
+import 'package:grocery1/features/home/presentation/screens/testscreen.dart';
 import 'package:grocery1/features/home/presentation/widgets/home_bottom_nav.dart';
 import 'package:grocery1/features/my_list/presentation/view/my_list_view.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/history/history_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart';
 import 'package:grocery1/features/profile/presentation/views/profile_view.dart';
+import 'package:grocery1/main_app.dart';
 
 import 'core/di/servicelocator.dart';
 import 'core/utils/my_bloc_observer.dart';
@@ -53,10 +55,11 @@ class _MyAppState extends State<MyApp> {
           // initialRoute: SplashView.routeName,
 
           /// أول شاشة
-          home: SplashView(),
+          home: MainApp(),
 
           /// Routes
           routes: {
+            testscreen.routeName : (context) =>  testscreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
             // RegisterScreen.routeName: (context) => const RegisterScreen(),
             SplashView.routeName: (context) => SplashView()

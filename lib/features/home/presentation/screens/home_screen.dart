@@ -52,7 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           },
           builder: (context, state) {
-            if (state is HomeLoading) return const Center(child: CircularProgressIndicator());
+            if (state is HomeLoading) {
+              return const Center(child: CircularProgressIndicator(
+              color: ColorManager.primary,
+            ));
+            }
             if (state is HomeSuccess) return HomeBody(state: state);
             if (state is HomeError) return Center(child: Text(state.errorMessage));
             return const SizedBox();

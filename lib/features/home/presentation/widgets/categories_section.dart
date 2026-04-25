@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:grocery1/core/utils/app_text.dart';
+import 'package:grocery1/features/home/presentation/screens/testscreen.dart';
 
 import '../../domain/entity/category_section_entity.dart';
 import 'category_item.dart';
@@ -20,10 +21,16 @@ class CategoriesSection extends StatelessWidget {
         SizedBox(
           height: 150.h,
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
             itemBuilder: (context, index) =>
-                CategoryItem(category: categories[index]),
+            //!! Wrap the CategoryItem with InkWell to make it tappable
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(testscreen.routeName, arguments: categories[index].id);
+                  },
+                  child: CategoryItem(category: categories[index])),
           ),
         ),
       ],
