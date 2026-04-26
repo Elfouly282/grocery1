@@ -8,6 +8,7 @@ import 'package:grocery1/features/home/presentation/widgets/search_input_field.d
 import 'package:grocery1/features/home/presentation/widgets/search_results_list.dart';
 
 import '../cubit/product_search_cubit.dart';
+
 class HomeSearchBar extends StatefulWidget {
   const HomeSearchBar({super.key});
 
@@ -27,6 +28,7 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Column(
+     
       children: [
         SearchInputField(controller: _controller),
         SearchResultsList(),

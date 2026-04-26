@@ -121,6 +121,24 @@ import '../../features/my_list/presentation/view_model/history/history_cubit.dar
     as _i287;
 import '../../features/my_list/presentation/view_model/smart_list/smart_lists_cubit.dart'
     as _i798;
+import '../../features/product_details/data/api/product_details_api.dart'
+    as _i552;
+import '../../features/product_details/data/data_source/product_details_data_source.dart'
+    as _i933;
+import '../../features/product_details/data/data_source/product_details_data_source_imp.dart'
+    as _i1061;
+import '../../features/product_details/data/repository/product_details_repo_imp.dart'
+    as _i902;
+import '../../features/product_details/domain/repository/product_details_repo.dart'
+    as _i497;
+import '../../features/product_details/domain/use_case/add_to_cart_use_case.dart'
+    as _i178;
+import '../../features/product_details/domain/use_case/product_details_use_case.dart'
+    as _i181;
+import '../../features/product_details/domain/use_case/toggle_favorite_use_case.dart'
+    as _i938;
+import '../../features/product_details/presentation/view_model/product_details_cubit.dart'
+    as _i111;
 import '../../features/signup/data/repositories/datasoures/remoteDataSourses/firebase_auth_datasourceImpl.dart'
     as _i1020;
 import '../../features/signup/data/repositories/datasoures/remoteDataSourses/register_remote_datasourceImpl.dart'
@@ -185,10 +203,13 @@ extension GetItInjectableX on _i174.GetIt {
     final firebaseModule = _$FirebaseModule();
     gh.factory<_i890.CartCubit>(() => _i890.CartCubit());
     gh.factory<_i826.MyListApi>(() => _i826.MyListApi());
+    gh.factory<_i552.ProductDetailsApi>(() => _i552.ProductDetailsApi());
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth());
     gh.factory<_i1005.SmartListDataSource>(
         () => _i446.SmartListDataSourceImpl(gh<_i826.MyListApi>()));
+    gh.factory<_i933.ProductDetailsDataSource>(() =>
+        _i1061.ProductDetailsDataSourceImp(gh<_i552.ProductDetailsApi>()));
     gh.factory<_i442.CategoryDetailsDatasource>(() =>
         _i213.CategoryDetailsDataSourceImpl(
             apiManger: gh<_i1047.ApiManager>()));
@@ -213,6 +234,9 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i705.FavoritesDataSourceImpl(gh<_i826.MyListApi>()));
     gh.factory<_i701.FavoritesRepository>(
         () => _i766.FavoritesRepositoryImpl(gh<_i781.FavoritesDataSource>()));
+    gh.factory<_i497.ProductDetailsRepository>(() =>
+        _i902.ProductDetailsRepositoryImp(
+            gh<_i933.ProductDetailsDataSource>()));
     gh.factory<_i864.MealsRemoteDataSource>(
         () => _i227.MealsRemoteDataSourceImpl(gh<_i1047.ApiManager>()));
     gh.factory<_i894.DeleteSmartListUseCase>(
@@ -255,6 +279,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i804.AddToCartSmartListUseCase(gh<_i832.AddToCartRepository>()));
     gh.factory<_i630.LoginUseCase>(
         () => _i630.LoginUseCase(loginRepo: gh<_i0.LoginRepo>()));
+    gh.factory<_i178.AddToCartUseCase>(
+        () => _i178.AddToCartUseCase(gh<_i497.ProductDetailsRepository>()));
+    gh.factory<_i181.ProductDetailsUseCase>(() =>
+        _i181.ProductDetailsUseCase(gh<_i497.ProductDetailsRepository>()));
+    gh.factory<_i938.ToggleFavoriteUseCase>(() =>
+        _i938.ToggleFavoriteUseCase(gh<_i497.ProductDetailsRepository>()));
     gh.factory<_i147.LoginCubit>(
         () => _i147.LoginCubit(gh<_i630.LoginUseCase>()));
     gh.factory<_i14.FavoritesCubit>(() => _i14.FavoritesCubit(
@@ -267,6 +297,11 @@ extension GetItInjectableX on _i174.GetIt {
             datasource: gh<_i836.Firebaseauthdatasource>()));
     gh.factory<_i245.CategoriesUseCase>(() => _i245.CategoriesUseCase(
         categoriesrepository: gh<_i257.Categoriesrepository>()));
+    gh.factory<_i111.ProductDetailsCubit>(() => _i111.ProductDetailsCubit(
+          gh<_i181.ProductDetailsUseCase>(),
+          gh<_i938.ToggleFavoriteUseCase>(),
+          gh<_i178.AddToCartUseCase>(),
+        ));
     gh.factory<_i931.RecommendedMealRepo>(() => _i953.RecommendedMealRepoImpl(
         gh<_i494.RecommendedMealRemoteDataSource>()));
     gh.factory<_i600.RegisterUseCase>(() => _i600.RegisterUseCase(

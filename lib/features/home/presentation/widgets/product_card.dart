@@ -7,27 +7,31 @@ import '../../domain/entity/products_search_entity.dart';
 
 class ProductCard extends StatelessWidget {
   final Product meal;
-  const ProductCard({super.key, required this.meal});
+  final VoidCallback? onTap;
+  const ProductCard({super.key, required this.meal, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ColorManager.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          ProductImageSection(meal: meal),
-          ProductFavoriteButton(),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: ProductDetailsSection(meal: meal),
-          ),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            ProductImageSection(meal: meal),
+            ProductFavoriteButton(),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: ProductDetailsSection(meal: meal),
+            ),
+          ],
+        ),
       ),
     );
   }

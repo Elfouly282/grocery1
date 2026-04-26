@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_card.dart';
@@ -22,16 +21,20 @@ class SearchResultsList extends StatelessWidget {
 
         if (state is ProductSearchSuccess) {
           final products = state.productSearchEntity.products;
-          return ListView.builder(
+          return GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: products.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
                 child: ProductCard(meal: products[index]),
               );
             },
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, mainAxisSpacing: 4),
           );
         }
 

@@ -4,19 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
 import 'package:grocery1/core/utils/app_toast.dart';
-import 'package:grocery1/features/my_list/domain/entity/favorite_toggle_model.dart';
 import 'package:grocery1/features/my_list/domain/entity/history_entity.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/history/history_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/history/history_state.dart';
 import 'package:grocery1/features/my_list/presentation/widgets/history/history_card.dart';
+import 'package:grocery1/features/product_details/presentation/view/product_details_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:toastification/toastification.dart';
 import 'package:grocery1/features/my_list/presentation/widgets/history/history_filtration.dart';
 import 'package:grocery1/features/my_list/domain/entity/filter_model.dart';
 
 class HistoryView extends StatelessWidget {
-  HistoryView({super.key});
-  FavoriteToggleDataEntity data = FavoriteToggleDataEntity();
+  const HistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +78,6 @@ class HistoryView extends StatelessWidget {
               ],
             ),
           );
-        } else if (state is AddRemoveFavoriteSuccess) {
-          data = state.response;
         }
         return const SizedBox.shrink();
       },
@@ -114,7 +111,7 @@ class HistoryView extends StatelessWidget {
         ),
         itemCount: dummyData.length,
         itemBuilder: (context, index) {
-          return HistoryCard(entity: dummyData[index], data: data);
+          return HistoryCard(entity: dummyData[index]);
         },
       ),
     );
@@ -179,10 +176,16 @@ class HistoryView extends StatelessWidget {
           itemBuilder: (context, index) {
             return HistoryCard(
               entity: historyItems[index],
-              data: data,
               onFavoriteToggle: () {
                 context.read<HistoryCubit>().addToCart(historyItems[index].id);
               },
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) =>
+                      ProductDetailsScreen(productId: historyItems[index].id),
+                ),
+              ),
             );
           },
         ),

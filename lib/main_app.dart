@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
+import 'package:grocery1/features/home/presentation/cubit/cart_cubit.dart';
 import 'package:grocery1/features/home/presentation/screens/home_screen.dart';
 import 'package:grocery1/features/home/presentation/widgets/home_bottom_nav.dart';
 import 'package:grocery1/features/my_list/presentation/view/my_list_view.dart';
@@ -31,28 +32,31 @@ class _MainAppState extends State<MainApp> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) =>
-                    getIt<SmartListsCubit>()..fetchSmartLists(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<FavoritesCubit>()..fetchFavorites(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<HistoryCubit>()..fetchHistory(),
-              ),
-            ],
-            child: Scaffold(
-              body: _widgetOptions.elementAt(_selectedIndex),
-              bottomNavigationBar: HomeBottomNav(
-                selectedIndex: _selectedIndex,
-                onItemTapped: _onItemTapped,
-              ),
-            ),
-          );
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<SmartListsCubit>()..fetchSmartLists(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<FavoritesCubit>()..fetchFavorites(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<HistoryCubit>()..fetchHistory(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CartCubit>(),
+        ),
+      ],
+      child: Scaffold(
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: HomeBottomNav(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        ),
+      ),
+    );
   }
 }

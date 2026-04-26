@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_card.dart';
+import 'package:grocery1/features/product_details/presentation/view/product_details_screen.dart';
 
 import '../cubit/product_search_cubit.dart';
 
@@ -20,7 +20,8 @@ class SearchResultsView extends StatelessWidget {
     }
 
     if (searchState is ProductSearchSuccess) {
-      final products = (searchState as ProductSearchSuccess).productSearchEntity.products;
+      final products =
+          (searchState as ProductSearchSuccess).productSearchEntity.products;
 
       if (products.isEmpty) {
         return const Center(child: Text("No products found"));
@@ -35,7 +36,13 @@ class SearchResultsView extends StatelessWidget {
           childAspectRatio: 0.75,
         ),
         itemCount: products.length,
-        itemBuilder: (context, index) => ProductCard(meal: products[index]),
+        itemBuilder: (context, index) => ProductCard(
+            meal: products[index],
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) =>
+                        ProductDetailsScreen(productId: products[index].id)))),
       );
     }
 

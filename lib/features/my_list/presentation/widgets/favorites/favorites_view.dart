@@ -7,6 +7,7 @@ import 'package:grocery1/features/my_list/domain/entity/favorite_entity.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_cubit.dart';
 import 'package:grocery1/features/my_list/presentation/view_model/favorites/favorites_state.dart';
 import 'package:grocery1/features/my_list/presentation/widgets/favorites/favorite_card.dart';
+import 'package:grocery1/features/product_details/presentation/view/product_details_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:toastification/toastification.dart';
 
@@ -58,7 +59,6 @@ class _FavoritesViewState extends State<FavoritesView> {
           );
         }
       },
-
       buildWhen: (previous, current) {
         return current is! RemoveFavoriteSuccess;
       },
@@ -97,10 +97,17 @@ class _FavoritesViewState extends State<FavoritesView> {
             entity: dummyData[index],
             onRemove: () {
               context.read<FavoritesCubit>().removeFavorite(
-                dummyData[index].id,
-              );
+                    dummyData[index].id,
+                  );
             },
             addToCart: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    ProductDetailsScreen(productId: dummyData[index].id),
+              ),
+            ),
           );
         },
       ),
@@ -128,6 +135,13 @@ class _FavoritesViewState extends State<FavoritesView> {
           addToCart: () {
             context.read<FavoritesCubit>().addToCart(favorites[index].id);
           },
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) =>
+                  ProductDetailsScreen(productId: favorites[index].id),
+            ),
+          ),
         );
       },
     );

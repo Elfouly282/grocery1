@@ -62,13 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return const SizedBox();
           },
         ),
-        // bottomNavigationBar: SizedBox(
-        //   height: 73.h,
-        //   child: HomeBottomNav(
-        //     selectedIndex: _selectedIndex,
-        //     onItemTapped: (index) => setState(() => _selectedIndex = index),
-        //   ),
-        // ),
+        
       ),
     );
   }

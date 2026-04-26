@@ -2,13 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:grocery1/main_app.dart';
+import 'package:grocery1/core/di/servicelocator.dart';
+import 'package:grocery1/core/utils/my_bloc_observer.dart';
+
 import 'package:grocery1/features/home/presentation/screens/testscreen.dart';
 import 'package:grocery1/features/subcategories/presentation/sub_categories_screen.dart';
-import 'package:grocery1/main_app.dart';
-import 'core/di/servicelocator.dart';
-import 'core/utils/my_bloc_observer.dart';
-import 'features/login/presentation/screens/login_screen.dart';
+import 'package:grocery1/features/login/presentation/screens/login_screen.dart';
 import 'SplashView.dart';
+
+// product details
+import 'package:grocery1/features/product_details/presentation/view/product_details_screen.dart';
+import 'package:grocery1/features/product_details/presentation/view_model/product_details_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,16 +22,16 @@ void main() async {
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp();
   }
+
   Bloc.observer = MyBlocObserver();
   configureDependencies();
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
-class MyApp extends StatefulWidget {
+
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-class _MyAppState extends State<MyApp> {
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -36,16 +42,29 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Grocery App',
-          // initialRoute: SplashView.routeName,
+          theme: ThemeData(
+            useMaterial3: true,
+          ),
+
           /// أول شاشة
-          home: MainApp(),
+          home: SplashView(),
+
           /// Routes
           routes: {
             SubCategoriesScreen.routeName: (context) => SubCategoriesScreen(),
+
             testscreen.routeName: (context) => testscreen(),
-            LoginScreen.routeName: (context) => LoginScreen(),
-            // RegisterScreen.routeName: (context) => const RegisterScreen(),
-            SplashView.routeName: (context) => SplashView()
+
+            LoginScreen.routeName: (context) => const LoginScreen(),
+
+            SplashView.routeName: (context) => const SplashView(),
+
+            // /// ضيفنا product details هنا
+            // ProductDetailsScreen.routeName: (context) => BlocProvider(
+            //       create: (context) =>
+            //           getIt<ProductDetailsCubit>()..getProductDetails(3),
+            //       child: const ProductDetailsScreen(),
+            //     ),
           },
         );
       },

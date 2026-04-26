@@ -99,4 +99,5 @@ static String categoryDetailsEndpoint(int id) => '/api/categories/$id';
   static const String storeAddress = '/api/addresses';
   static const String deleteAccount = '/api/auth/delete-account';
   static const String logout = '/api/auth/logout';
+  
 }

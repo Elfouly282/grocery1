@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/utils/app_text.dart';
+import 'package:grocery1/features/product_details/presentation/view/product_details_screen.dart';
 import '../../domain/entity/recommended_meal_entity.dart';
 import 'product_card.dart';
 
@@ -25,7 +26,13 @@ class RecommendedSection extends StatelessWidget {
             childAspectRatio: 0.75,
           ),
           itemCount: meals.length,
-          itemBuilder: (context, index) => ProductCard(meal: meals[index]),
+          itemBuilder: (context, index) => ProductCard(
+              meal: meals[index],
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) =>
+                          ProductDetailsScreen(productId: meals[index].id)))),
         ),
       ],
     );
