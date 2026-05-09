@@ -24,10 +24,10 @@ class FavoriteToggleDataModel {
   }
 
   FavoriteToggleDataEntity toEntity() => FavoriteToggleDataEntity(
-    success: success ?? false,
-    message: message ?? '',
-    data: data!.toEntity(),
-  );
+        success: success ?? false,
+        message: message ?? '',
+        data: data!.toEntity(),
+      );
 }
 
 class DataModel {

@@ -72,7 +72,6 @@ class ProductDetailsSkeletonizerWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Sizes.s8),
-
             Row(
               children: [
                 ...List.generate(
@@ -84,7 +83,6 @@ class ProductDetailsSkeletonizerWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Sizes.s24),
-
             const Text(
               'Detailes',
               style: TextStyle(
@@ -109,7 +107,6 @@ class ProductDetailsSkeletonizerWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Sizes.s24),
-
             const Text(
               'Description',
               style: TextStyle(
@@ -124,7 +121,6 @@ class ProductDetailsSkeletonizerWidget extends StatelessWidget {
               style: TextStyle(fontSize: Sizes.s15),
             ),
             const SizedBox(height: Sizes.s24),
-
             const Text(
               'How to Use',
               style: TextStyle(

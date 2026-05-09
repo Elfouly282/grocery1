@@ -13,12 +13,11 @@ class RegisterResponseEntity {
     return RegisterResponseEntity(
       success: json['success'],
       message: json['message'],
-      data: json['data'] != null
-          ? DataEntity.fromJson(json['data'])
-          : null,
+      data: json['data'] != null ? DataEntity.fromJson(json['data']) : null,
     );
   }
 }
+
 class DataEntity {
   final UserEntity? user;
   final String? token;
@@ -30,13 +29,12 @@ class DataEntity {
 
   factory DataEntity.fromJson(Map<String, dynamic> json) {
     return DataEntity(
-      user: json['user'] != null
-          ? UserEntity.fromJson(json['user'])
-          : null,
+      user: json['user'] != null ? UserEntity.fromJson(json['user']) : null,
       token: json['token'],
     );
   }
 }
+
 class UserEntity {
   final num? id;
   final String? username;
@@ -62,6 +60,7 @@ class UserEntity {
     );
   }
 }
+
 class ErrorEntity {
   final String message;
   final Map<String, List<String>> errors;

@@ -26,12 +26,14 @@ class CategoriesSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
             itemBuilder: (context, index) =>
-            //!! Wrap the CategoryItem with InkWell to make it tappable
+                //!! Wrap the CategoryItem with InkWell to make it tappable
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(SubCategoriesScreen.routeName, arguments: categories[index].id);
-                  },
-                  child: CategoryItem(category: categories[index])),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                          SubCategoriesScreen.routeName,
+                          arguments: categories[index].id);
+                    },
+                    child: CategoryItem(category: categories[index])),
           ),
         ),
       ],

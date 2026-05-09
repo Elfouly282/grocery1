@@ -24,12 +24,12 @@ class FavoriteModel {
   }
 
   FavoriteEntity toEntity() => FavoriteEntity(
-    id: id ?? 0,
-    title: title ?? '',
-    price: price ?? 0.0,
-    originalPrice: originalPrice ?? 0.0,
-    imageUrl: imageUrl ?? '',
-  );
+        id: id ?? 0,
+        title: title ?? '',
+        price: price ?? 0.0,
+        originalPrice: originalPrice ?? 0.0,
+        imageUrl: imageUrl ?? '',
+      );
 }
 
 class FavoriteResponseModel {
@@ -53,5 +53,3 @@ class FavoriteResponseModel {
   List<FavoriteEntity> toEntity() =>
       data?.map((e) => e.toEntity()).toList() ?? [];
 }
-
-

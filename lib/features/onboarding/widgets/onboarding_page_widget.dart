@@ -18,15 +18,14 @@ class OnboardingPageWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-
-         Spacer(),
+          Spacer(),
           Expanded(
             flex: 8,
-            child: Image.asset(image,height: 199,),
+            child: Image.asset(
+              image,
+              height: 199,
+            ),
           ),
-
-
-
           Expanded(
             flex: 2,
             child: Text(
@@ -39,8 +38,6 @@ class OnboardingPageWidget extends StatelessWidget {
               ),
             ),
           ),
-
-
           Expanded(
             flex: 2,
             child: Text(

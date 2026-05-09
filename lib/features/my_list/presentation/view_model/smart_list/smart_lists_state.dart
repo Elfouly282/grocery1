@@ -37,6 +37,7 @@ class DeleteSmartListSuccess extends SmartListsState {
   @override
   List<Object> get props => [message];
 }
+
 class DeleteSmartListError extends SmartListsState {
   final String message;
   const DeleteSmartListError(this.message);

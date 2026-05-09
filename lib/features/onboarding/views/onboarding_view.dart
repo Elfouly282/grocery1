@@ -136,7 +136,6 @@ class OnboardingViewState extends State<OnboardingView> {
                       )
                     else
                       const SizedBox(width: 56),
-
                     GestureDetector(
                       onTap: onNextPressed,
                       child: Container(

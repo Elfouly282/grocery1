@@ -10,8 +10,8 @@ import 'package:grocery1/features/subcategories/domain/repositories/datasourses/
 import 'package:grocery1/features/subcategories/domain/entities/categories_response_entity.dart';
 
 import 'package:grocery1/features/subcategories/data/models/categories_response_dm.dart';
-@Injectable(as:CategoriesDataSource)
 
+@Injectable(as: CategoriesDataSource)
 class CategoriesDataSourceImpl implements CategoriesDataSource {
   ApiManager apiManger;
 
@@ -32,7 +32,7 @@ class CategoriesDataSourceImpl implements CategoriesDataSource {
       );
 
       final getAllCategoriesResponse =
-      CategoriesResponseDm.fromJson(response.data);
+          CategoriesResponseDm.fromJson(response.data);
 
       if (response.statusCode != null &&
           response.statusCode! >= 200 &&

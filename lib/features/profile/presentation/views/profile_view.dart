@@ -98,10 +98,7 @@ class _ProfileViewState extends State<ProfileView> {
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: ColorManager.appbarBackground,
-              leading: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: const Icon(Icons.arrow_back_ios, size: 19),
-              ),
+              automaticallyImplyLeading: false,
               title: const Text(
                 'My Profile',
                 style: TextStyle(fontSize: 18, fontFamily: 'inter'),

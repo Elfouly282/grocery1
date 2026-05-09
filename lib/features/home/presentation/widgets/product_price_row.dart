@@ -14,8 +14,7 @@ class ProductPriceRow extends StatelessWidget {
       children: [
         Text(
           '£${meal.finalPrice.toStringAsFixed(0)}',
-          style: getMediumStyle(
-              color: ColorManager.primary, fontSize: 16.sp),
+          style: getMediumStyle(color: ColorManager.primary, fontSize: 16.sp),
         ),
         if (meal.hasDiscount) ...[
           const SizedBox(width: 6),

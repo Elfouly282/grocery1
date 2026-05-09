@@ -5,7 +5,8 @@ import 'package:grocery1/features/my_list/domain/entity/history_entity.dart';
 import 'package:grocery1/features/my_list/domain/entity/filter_model.dart';
 
 abstract class HistoryRepository {
-  Future<Either<Failure, List<HistoryEntity>>> getHistory({FilterModel? filters});
+  Future<Either<Failure, List<HistoryEntity>>> getHistory(
+      {FilterModel? filters});
   Future<Either<Failure, FavoriteToggleDataEntity>> addRemoveFavorite(
     int mealId,
   );

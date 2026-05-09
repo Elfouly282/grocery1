@@ -10,7 +10,6 @@ import 'package:grocery1/features/subcategories/domain/entities/category_details
 
 import 'package:grocery1/features/subcategories/data/models/category_details_response_dm.dart';
 
-
 @Injectable(as: CategoryDetailsDatasource)
 class CategoryDetailsDataSourceImpl implements CategoryDetailsDatasource {
   final ApiManager apiManger;
@@ -18,7 +17,8 @@ class CategoryDetailsDataSourceImpl implements CategoryDetailsDatasource {
   CategoryDetailsDataSourceImpl({required this.apiManger});
 
   @override
-  Future<Either<Failure, CategoryDetailsResponseEntity>> getCategoryDetails(int id) async {
+  Future<Either<Failure, CategoryDetailsResponseEntity>> getCategoryDetails(
+      int id) async {
     try {
       final connectivityResult = await Connectivity().checkConnectivity();
 
@@ -28,11 +28,10 @@ class CategoryDetailsDataSourceImpl implements CategoryDetailsDatasource {
       }
 
       final response = await apiManger.getData(
-        endPoint: ApiEndpoints.categoryDetailsEndpoint(id)
-      );
+          endPoint: ApiEndpoints.categoryDetailsEndpoint(id));
 
       final categoryDetailsResponse =
-      CategoryDetailsResponseDm.fromJson(response.data);
+          CategoryDetailsResponseDm.fromJson(response.data);
 
       if (response.statusCode != null &&
           response.statusCode! >= 200 &&

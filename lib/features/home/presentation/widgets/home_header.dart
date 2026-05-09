@@ -8,7 +8,6 @@ import 'cart_icon.dart';
 import 'location_selector.dart';
 import 'notification_icon.dart';
 
-
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 

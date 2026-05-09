@@ -1,6 +1,3 @@
-
-
-
 import 'package:grocery1/features/subcategories/domain/entities/category_details_response_entity.dart';
 
 class CategoryDetailsResponseDm extends CategoryDetailsResponseEntity {
@@ -19,10 +16,10 @@ class CategoryDetailsResponseDm extends CategoryDetailsResponseEntity {
   }
 
   Map<String, dynamic> toJson() => {
-    'success': success,
-    'message': message,
-    if (data != null) 'data': (data as DataOfCategoryDetailsDm).toJson(),
-  };
+        'success': success,
+        'message': message,
+        if (data != null) 'data': (data as DataOfCategoryDetailsDm).toJson(),
+      };
 }
 
 class DataOfCategoryDetailsDm extends DataOfCategoryDetailsEntity {
@@ -53,19 +50,19 @@ class DataOfCategoryDetailsDm extends DataOfCategoryDetailsEntity {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'slug': slug,
-    'description': description,
-    'image_url': imageUrl,
-    'sort_order': sortOrder,
-    if (meals != null)
-      'meals': meals!
-          .map((v) => (v as CategoryDetailsMealsDm).toJson())
-          .toList(),
-    'created_at': createdAt,
-    'updated_at': updatedAt,
-  };
+        'id': id,
+        'name': name,
+        'slug': slug,
+        'description': description,
+        'image_url': imageUrl,
+        'sort_order': sortOrder,
+        if (meals != null)
+          'meals': meals!
+              .map((v) => (v as CategoryDetailsMealsDm).toJson())
+              .toList(),
+        'created_at': createdAt,
+        'updated_at': updatedAt,
+      };
 }
 
 class CategoryDetailsMealsDm extends CategoryDetailsMealsEntity {
@@ -104,19 +101,19 @@ class CategoryDetailsMealsDm extends CategoryDetailsMealsEntity {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'slug': slug,
-    'description': description,
-    'image_url': imageUrl,
-    'offer_title': offerTitle,
-    'price': price,
-    'discount_price': discountPrice,
-    'final_price': finalPrice,
-    'rating': rating,
-    'rating_count': ratingCount,
-    'has_offer': hasOffer,
-    'is_featured': isFeatured,
-    'features': features,
-  };
+        'id': id,
+        'title': title,
+        'slug': slug,
+        'description': description,
+        'image_url': imageUrl,
+        'offer_title': offerTitle,
+        'price': price,
+        'discount_price': discountPrice,
+        'final_price': finalPrice,
+        'rating': rating,
+        'rating_count': ratingCount,
+        'has_offer': hasOffer,
+        'is_featured': isFeatured,
+        'features': features,
+      };
 }

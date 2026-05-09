@@ -7,6 +7,7 @@ class DividerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Divider(height: 1,indent: 0,endIndent: 0, color: ColorManager.grey);
+    return Divider(
+        height: 1, indent: 0, endIndent: 0, color: ColorManager.grey);
   }
 }

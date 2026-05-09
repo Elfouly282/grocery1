@@ -10,74 +10,80 @@ TextStyle _getTextStyle(
   Color color, {
   double height = 1.3,
   double letterSpacing = 0.5,
-}) => TextStyle(
-  fontSize: fontSize,
-  fontFamily: fontFamily ?? FontConstants.interFontFamily,
-  color: color,
-  fontWeight: fontWeight,
-  height: height,
-  letterSpacing: letterSpacing,
-);
+}) =>
+    TextStyle(
+      fontSize: fontSize,
+      fontFamily: fontFamily ?? FontConstants.interFontFamily,
+      color: color,
+      fontWeight: fontWeight,
+      height: height,
+      letterSpacing: letterSpacing,
+    );
 
 TextStyle getLightStyle({
   double? fontSize,
   String? fontFamily,
   required Color color,
-}) => _getTextStyle(
-  fontSize ?? FontSize.s12,
-  fontFamily,
-  FontWeightManager.light,
-  color,
-);
+}) =>
+    _getTextStyle(
+      fontSize ?? FontSize.s12,
+      fontFamily,
+      FontWeightManager.light,
+      color,
+    );
 
 TextStyle getRegularStyle({
   double? fontSize,
   String? fontFamily,
   required Color color,
-}) => _getTextStyle(
-  fontSize ?? FontSize.s12,
-  fontFamily,
-  FontWeightManager.regular,
-  color,
-);
+}) =>
+    _getTextStyle(
+      fontSize ?? FontSize.s12,
+      fontFamily,
+      FontWeightManager.regular,
+      color,
+    );
 
 TextStyle getMediumStyle({
   double? fontSize,
   String? fontFamily,
   required Color color,
-}) => _getTextStyle(
-  fontSize ?? FontSize.s12,
-  fontFamily,
-  FontWeightManager.medium,
-  color,
-);
+}) =>
+    _getTextStyle(
+      fontSize ?? FontSize.s12,
+      fontFamily,
+      FontWeightManager.medium,
+      color,
+    );
 
 TextStyle getSemiBoldStyle({
   double? fontSize,
   String? fontFamily,
   required Color color,
-}) => _getTextStyle(
-  fontSize ?? FontSize.s12,
-  fontFamily,
-  FontWeightManager.semiBold,
-  color,
-);
+}) =>
+    _getTextStyle(
+      fontSize ?? FontSize.s12,
+      fontFamily,
+      FontWeightManager.semiBold,
+      color,
+    );
 
 TextStyle getBoldStyle({
   double? fontSize,
   String? fontFamily,
   required Color color,
-}) => _getTextStyle(
-  fontSize ?? FontSize.s12,
-  fontFamily,
-  FontWeightManager.bold,
-  color,
-);
+}) =>
+    _getTextStyle(
+      fontSize ?? FontSize.s12,
+      fontFamily,
+      FontWeightManager.bold,
+      color,
+    );
 
 TextStyle getTextWithLine() => TextStyle(
-  color: ColorManager.primary,
-  fontSize: FontSize.s12,
-  fontWeight: FontWeight.w400,
-  decoration: TextDecoration.lineThrough,
-  decorationColor: ColorManager.primary,
-);
+      color: ColorManager.primary,
+      fontSize: FontSize.s12,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.lineThrough,
+      decorationColor: ColorManager.primary,
+    );

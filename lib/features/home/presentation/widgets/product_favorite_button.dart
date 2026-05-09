@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,9 +32,7 @@ class ProductFavoriteButton extends StatelessWidget {
           icon: Icon(
             isFavorite ? Icons.favorite : Icons.favorite,
             size: 16.sp,
-            color: isFavorite
-                ? ColorManager.red
-                : ColorManager.greyBorder,
+            color: isFavorite ? ColorManager.red : ColorManager.greyBorder,
           ),
         ),
       ),

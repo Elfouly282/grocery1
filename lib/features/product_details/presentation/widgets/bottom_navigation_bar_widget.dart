@@ -67,7 +67,6 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
               ),
             ),
             const SizedBox(width: Sizes.s16),
-
             Expanded(
               child: ElevatedButton(
                 onPressed: () {

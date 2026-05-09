@@ -15,5 +15,3 @@ class WidgetTitle extends StatelessWidget {
     );
   }
 }
-
-

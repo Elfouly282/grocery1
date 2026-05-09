@@ -1,4 +1,3 @@
-
 //
 // class ProfileModel extends ProfileEntity {
 //   ProfileModel({

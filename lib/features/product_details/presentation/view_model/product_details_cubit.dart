@@ -7,9 +7,7 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
-  ProductDetailsCubit(
-      this._productDetailsUseCase,
-      this._toggleFavoriteUseCase,
+  ProductDetailsCubit(this._productDetailsUseCase, this._toggleFavoriteUseCase,
       this._addToCartUseCase)
       : super(ProductDetailsInitialState());
   final ProductDetailsUseCase _productDetailsUseCase;
@@ -32,8 +30,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   Future<void> toggleFavorite(int productId) async {
     final result = await _toggleFavoriteUseCase.invoke(productId);
     result.fold(
-      (failure) => emit(
-          ProductDetailsToggleFavoriteErrorState(errorMessage: failure.failuremessage)),
+      (failure) => emit(ProductDetailsToggleFavoriteErrorState(
+          errorMessage: failure.failuremessage)),
       (response) => emit(
         ProductDetailsToggleFavoriteSuccessState(response: response),
       ),

@@ -3,10 +3,8 @@ String formatHowToUse(String? rawText) {
 
   List<String> sentences = rawText.split('.');
 
-  List<String> cleanSentences = sentences
-      .map((s) => s.trim())
-      .where((s) => s.isNotEmpty)
-      .toList();
+  List<String> cleanSentences =
+      sentences.map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
 
   String formattedText = '';
   for (int i = 0; i < cleanSentences.length; i++) {

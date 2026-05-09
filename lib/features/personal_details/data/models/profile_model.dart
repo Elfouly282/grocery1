@@ -22,7 +22,7 @@ class ProfileModel extends ProfileEntity {
       phone: data['phone'],
       countryCode: data['country_code'],
       preferredLanguage: data['preferred_languages'] != null &&
-          (data['preferred_languages'] as List).isNotEmpty
+              (data['preferred_languages'] as List).isNotEmpty
           ? data['preferred_languages'][0]
           : null,
     );

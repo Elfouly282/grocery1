@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:grocery1/features/delivery_addresses/data/mappers/addressmappers.dart';
 import '../../../../core/api/api_manager.dart';
 import '../../../../core/di/servicelocator.dart';
 import '../../../../core/failure/failure.dart';
@@ -12,8 +14,17 @@ import '../../../login/data/local/local_data_source.dart';
 class DeliveryAddressesRepoImpl implements DeliveryAddressesRepo {
   final ApiManager apiManger;
   final LocalauthDatasouce _localAuthDataSource = getIt<LocalauthDatasouce>();
+  final FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
   DeliveryAddressesRepoImpl({required this.apiManger});
+
+  // Future<void> saveAddressId(String id) async {
+  //   await secureStorage.write(key: 'address_id', value: id);
+  // }
+
+  // Future<String?> getAddressId() async {
+  //   return await secureStorage.read(key: 'address_id');
+  // }
 
   Future<Map<String, dynamic>> _authHeaders() async {
     final token = await _localAuthDataSource.getToken();
@@ -32,7 +43,7 @@ class DeliveryAddressesRepoImpl implements DeliveryAddressesRepo {
       );
       print('✅ addresses: ${response.data}');
       final List data = response.data['data'];
-      return Right(data.map((e) => AddressModel.fromJson(e)).toList());
+      return Right(data.map((e) => AddressModel.fromJson(e).toEntity()).toList());
     } catch (e) {
       print('❌ error: $e');
       return Left(Failure(e.toString()));
@@ -55,7 +66,7 @@ class DeliveryAddressesRepoImpl implements DeliveryAddressesRepo {
           isDefault: address.isDefault,
         ).toJson(),
       );
-      return Right(AddressModel.fromJson(response.data['data']));
+      return Right(AddressModel.fromJson(response.data['data']).toEntity());
     } catch (e) {
       if (e is DioException) {
         print('❌ store error details: ${e.response?.data}');

@@ -1,5 +1,3 @@
-
-
 import 'package:grocery1/features/subcategories/domain/entities/categories_response_entity.dart';
 
 /// success : true
@@ -8,23 +6,20 @@ import 'package:grocery1/features/subcategories/domain/entities/categories_respo
 
 class CategoriesResponseDm extends CategoriesResponseEntity {
   CategoriesResponseDm({
-     super.success,
-     super.message,
-     super.data,
+    super.success,
+    super.message,
+    super.data,
   });
-
 
   factory CategoriesResponseDm.fromJson(Map<String, dynamic> json) {
     return CategoriesResponseDm(
       success: json['success'] ?? false,
       message: json['message'] ?? '',
-      data: (json['data'] as List? ?? [])
-          .map((e) => DataDM.fromJson(e))
-          .toList(),
+      data:
+          (json['data'] as List? ?? []).map((e) => DataDM.fromJson(e)).toList(),
     );
   }
 }
-
 
 class DataDM extends DataEntity {
   DataDM({

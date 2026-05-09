@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/features/home/presentation/cubit/home_cubit.dart';
+import 'package:grocery1/features/cart/presentation/screens/showdrawe.dart';
 import 'package:grocery1/features/home/presentation/widgets/cart_drawer.dart';
 import '../cubit/cart_cubit.dart';
 import '../cubit/category_cubit.dart';
@@ -35,14 +36,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<HomeCubit>()..getTodayDeals()),
-        BlocProvider(create: (context) => getIt<RecommendedCubit>()..getRecommendedForYou()),
-        BlocProvider(create: (context) => getIt<CategoryCubit>()..getAllCategory()),
-        BlocProvider(create: (context) => getIt<CartCubit>()),
+        BlocProvider(
+            create: (context) =>
+                getIt<RecommendedCubit>()..getRecommendedForYou()),
+        BlocProvider(
+            create: (context) => getIt<CategoryCubit>()..getAllCategory()),
+        // BlocProvider(create: (context) => getIt<CartCubit>()),
         BlocProvider(create: (context) => getIt<ProductSearchCubit>()),
       ],
       child: Scaffold(
         backgroundColor: ColorManager.white,
-        endDrawer: const CartDrawer(),
+        endDrawer: Showdrawer(),
         body: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is HomeError) {
@@ -53,16 +57,17 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           builder: (context, state) {
             if (state is HomeLoading) {
-              return const Center(child: CircularProgressIndicator(
-              color: ColorManager.primary,
-            ));
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: ColorManager.primary,
+              ));
             }
             if (state is HomeSuccess) return HomeBody(state: state);
-            if (state is HomeError) return Center(child: Text(state.errorMessage));
+            if (state is HomeError)
+              return Center(child: Text(state.errorMessage));
             return const SizedBox();
           },
         ),
-        
       ),
     );
   }

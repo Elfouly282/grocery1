@@ -40,7 +40,6 @@ class AddRemoveFavoriteSuccess extends HistoryState {
   List<Object> get props => [response];
 }
 
-
 class AddToCartSuccess extends HistoryState {
   final String message;
 
@@ -58,5 +57,3 @@ class AddToCartHistoryError extends HistoryState {
   @override
   List<Object> get props => [message];
 }
-
-

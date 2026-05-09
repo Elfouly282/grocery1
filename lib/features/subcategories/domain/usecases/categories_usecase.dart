@@ -9,9 +9,9 @@ import 'package:grocery1/features/subcategories/domain/entities/categories_respo
 
 @injectable
 class CategoriesUseCase {
-Categoriesrepository categoriesrepository;
-CategoriesUseCase({required this.categoriesrepository});
-Future<Either<Failure,CategoriesResponseEntity>> invoke(){
-  return categoriesrepository.getAllCategory();
-}
+  Categoriesrepository categoriesrepository;
+  CategoriesUseCase({required this.categoriesrepository});
+  Future<Either<Failure, CategoriesResponseEntity>> invoke() {
+    return categoriesrepository.getAllCategory();
+  }
 }

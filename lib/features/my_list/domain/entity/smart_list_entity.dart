@@ -1,4 +1,3 @@
-
 class SmartListResponseEntity {
   bool success;
   String message;

@@ -10,7 +10,6 @@ import '../cubit/personal_details_cubit.dart';
 import '../cubit/personal_details_state.dart';
 import '../widgets/country_code_widget.dart';
 
-
 class PersonalDetailsView extends StatefulWidget {
   const PersonalDetailsView({super.key});
 
@@ -44,8 +43,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   void fillControllers(ProfileEntity profile) {
-    nameController.text =
-        profile.username ?? '';
+    nameController.text = profile.username ?? '';
     emailController.text = profile.email ?? '';
     phoneController.text = profile.phone ?? '';
     setState(() {
@@ -98,102 +96,105 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               ),
               title: const Text(
                 'Personal Details',
-                style: TextStyle(fontSize: 18,fontFamily: 'inter'),
+                style: TextStyle(fontSize: 18, fontFamily: 'inter'),
               ),
             ),
             body: state is PersonalDetailsLoading
-                ? const Center(child: CircularProgressIndicator(color: ColorManager.primary,))
+                ? const Center(
+                    child: CircularProgressIndicator(
+                    color: ColorManager.primary,
+                  ))
                 : SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  DividerWidget(),
-                  const SizedBox(height: 26),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        DividerWidget(),
+                        const SizedBox(height: 26),
 
-                  // ── Name ──────────────────────────────────
-                  CustomTextField(
-                    controller: nameController,
-                    hintText: 'Name',
-                    hintColor: Colors.grey.shade400,
-                    hintWeight: FontWeight.w300,
-                    icon: Icons.person_outline,
-                    backgroundColor: Colors.white,
-                  ),
-                  const SizedBox(height: 12),
-
-                //country code
-                  Row(
-                    children: [
-                      CountryCodeWidget(
-                        selectedCode: selectedCountryCode,
-                        onChanged: (value) {
-                          setState(() => selectedCountryCode = value);
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CustomTextField(
-                          controller: phoneController,
-                          hintText: 'Phone number',
+                        // ── Name ──────────────────────────────────
+                        CustomTextField(
+                          controller: nameController,
+                          hintText: 'Name',
                           hintColor: Colors.grey.shade400,
                           hintWeight: FontWeight.w300,
-                          icon: Icons.phone_outlined,
-                          keyboardType: TextInputType.phone,
+                          icon: Icons.person_outline,
                           backgroundColor: Colors.white,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
+                        const SizedBox(height: 12),
 
-                 //email
-                  CustomTextField(
-                    controller: emailController,
-                    hintText: 'Email',
-                    icon: Icons.email_outlined,
-                    hintWeight: FontWeight.w300,
-                    hintColor: Colors.grey.shade400,
-                    keyboardType: TextInputType.emailAddress,
-                    backgroundColor: Colors.white,
-                  ),
-
-                  SizedBox(
-                      height:
-                      MediaQuery.of(context).size.height * 0.5),
-
-                  //button save
-
-
-                  SizedBox(
-                    width: double.infinity,
-                    height: 42,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManager.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                        //country code
+                        Row(
+                          children: [
+                            CountryCodeWidget(
+                              selectedCode: selectedCountryCode,
+                              onChanged: (value) {
+                                setState(() => selectedCountryCode = value);
+                              },
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: CustomTextField(
+                                controller: phoneController,
+                                hintText: 'Phone number',
+                                hintColor: Colors.grey.shade400,
+                                hintWeight: FontWeight.w300,
+                                icon: Icons.phone_outlined,
+                                keyboardType: TextInputType.phone,
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      onPressed: state is PersonalDetailsUpdateLoading
-                          ? null
-                          : onSave,
-                      child: state is PersonalDetailsUpdateLoading
-                          ? const CircularProgressIndicator(
-                          color: Colors.white,strokeWidth: 3,)
-                          : const Text(
-                        'Save',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                        const SizedBox(height: 12),
+
+                        //email
+                        CustomTextField(
+                          controller: emailController,
+                          hintText: 'Email',
+                          icon: Icons.email_outlined,
+                          hintWeight: FontWeight.w300,
+                          hintColor: Colors.grey.shade400,
+                          keyboardType: TextInputType.emailAddress,
+                          backgroundColor: Colors.white,
                         ),
-                      ),
+
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.5),
+
+                        //button save
+
+                        SizedBox(
+                          width: double.infinity,
+                          height: 42,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorManager.primary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            onPressed: state is PersonalDetailsUpdateLoading
+                                ? null
+                                : onSave,
+                            child: state is PersonalDetailsUpdateLoading
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 3,
+                                  )
+                                : const Text(
+                                    'Save',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                ],
-              ),
-            ),
           );
         },
       ),

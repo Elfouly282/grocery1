@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery1/features/home/presentation/cubit/cart_state.dart';
 
 import '../../../../core/resources/color_manager.dart';
 import '../cubit/cart_cubit.dart';
@@ -9,7 +10,8 @@ class CartCheckoutSection extends StatelessWidget {
   final CartState state;
   final CartCubit cubit;
 
-  const CartCheckoutSection({super.key, required this.state, required this.cubit});
+  const CartCheckoutSection(
+      {super.key, required this.state, required this.cubit});
 
   @override
   Widget build(BuildContext context) {

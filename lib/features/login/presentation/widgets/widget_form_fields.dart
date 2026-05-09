@@ -85,10 +85,9 @@ class _WidgetFormFieldsState extends State<WidgetFormFields> {
             onTap: () {
               if (formKey.currentState!.validate()) {
                 context.read<LoginCubit>().login(
-                  email: emailController.text,
-                  password: passwordController.text,
-                );
-                
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
               }
             },
           ),

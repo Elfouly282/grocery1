@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
 import 'package:grocery1/core/resources/styles_manager.dart';
 
-
 class DialogUtils {
   static void showLoading(
       {required BuildContext context, required String message}) {
@@ -13,12 +12,14 @@ class DialogUtils {
           return AlertDialog(
             content: Row(
               children: [
-                const CircularProgressIndicator(color: ColorManager.primary,),
+                const CircularProgressIndicator(
+                  color: ColorManager.primary,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     message,
-                    style:getMediumStyle(color:ColorManager.primary) ,
+                    style: getMediumStyle(color: ColorManager.primary),
                   ),
                 )
               ],
@@ -51,7 +52,7 @@ class DialogUtils {
           },
           child: Text(
             posActionName,
-            style:getMediumStyle(color:ColorManager.primary),
+            style: getMediumStyle(color: ColorManager.primary),
           )));
     }
     if (negActionName != null) {
@@ -60,7 +61,8 @@ class DialogUtils {
             Navigator.pop(context);
             negAction?.call();
           },
-          child: Text(negActionName, style:getMediumStyle(color:ColorManager.primary))));
+          child: Text(negActionName,
+              style: getMediumStyle(color: ColorManager.primary))));
     }
     showDialog(
         context: context,
@@ -68,11 +70,11 @@ class DialogUtils {
           return AlertDialog(
             content: Text(
               message,
-              style:getMediumStyle(color:ColorManager.primary),
+              style: getMediumStyle(color: ColorManager.primary),
             ),
             title: Text(
               title ?? '',
-              style:getMediumStyle(color:ColorManager.primary),
+              style: getMediumStyle(color: ColorManager.primary),
             ),
             actions: actions,
           );

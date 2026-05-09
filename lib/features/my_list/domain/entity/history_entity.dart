@@ -25,16 +25,16 @@ class HistoryEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    title,
-    subtitle,
-    rating,
-    ratingCount,
-    price,
-    originalPrice,
-    imageUrl,
-    isFavorite,
-  ];
+        id,
+        title,
+        subtitle,
+        rating,
+        ratingCount,
+        price,
+        originalPrice,
+        imageUrl,
+        isFavorite,
+      ];
 }
 
 class HistoryResponseEntity {

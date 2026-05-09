@@ -4,6 +4,5 @@ import 'package:grocery1/features/home/domain/entity/recommended_meal_entity.dar
 import '../../../../core/failure/failure.dart';
 
 abstract class RecommendedMealRepo {
-
   Future<Either<Failure, List<RecommendedMealEntity>>> getRecommendedForYou();
-  }
+}

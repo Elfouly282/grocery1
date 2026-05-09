@@ -32,36 +32,39 @@ class RecommendedMealEntity extends Product {
     required this.features,
     required this.recommendationReason,
   }) : super(
-    id: id,
-    title: title,
-    description: description,
-    imageUrl: imageUrl,
-    offerTitle: offerTitle,
-    price: price,
-    discountPrice: discountPrice,
-    finalPrice: finalPrice,
-    hasOffer: hasOffer,
-    rating: rating,
-    ratingCount: ratingCount,
-    brand: brand,
-    size: size,
-    categoryId: categoryId,
-    subcategoryId: subcategoryId,
-    isFeatured: isFeatured,
-    inStock: inStock,
-    isFavorited: isFavorited,
-    createdAt: createdAt,
-  );
+          id: id,
+          title: title,
+          description: description,
+          imageUrl: imageUrl,
+          offerTitle: offerTitle,
+          price: price,
+          discountPrice: discountPrice,
+          finalPrice: finalPrice,
+          hasOffer: hasOffer,
+          rating: rating,
+          ratingCount: ratingCount,
+          brand: brand,
+          size: size,
+          categoryId: categoryId,
+          subcategoryId: subcategoryId,
+          isFeatured: isFeatured,
+          inStock: inStock,
+          isFavorited: isFavorited,
+          createdAt: createdAt,
+        );
 
-  List<String> get featureList =>
-      features.split(',').map((f) => f.trim()).where((f) => f.isNotEmpty).toList();
+  List<String> get featureList => features
+      .split(',')
+      .map((f) => f.trim())
+      .where((f) => f.isNotEmpty)
+      .toList();
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is RecommendedMealEntity &&
-              runtimeType == other.runtimeType &&
-              id == other.id;
+      other is RecommendedMealEntity &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;

@@ -1,14 +1,18 @@
-// features/cart/presentation/cubit/cart_cubit.dart
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:grocery1/features/home/presentation/cubit/cart_state.dart';
+
 import 'package:injectable/injectable.dart';
 
-part 'cart_state.dart';
+
 @injectable
 class CartCubit extends Cubit<CartState> {
+ 
   CartCubit() : super(const CartState(items: []));
+
+ 
 
   void addToCart(CartItem item) {
     final existingIndex = state.items.indexWhere((e) => e.id == item.id);
@@ -35,18 +39,21 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void decrementQuantity(String id) {
-    final updatedItems = state.items.map((e) {
-      if (e.id == id) {
-        if (e.quantity <= 1) return null;
-        return e.copyWith(quantity: e.quantity - 1);
-      }
-      return e;
-    }).whereType<CartItem>().toList();
+    final updatedItems = state.items
+        .map((e) {
+          if (e.id == id) {
+            if (e.quantity <= 1) return null;
+            return e.copyWith(quantity: e.quantity - 1);
+          }
+          return e;
+        })
+        .whereType<CartItem>()
+        .toList();
     emit(CartState(items: updatedItems));
   }
 
   double get total => state.items.fold(
-    0,
+        0,
         (sum, item) => sum + (item.price * item.quantity),
-  );
+      );
 }

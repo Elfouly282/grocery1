@@ -8,6 +8,7 @@ import 'package:grocery1/core/resources/string_constants.dart';
 import 'package:grocery1/core/resources/styles_manager.dart';
 import 'package:grocery1/core/resources/values_manager.dart';
 import 'package:grocery1/core/utils/app_toast.dart';
+import 'package:grocery1/features/cart/presentation/screens/showdrawe.dart';
 import 'package:grocery1/features/product_details/presentation/view_model/product_details_cubit.dart';
 import 'package:grocery1/features/product_details/presentation/view_model/product_details_state.dart';
 import 'package:grocery1/features/product_details/presentation/widgets/bottom_navigation_bar_widget.dart';
@@ -44,6 +45,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return BlocProvider.value(
       value: _productDetailsCubit,
       child: Scaffold(
+        endDrawer: Showdrawer(),
         backgroundColor: ColorManager.pureWhite,
         appBar: AppBar(
           backgroundColor: ColorManager.pureWhite,
@@ -82,14 +84,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 );
               },
             ),
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart_outlined,
-                color: ColorManager.black,
-                size: Sizes.s28.sp,
-              ),
-              onPressed: () {},
-            ),
+            // IconButton(
+            //   icon: Icon(
+            //     Icons.shopping_cart_outlined,
+            //     color: ColorManager.black,
+            //     size: Sizes.s28.sp,
+            //   ),
+            //   onPressed: () {},
+            // ),
             SizedBox(width: Insets.s16.w),
           ],
         ),

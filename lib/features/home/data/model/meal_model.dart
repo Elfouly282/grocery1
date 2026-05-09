@@ -1,8 +1,6 @@
 import '../../domain/entity/meal_entity.dart';
 import 'category_model.dart';
 
-
-
 class MealModel {
   final int id;
   final String title;

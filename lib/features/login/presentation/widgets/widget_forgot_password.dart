@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_text.dart';
 
-
 class WidgetForgotPassword extends StatelessWidget {
   const WidgetForgotPassword({super.key});
 
@@ -14,7 +13,7 @@ class WidgetForgotPassword extends StatelessWidget {
         onPressed: () {
           // Navigator.pushNamed(context, Routes.forgotPassword);
         },
-        child:AppText.forgotPassword(),
+        child: AppText.forgotPassword(),
       ),
     );
   }

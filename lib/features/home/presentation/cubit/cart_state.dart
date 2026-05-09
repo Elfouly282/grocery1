@@ -1,6 +1,6 @@
 // features/cart/presentation/cubit/cart_state.dart
-
-part of 'cart_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 @immutable
 class CartItem extends Equatable {
   final String id;

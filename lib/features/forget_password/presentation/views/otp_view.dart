@@ -98,26 +98,27 @@ class _OtpViewState extends State<OtpView> {
                       onPressed: state is ForgotPasswordLoading
                           ? null
                           : () {
-                        if (otpCode.length == 4) {
-                          cubit.verifyOtp(otpCode);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Please enter the complete code'),
-                            ),
-                          );
-                        }
-                      },
+                              if (otpCode.length == 4) {
+                                cubit.verifyOtp(otpCode);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Please enter the complete code'),
+                                  ),
+                                );
+                              }
+                            },
                       child: state is ForgotPasswordLoading
                           ? CircularProgressIndicator(color: Colors.white)
                           : Text(
-                        "Verify",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                              "Verify",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                     ),
                   ),
                   SizedBox(height: 16),

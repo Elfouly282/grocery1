@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 abstract class AppToast {
-  static  showToast({
+  static showToast({
     required BuildContext context,
     required String title,
     required String description,
@@ -25,19 +25,19 @@ abstract class AppToast {
         color: type == ToastificationType.success
             ? Colors.green
             : type == ToastificationType.info
-            ? Colors.blue
-            : type == ToastificationType.warning
-            ? Colors.orange
-            : Colors.red,
+                ? Colors.blue
+                : type == ToastificationType.warning
+                    ? Colors.orange
+                    : Colors.red,
       ),
       showProgressBar: true,
       backgroundColor: type == ToastificationType.success
           ? Colors.green
           : type == ToastificationType.info
-          ? Colors.blue
-          : type == ToastificationType.warning
-          ? Colors.orange
-          : Colors.red,
+              ? Colors.blue
+              : type == ToastificationType.warning
+                  ? Colors.orange
+                  : Colors.red,
       foregroundColor: Colors.white,
     );
   }

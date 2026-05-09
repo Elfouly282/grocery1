@@ -18,8 +18,8 @@ class CategoriesViewModel extends Cubit<CategoryState> {
 
     final result = await categoriesUseCase.invoke();
     result.fold(
-          (failure) => emit(CategoryError(failure.failuremessage)),
-          (response) => emit(CategorySuccess(response)),
+      (failure) => emit(CategoryError(failure.failuremessage)),
+      (response) => emit(CategorySuccess(response)),
     );
   }
 

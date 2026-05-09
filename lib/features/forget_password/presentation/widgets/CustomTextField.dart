@@ -12,7 +12,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.controller,
-    this.isPassword=true,
+    this.isPassword = true,
     this.validator,
   });
 
@@ -41,27 +41,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 12),
         hintText: widget.hintText,
-        hintStyle: TextStyle(
-          fontSize: 13
-        ),
+        hintStyle: TextStyle(fontSize: 13),
         prefixIcon: widget.prefixIcon,
-
         suffixIcon: widget.isPassword
             ? GestureDetector(
-          onTap: () => setState(() => obscureText = !obscureText),
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Icon(
-              size: 20,
-              color: Colors.grey,
-              obscureText ? Icons.visibility_off_rounded
-                  : Icons.visibility_rounded ,
-
-            ),
-          ),
-        )
+                onTap: () => setState(() => obscureText = !obscureText),
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                    size: 20,
+                    color: Colors.grey,
+                    obscureText
+                        ? Icons.visibility_off_rounded
+                        : Icons.visibility_rounded,
+                  ),
+                ),
+              )
             : null,
-
         suffixIconConstraints: BoxConstraints(
           minWidth: 35,
           minHeight: 36,

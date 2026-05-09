@@ -8,15 +8,14 @@ import 'package:grocery1/core/resources/styles_manager.dart';
 class CategoryItem extends StatelessWidget {
   final String image;
   final String title;
-  final Color  color;
-  final Color  backgroundColor;
-  const CategoryItem({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.backgroundColor,
-   required this.color
-  });
+  final Color color;
+  final Color backgroundColor;
+  const CategoryItem(
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.backgroundColor,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,6 @@ class CategoryItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-
               padding: EdgeInsets.only(top: 8.h),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16.r),
@@ -54,11 +52,14 @@ class CategoryItem extends StatelessWidget {
                   width: 68.w,
                   height: 54.h,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Icon(Icons.broken_image),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.broken_image),
                 ),
               ),
-            ), SizedBox(height: 4.h),
+            ),
+            SizedBox(height: 4.h),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.w),

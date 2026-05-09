@@ -10,7 +10,6 @@ class SuccessPopupWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.white,
-
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -21,7 +20,6 @@ class SuccessPopupWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-
               Image.asset(AppAssets.resetCheck),
 
               SizedBox(height: 16),

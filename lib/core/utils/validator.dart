@@ -36,7 +36,6 @@ class Validator {
   //   }
   // }
 
-
   static String? Function(String?) validateConfirmPassword(String password) {
     return (val) {
       if (val == null || val.isEmpty) {

@@ -1,12 +1,6 @@
-class ForgetPasswordEntity{
+class ForgetPasswordEntity {
+  final String? email;
+  final String? phone;
 
- final String? email;
- final String? phone;
-
-  ForgetPasswordEntity({
-    this.email,
-    this.phone
-
-  });
-
+  ForgetPasswordEntity({this.email, this.phone});
 }

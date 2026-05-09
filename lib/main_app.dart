@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
+import 'package:grocery1/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:grocery1/features/home/presentation/cubit/cart_cubit.dart';
 import 'package:grocery1/features/home/presentation/screens/home_screen.dart';
 import 'package:grocery1/features/home/presentation/widgets/home_bottom_nav.dart';
@@ -12,7 +13,6 @@ import 'package:grocery1/features/profile/presentation/views/profile_view.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
-
   @override
   State<MainApp> createState() => _MainAppState();
 }
@@ -37,6 +37,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+      
         BlocProvider(
           create: (context) => getIt<SmartListsCubit>()..fetchSmartLists(),
         ),

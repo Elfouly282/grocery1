@@ -22,5 +22,6 @@ class SmartListDataSourceImpl implements SmartListDataSource {
   Future<String> addAllToCart({
     required int mealId,
     required int quantity,
-  }) async => await _myListApi.addToCart(mealId: mealId, quantity: quantity);
+  }) async =>
+      await _myListApi.addToCart(mealId: mealId, quantity: quantity);
 }

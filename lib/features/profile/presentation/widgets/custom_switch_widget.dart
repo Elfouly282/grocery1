@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/resources/color_manager.dart';
 
-
-
 class CustomSwitchWidget extends StatefulWidget {
   final bool isDark;
   final ValueChanged<bool>? onChanged;
@@ -46,8 +44,7 @@ class _CustomSwitchWidgetState extends State<CustomSwitchWidget> {
         ),
         child: AnimatedAlign(
           duration: const Duration(milliseconds: 200),
-          alignment:
-          _isDark ? Alignment.centerRight : Alignment.centerLeft,
+          alignment: _isDark ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
             margin: const EdgeInsets.all(2),
             width: 22,

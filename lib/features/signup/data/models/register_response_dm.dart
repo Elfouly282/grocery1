@@ -1,5 +1,3 @@
-
-
 import 'package:grocery1/features/signup/domain/entities/register_response_entity.dart';
 
 class RegisterResponseModel extends RegisterResponseEntity {
@@ -8,21 +6,20 @@ class RegisterResponseModel extends RegisterResponseEntity {
     String? message,
     DataModel? data,
   }) : super(
-    success: success,
-    message: message,
-    data: data,
-  );
+          success: success,
+          message: message,
+          data: data,
+        );
 
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) {
     return RegisterResponseModel(
       success: json['success'],
       message: json['message'],
-      data: json['data'] != null
-          ? DataModel.fromJson(json['data'])
-          : null,
+      data: json['data'] != null ? DataModel.fromJson(json['data']) : null,
     );
   }
 }
+
 class DataModel extends DataEntity {
   DataModel({
     UserModel? user,
@@ -31,13 +28,12 @@ class DataModel extends DataEntity {
 
   factory DataModel.fromJson(Map<String, dynamic> json) {
     return DataModel(
-      user: json['user'] != null
-          ? UserModel.fromJson(json['user'])
-          : null,
+      user: json['user'] != null ? UserModel.fromJson(json['user']) : null,
       token: json['token'],
     );
   }
 }
+
 class UserModel extends UserEntity {
   UserModel({
     num? id,
@@ -46,12 +42,12 @@ class UserModel extends UserEntity {
     String? phone,
     String? createdAt,
   }) : super(
-    id: id,
-    username: username,
-    email: email,
-    phone: phone,
-    createdAt: createdAt,
-  );
+          id: id,
+          username: username,
+          email: email,
+          phone: phone,
+          createdAt: createdAt,
+        );
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -63,6 +59,7 @@ class UserModel extends UserEntity {
     );
   }
 }
+
 class ErrorModel extends ErrorEntity {
   ErrorModel({
     required String message,
@@ -73,11 +70,10 @@ class ErrorModel extends ErrorEntity {
     return ErrorModel(
       message: json['message'] ?? '',
       errors: (json['errors'] as Map<String, dynamic>).map(
-            (key, value) =>
-            MapEntry(
-              key,
-              List<String>.from(value),
-            ),
+        (key, value) => MapEntry(
+          key,
+          List<String>.from(value),
+        ),
       ),
     );
   }

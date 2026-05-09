@@ -27,17 +27,17 @@ class CountryCodeWidget extends StatelessWidget {
           Text(
             'Country',
             style: TextStyle(
-              fontSize: 12,
-              color: ColorManager.primary,
-              fontWeight: FontWeight.w300,
-              fontFamily: 'inter'
-            ),
+                fontSize: 12,
+                color: ColorManager.primary,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'inter'),
           ),
           DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: selectedCode,
               isDense: true,
-              icon: const Icon(Icons.keyboard_arrow_down_rounded, color:  Colors.black),
+              icon: const Icon(Icons.keyboard_arrow_down_rounded,
+                  color: Colors.black),
               items: const [
                 DropdownMenuItem(value: '+20', child: Text('+20')),
                 DropdownMenuItem(value: '+1', child: Text('+1')),

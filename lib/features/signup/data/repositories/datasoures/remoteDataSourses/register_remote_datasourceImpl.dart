@@ -18,12 +18,12 @@ class Registerremotedatasourceimpl implements Registerremotedatasource {
 
   @override
   Future<Either<Failure, RegisterResponseModel>> register(
-      String name,
-      String email,
-      String password,
-      String rePassword,
-      String phone,
-      ) async {
+    String name,
+    String email,
+    String password,
+    String rePassword,
+    String phone,
+  ) async {
     try {
       final connectivityResult = await Connectivity().checkConnectivity();
 
@@ -42,8 +42,7 @@ class Registerremotedatasourceimpl implements Registerremotedatasource {
           "agree_terms": 1
         },
       );
-      final registerResponse =
-      RegisterResponseModel.fromJson(response.data);
+      final registerResponse = RegisterResponseModel.fromJson(response.data);
 
       if (response.statusCode != null &&
           response.statusCode! >= 200 &&
@@ -58,5 +57,4 @@ class Registerremotedatasourceimpl implements Registerremotedatasource {
       return Left(Failure(e.toString()));
     }
   }
-
 }

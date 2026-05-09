@@ -1,5 +1,3 @@
-
-
 import 'category_entity.dart';
 
 class MealEntity {
@@ -43,17 +41,21 @@ class MealEntity {
     return ((price - discountPrice!) / price) * 100;
   }
 
-  List<String> get featureList =>
-      features.split(',').map((f) => f.trim()).where((f) => f.isNotEmpty).toList();
+  List<String> get featureList => features
+      .split(',')
+      .map((f) => f.trim())
+      .where((f) => f.isNotEmpty)
+      .toList();
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is MealEntity && runtimeType == other.runtimeType && id == other.id;
+      other is MealEntity && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;
 
   @override
-  String toString() => 'MealEntity(id: $id, title: $title, finalPrice: $finalPrice)';
+  String toString() =>
+      'MealEntity(id: $id, title: $title, finalPrice: $finalPrice)';
 }

@@ -9,10 +9,10 @@ final class ProductSearchLoading extends ProductSearchState {}
 
 final class ProductSearchSuccess extends ProductSearchState {
   final ProductSearchEntity productSearchEntity;
-   ProductSearchSuccess(this.productSearchEntity);
+  ProductSearchSuccess(this.productSearchEntity);
 }
 
 final class ProductSearchError extends ProductSearchState {
   final String message;
-   ProductSearchError(this.message);
+  ProductSearchError(this.message);
 }

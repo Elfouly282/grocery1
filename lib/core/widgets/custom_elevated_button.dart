@@ -42,8 +42,7 @@ class CustomElevatedButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
       ),
       onPressed: onTap,
-      child:
-          child ??
+      child: child ??
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -51,8 +50,7 @@ class CustomElevatedButton extends StatelessWidget {
               if (prefixIcon != null) SizedBox(width: 8.w),
               Text(
                 label ?? '',
-                style:
-                    textStyle ??
+                style: textStyle ??
                     getMediumStyle(
                       color: ColorManager.white,
                     ).copyWith(fontSize: FontSize.s20),

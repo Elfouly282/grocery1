@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery1/core/resources/color_manager.dart';
+import 'package:grocery1/features/home/presentation/cubit/cart_state.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_add_to_cart_button.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_name_row.dart';
 import 'package:grocery1/features/home/presentation/widgets/product_price_row.dart';

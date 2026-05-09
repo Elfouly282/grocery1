@@ -119,17 +119,15 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                         onPressed: state is ForgotPasswordLoading
                             ? null
                             : () {
-                          if (formKey.currentState!.validate()) {
-                            cubit.sendCode(
-                              email: cubit.isEmail
-                                  ? controller.text
-                                  : null,
-                              phone: cubit.isEmail
-                                  ? null
-                                  : controller.text,
-                            );
-                          }
-                        },
+                                if (formKey.currentState!.validate()) {
+                                  cubit.sendCode(
+                                    email:
+                                        cubit.isEmail ? controller.text : null,
+                                    phone:
+                                        cubit.isEmail ? null : controller.text,
+                                  );
+                                }
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ColorManager.primary,
                           shape: RoundedRectangleBorder(
@@ -139,12 +137,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                         child: state is ForgotPasswordLoading
                             ? CircularProgressIndicator(color: Colors.white)
                             : Text(
-                          'Send Code',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
+                                'Send Code',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
                     ),
                   ],

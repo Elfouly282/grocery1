@@ -18,5 +18,3 @@ class FavoriteEntity extends Equatable {
   @override
   List<Object?> get props => [id, title, price, originalPrice, imageUrl];
 }
-
-

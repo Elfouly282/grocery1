@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery1/features/signup/presentation/ui/auth/cubit/register_states.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:grocery1/features/signup/domain/usecases/register_usecase.dart';
-
 
 @injectable
 class RegisterViewModel extends Cubit<RegisterStates> {
@@ -32,7 +30,6 @@ class RegisterViewModel extends Cubit<RegisterStates> {
   void register() async {
     if (!(formKey.currentState?.validate() ?? false)) return;
 
-
     if (!isAcceptedTerms) {
       emit(RegisterErrorState(
         errors: {
@@ -53,16 +50,16 @@ class RegisterViewModel extends Cubit<RegisterStates> {
     );
 
     result.fold(
-          (failure) {
-            print("RAW ERROR: ${failure.failuremessage}");
+      (failure) {
+        print("RAW ERROR: ${failure.failuremessage}");
 
-            emit(RegisterErrorState(
+        emit(RegisterErrorState(
           errors: {
             "general": [failure.failuremessage]
           },
         ));
       },
-          (response) {
+      (response) {
         emit(RegisterSuccessState(responseEntity: response));
       },
     );

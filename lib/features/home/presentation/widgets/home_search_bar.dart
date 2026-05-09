@@ -28,7 +28,6 @@ class _HomeSearchBarState extends State<HomeSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Column(
-     
       children: [
         SearchInputField(controller: _controller),
         SearchResultsList(),

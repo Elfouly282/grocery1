@@ -11,10 +11,10 @@ class ProductDetailsResponseModel {
     data = json['data'] != null ? ProductModel.fromJson(json['data']) : null;
   }
   ProductDetailsResponseEntity toEntity() => ProductDetailsResponseEntity(
-    success: success ?? false,
-    message: message ?? '',
-    data: data!.toEntity(),
-  );
+        success: success ?? false,
+        message: message ?? '',
+        data: data!.toEntity(),
+      );
 }
 
 class ProductModel {
@@ -130,34 +130,34 @@ class ProductModel {
     isFavorite = json['is_favorite'] == 1 || json['is_favorite'] == true;
   }
   ProductEntity toEntity() => ProductEntity(
-    id: id ?? 0,
-    title: title ?? '',
-    slug: slug ?? '',
-    description: description ?? '',
-    imageUrl: imageUrl ?? '',
-    offerTitle: offerTitle ?? '',
-    price: price ?? 0.0,
-    discountPrice: discountPrice ?? 0.0,
-    finalPrice: finalPrice ?? 0.0,
-    hasOffer: hasOffer ?? false,
-    rating: rating ?? 0.0,
-    ratingCount: ratingCount ?? 0,
-    size: size ?? '',
-    brand: brand ?? '',
-    includes: includes ?? '',
-    howToUse: howToUse ?? '',
-    features: features ?? '',
-    expiryDate: expiryDate ?? '',
-    daysUntilExpiry: daysUntilExpiry ?? 0,
-    isExpired: isExpired ?? false,
-    stockQuantity: stockQuantity ?? 0,
-    inStock: inStock ?? false,
-    soldCount: soldCount ?? 0,
-    isFeatured: isFeatured ?? false,
-    isAvailable: isAvailable ?? false,
-    availableDate: availableDate ?? '',
-    isFavorite: isFavorite ?? false,
-  );
+        id: id ?? 0,
+        title: title ?? '',
+        slug: slug ?? '',
+        description: description ?? '',
+        imageUrl: imageUrl ?? '',
+        offerTitle: offerTitle ?? '',
+        price: price ?? 0.0,
+        discountPrice: discountPrice ?? 0.0,
+        finalPrice: finalPrice ?? 0.0,
+        hasOffer: hasOffer ?? false,
+        rating: rating ?? 0.0,
+        ratingCount: ratingCount ?? 0,
+        size: size ?? '',
+        brand: brand ?? '',
+        includes: includes ?? '',
+        howToUse: howToUse ?? '',
+        features: features ?? '',
+        expiryDate: expiryDate ?? '',
+        daysUntilExpiry: daysUntilExpiry ?? 0,
+        isExpired: isExpired ?? false,
+        stockQuantity: stockQuantity ?? 0,
+        inStock: inStock ?? false,
+        soldCount: soldCount ?? 0,
+        isFeatured: isFeatured ?? false,
+        isAvailable: isAvailable ?? false,
+        availableDate: availableDate ?? '',
+        isFavorite: isFavorite ?? false,
+      );
 }
 
 class CategoryModel {

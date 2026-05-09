@@ -21,7 +21,7 @@ class ProductImageSection extends StatelessWidget {
             height: 116.h,
             fit: BoxFit.cover,
             errorBuilder: (_, __, ___) =>
-            const Icon(Icons.image_not_supported, size: 60),
+                const Icon(Icons.image_not_supported, size: 60),
           ),
         ),
       ),

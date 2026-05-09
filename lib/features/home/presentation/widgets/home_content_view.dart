@@ -40,7 +40,9 @@ class HomeContentView extends StatelessWidget {
           BlocBuilder<RecommendedCubit, RecommendedState>(
             builder: (context, recommendedState) {
               if (recommendedState is RecommendedLoading) {
-                return Center(child: const CircularProgressIndicator(color: ColorManager.primary));
+                return Center(
+                    child: const CircularProgressIndicator(
+                        color: ColorManager.primary));
               }
               if (recommendedState is RecommendedSuccess) {
                 return RecommendedSection(meals: recommendedState.meals);

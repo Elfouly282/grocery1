@@ -2,6 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery1/core/api/api_manager.dart';
+import 'package:grocery1/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:grocery1/features/cart/presentation/screens/checkoutscreen.dart';
+import 'package:grocery1/features/cart/presentation/screens/paymentview.dart';
+import 'package:grocery1/features/delivery_addresses/data/repo/delivery_addresses_repo_impl.dart';
+import 'package:grocery1/features/delivery_addresses/presentation/cubit/delivery_addresses_cubit.dart';
 
 import 'package:grocery1/main_app.dart';
 import 'package:grocery1/core/di/servicelocator.dart';
@@ -39,33 +45,47 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Grocery App',
-          theme: ThemeData(
-            useMaterial3: true,
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => minacartcubit()..fetchcart(),
+            ),
+            BlocProvider(
+          //    child: Checkoutscreen(),
+                create: (context) => DeliveryAddressesCubit(
+                      repo: DeliveryAddressesRepoImpl(apiManger: ApiManager()),
+                    )..getAddresses()),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Grocery App',
+            theme: ThemeData(
+              useMaterial3: true,
+            ),
+
+            /// أول شاشة
+            home: const SplashView(),
+
+            /// Routes
+            routes: {
+              Paymentscreen.routeName: (context) => Paymentscreen(),
+              Checkoutscreen.routeName: (context) => Checkoutscreen(),
+              SubCategoriesScreen.routeName: (context) => SubCategoriesScreen(),
+
+              testscreen.routeName: (context) => testscreen(),
+
+              LoginScreen.routeName: (context) => const LoginScreen(),
+
+              SplashView.routeName: (context) => const SplashView(),
+
+              // /// ضيفنا product details هنا
+              // ProductDetailsScreen.routeName: (context) => BlocProvider(
+              //       create: (context) =>
+              //           getIt<ProductDetailsCubit>()..getProductDetails(3),
+              //       child: const ProductDetailsScreen(),
+              //     ),
+            },
           ),
-
-          /// أول شاشة
-          home: SplashView(),
-
-          /// Routes
-          routes: {
-            SubCategoriesScreen.routeName: (context) => SubCategoriesScreen(),
-
-            testscreen.routeName: (context) => testscreen(),
-
-            LoginScreen.routeName: (context) => const LoginScreen(),
-
-            SplashView.routeName: (context) => const SplashView(),
-
-            // /// ضيفنا product details هنا
-            // ProductDetailsScreen.routeName: (context) => BlocProvider(
-            //       create: (context) =>
-            //           getIt<ProductDetailsCubit>()..getProductDetails(3),
-            //       child: const ProductDetailsScreen(),
-            //     ),
-          },
         );
       },
     );

@@ -16,16 +16,17 @@ class ProductStarsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ...List.generate(5, (i) => Icon(
-          i < rating.floor() ? Icons.star : Icons.star,
-          size: 12,
-          color: ColorManager.orange,
-        )),
+        ...List.generate(
+            5,
+            (i) => Icon(
+                  i < rating.floor() ? Icons.star : Icons.star,
+                  size: 12,
+                  color: ColorManager.orange,
+                )),
         SizedBox(width: 2.w),
         Text(
           '($ratingCount)',
-          style: getMediumStyle(
-              color: ColorManager.grey, fontSize: 10.sp),
+          style: getMediumStyle(color: ColorManager.grey, fontSize: 10.sp),
         ),
       ],
     );

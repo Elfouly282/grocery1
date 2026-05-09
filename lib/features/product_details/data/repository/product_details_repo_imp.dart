@@ -30,7 +30,8 @@ class ProductDetailsRepositoryImp implements ProductDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, FavoriteToggleEntity>> toggleFavorite(int productId) async {
+  Future<Either<Failure, FavoriteToggleEntity>> toggleFavorite(
+      int productId) async {
     try {
       final result = await _productDetailsDataSource.toggleFavorite(productId);
       return Right(result);
@@ -42,9 +43,11 @@ class ProductDetailsRepositoryImp implements ProductDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, AddToCartEntity>> addToCart(int mealId, int quantity) async {
+  Future<Either<Failure, AddToCartEntity>> addToCart(
+      int mealId, int quantity) async {
     try {
-      final result = await _productDetailsDataSource.addToCart(mealId, quantity);
+      final result =
+          await _productDetailsDataSource.addToCart(mealId, quantity);
       return Right(result);
     } on RemoteException catch (e) {
       return Left(Failure(e.errormessage));

@@ -32,16 +32,17 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
     _cityController.dispose();
     super.dispose();
   }
+
   void _onSave() {
     context.read<DeliveryAddressesCubit>().storeAddress(
-      AddressEntity(
-        fullName: _fullNameController.text,
-        phone: '$_selectedCountryCode${_phoneController.text}',
-        streetAddress: _streetController.text,
-        city: _cityController.text,
-        country: 'Egypt',
-      ),
-    );
+          AddressEntity(
+            fullName: _fullNameController.text,
+            phone: '$_selectedCountryCode${_phoneController.text}',
+            streetAddress: _streetController.text,
+            city: _cityController.text,
+            country: 'Egypt',
+          ),
+        );
     Navigator.pop(context);
   }
 
@@ -54,11 +55,9 @@ class _AddAddressBottomSheetState extends State<AddAddressBottomSheet> {
         right: 16,
         top: 16,
       ),
-
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-
           Container(
             width: 40,
             height: 4,

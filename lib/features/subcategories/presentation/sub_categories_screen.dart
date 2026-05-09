@@ -19,7 +19,6 @@ class SubCategoriesScreen extends StatefulWidget {
   State<SubCategoriesScreen> createState() => _SubCategoriesScreenState();
 }
 
-
 class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
   bool isInitialized = false;
 

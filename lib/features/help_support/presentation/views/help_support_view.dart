@@ -17,79 +17,62 @@ class HelpSupportView extends StatelessWidget {
           onTap: () => Navigator.pop(context),
           child: Icon(Icons.arrow_back_ios, size: 19),
         ),
-        title: Text(
-            'Help & Support',
-            style: TextStyle(fontSize: 18,
-                fontFamily: 'inter'
-            )),
+        title: Text('Help & Support',
+            style: TextStyle(fontSize: 18, fontFamily: 'inter')),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
-
             DividerWidget(),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             SupportMenuItem(
                 title: "(FAQ)",
-                onTap: (){
+                onTap: () {
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(builder: (_) => ()),
                   // );
-
                 }),
-
             DividerWidget(),
-
             SupportMenuItem(
                 title: "Contact Customer Support",
-                onTap: (){
+                onTap: () {
                   // Navigator.push(
                   //   context,
                   //    MaterialPageRoute(builder: (_) =>   ()),
                   // );
                 }),
-
             DividerWidget(),
-
             SupportMenuItem(
                 title: "Terms and Conditions",
-                onTap: (){
+                onTap: () {
                   //Navigator.pushNamed(context, '/');
                 }),
-
             DividerWidget(),
-
             SupportMenuItem(
                 title: "Privacy Policy",
-                onTap: (){
+                onTap: () {
                   //Navigator.pushNamed(context, '/');
                 }),
-
             DividerWidget(),
-
             SupportMenuItem(
                 title: "About Grocery Plus",
-                onTap: (){
+                onTap: () {
                   //Navigator.pushNamed(context,'');
                 }),
-
             DividerWidget(),
-
             SupportMenuItem(
                 title: "App Version: 1.0.5",
-                onTap: (){
+                onTap: () {
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(builder: (_) =>   ()),
                   // );
                 }),
-
             DividerWidget(),
-
-
-
           ],
         ),
       ),

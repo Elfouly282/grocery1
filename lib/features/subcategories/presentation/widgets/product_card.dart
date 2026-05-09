@@ -69,7 +69,7 @@ class ProductCard extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min, 
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       title,

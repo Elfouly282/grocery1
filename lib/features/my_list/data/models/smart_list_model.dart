@@ -36,14 +36,13 @@ class SmartListModel {
   }
 
   SmartListEntity toEntity() => SmartListEntity(
-    id: id ?? 0,
-    title: title ?? '',
-    itemCount: meals?.length ?? 0,
-    updatedAt: updatedAt ?? '',
-    imageUrl: imageUrl ?? '',
-
-    meals: meals?.map((e) => e.toEntity()).toList() ?? [],
-  );
+        id: id ?? 0,
+        title: title ?? '',
+        itemCount: meals?.length ?? 0,
+        updatedAt: updatedAt ?? '',
+        imageUrl: imageUrl ?? '',
+        meals: meals?.map((e) => e.toEntity()).toList() ?? [],
+      );
 }
 
 class Meals {
@@ -84,13 +83,13 @@ class Meals {
   }
 
   MealsEntity toEntity() => MealsEntity(
-    id: id ?? 0,
-    title: title ?? '',
-    slug: slug ?? '',
-    description: description ?? '',
-    imageUrl: imageUrl ?? '',
-    offerTitle: offerTitle ?? '',
-  );
+        id: id ?? 0,
+        title: title ?? '',
+        slug: slug ?? '',
+        description: description ?? '',
+        imageUrl: imageUrl ?? '',
+        offerTitle: offerTitle ?? '',
+      );
 }
 
 class SmartListResponseModel {

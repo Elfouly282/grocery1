@@ -32,24 +32,24 @@ class CategoryItem extends StatelessWidget {
               children: [
                 category.imageUrl != null
                     ? ClipRRect(
-                  borderRadius: BorderRadius.circular(8.r),
-                  child: Image.network(
-                    category.imageUrl!,
-                    width: 60.w,
-                    height: 50.h,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        Icons.broken_image,
-                        size: 40.w,
-                      );
-                    },
-                  ),
-                )
+                        borderRadius: BorderRadius.circular(8.r),
+                        child: Image.network(
+                          category.imageUrl!,
+                          width: 60.w,
+                          height: 50.h,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Icon(
+                              Icons.broken_image,
+                              size: 40.w,
+                            );
+                          },
+                        ),
+                      )
                     : Icon(
-                  Icons.category,
-                  size: 40.w,
-                ),
+                        Icons.category,
+                        size: 40.w,
+                      ),
                 SizedBox(height: 6.h),
                 Text(
                   category.name,

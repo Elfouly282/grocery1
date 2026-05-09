@@ -3,13 +3,12 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../domain/usecases/firebase_auth_usecase.dart';
 import 'firebase_auth_state.dart';
+
 @injectable
-class FirebaseauthViewModel extends Cubit<Firebaseauthstate>{
+class FirebaseauthViewModel extends Cubit<Firebaseauthstate> {
   final AuthUseCases authUseCases;
 
-  FirebaseauthViewModel({
-    required this.authUseCases
-  }) : super(AuthInitial());
+  FirebaseauthViewModel({required this.authUseCases}) : super(AuthInitial());
 
   // ================= GOOGLE =================
 
@@ -17,8 +16,8 @@ class FirebaseauthViewModel extends Cubit<Firebaseauthstate>{
     emit(AuthLoading());
     final result = await authUseCases.google();
     result.fold(
-          (failure) => emit(AuthError(failure.failuremessage)),
-          (user) => emit(AuthSuccess()),
+      (failure) => emit(AuthError(failure.failuremessage)),
+      (user) => emit(AuthSuccess()),
     );
   }
 
@@ -41,8 +40,8 @@ class FirebaseauthViewModel extends Cubit<Firebaseauthstate>{
     final result = await authUseCases.facebook();
 
     result.fold(
-          (failure) => emit(AuthError(failure.failuremessage)),
-          (user) => emit(AuthSuccess()),
+      (failure) => emit(AuthError(failure.failuremessage)),
+      (user) => emit(AuthSuccess()),
     );
   }
 }

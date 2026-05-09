@@ -15,8 +15,8 @@ class CategoryDetailsViewModel extends Cubit<CategoryDetailsState> {
 
     final result = await categoryDetailsUseCase.invoke(id);
     result.fold(
-          (failure) => emit(CategoryDetailsError(failure.failuremessage)),
-          (response) => emit(CategoryDetailsSuccess(response)),
+      (failure) => emit(CategoryDetailsError(failure.failuremessage)),
+      (response) => emit(CategoryDetailsSuccess(response)),
     );
   }
 }

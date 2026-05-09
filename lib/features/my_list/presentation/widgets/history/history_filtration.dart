@@ -13,8 +13,15 @@ class HistoryFilterBottomSheet extends StatefulWidget {
 
 class _HistoryFilterBottomSheetState extends State<HistoryFilterBottomSheet> {
   List<String> categories = [
-    'Fresh Produce', 'Canned', 'Personal', 'Cleaning',
-    'Dairy & Eggs', 'Bakery', 'Meat', 'Poultry', 'Sea Food'
+    'Fresh Produce',
+    'Canned',
+    'Personal',
+    'Cleaning',
+    'Dairy & Eggs',
+    'Bakery',
+    'Meat',
+    'Poultry',
+    'Sea Food'
   ];
   List<String> selectedCategories = [];
   RangeValues priceRange = const RangeValues(0, 9999);
@@ -54,7 +61,7 @@ class _HistoryFilterBottomSheetState extends State<HistoryFilterBottomSheet> {
               ),
             ),
             SizedBox(height: Insets.s16.h),
-            
+
             // Categories
             Text(
               'Categories',
@@ -158,7 +165,8 @@ class _HistoryFilterBottomSheetState extends State<HistoryFilterBottomSheet> {
                       child: Text(
                         '${priceRange.start.toInt()} EGP',
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: Sizes.s14.sp),
+                            fontWeight: FontWeight.w500,
+                            fontSize: Sizes.s14.sp),
                       ),
                     ),
                   ],
@@ -178,7 +186,8 @@ class _HistoryFilterBottomSheetState extends State<HistoryFilterBottomSheet> {
                       child: Text(
                         '${priceRange.end.toInt()} EGP',
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: Sizes.s14.sp),
+                            fontWeight: FontWeight.w500,
+                            fontSize: Sizes.s14.sp),
                       ),
                     ),
                   ],
@@ -269,10 +278,14 @@ class _HistoryFilterBottomSheetState extends State<HistoryFilterBottomSheet> {
                 ),
                 onPressed: () {
                   final filterModel = FilterModel(
-                    categories: selectedCategories.isNotEmpty ? selectedCategories : null,
+                    categories: selectedCategories.isNotEmpty
+                        ? selectedCategories
+                        : null,
                     minPrice: priceRange.start,
                     maxPrice: priceRange.end,
-                    rating: selectedRatings.isNotEmpty ? selectedRatings.first : null,
+                    rating: selectedRatings.isNotEmpty
+                        ? selectedRatings.first
+                        : null,
                   );
                   Navigator.pop(context, filterModel);
                 },
